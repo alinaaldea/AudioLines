@@ -1,0 +1,12 @@
+recording {
+  #recordBtn {
+    height: 6rem;
+    width: 6rem;
+    background-color: color($colors, primary);
+    .material-icons {
+      color: color($colors, secondary);
+      vertical-align: -webkit-baseline-middle;
+      font-size: 5rem;
+    }
+  }
+}
