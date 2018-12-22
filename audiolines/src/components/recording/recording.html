@@ -3,12 +3,12 @@
   (click)="startRecord()"
   class="btn-floating waves-effect waves-dark"
 >
-  <i class="material-icons">mic</i>
+  <span class="add-track-icon"></span>
 </button>
 <button
   *ngIf="recording"
   (click)="stopRecord()"
-  class="btn-floating waves-effect waves-dark"
+  class="btn-floating waves-effect waves-dark pulse"
 >
-  <i class="material-icons">mic_off</i>
+  <span class="recording-icon"></span>
 </button>
