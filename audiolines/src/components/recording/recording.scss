@@ -1,9 +1,9 @@
 recording {
-  #recordBtn {
-    height: 6rem;
-    width: 6rem;
+  button.btn-floating {
+    height: 7rem;
+    width: 7rem;
     background-color: color($colors, primary);
-    .material-icons {
+    i.material-icons {
       color: color($colors, secondary);
       vertical-align: -webkit-baseline-middle;
       font-size: 5rem;

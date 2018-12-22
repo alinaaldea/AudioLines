@@ -1,7 +1,14 @@
 <button
-  id="recordBtn"
-  (click)="onClick()"
-  class="btn-floating btn-large waves-effect waves-light"
+  *ngIf="!recording"
+  (click)="startRecord()"
+  class="btn-floating waves-effect waves-dark"
 >
   <i class="material-icons">mic</i>
+</button>
+<button
+  *ngIf="recording"
+  (click)="stopRecord()"
+  class="btn-floating waves-effect waves-dark"
+>
+  <i class="material-icons">mic_off</i>
 </button>
