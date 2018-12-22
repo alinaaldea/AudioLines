@@ -29,9 +29,12 @@ $app-direction: ltr;
 
 $colors: (
   primary: #00bb88,
-  secondary: #1b242b,
-  btnDisabled: #9b9b9b,
-  trkDisabled: #e4e4e4
+  //RGB(0,187,135)
+    secondary: #1b242b,
+  // RGB(27,36,43)
+    btnDisabled: #9b9b9b,
+  // RGB(155,155,155)
+    trkDisabled: #e4e4e4// RGB(228,228,228)
 );
 
 // App iOS Variables
