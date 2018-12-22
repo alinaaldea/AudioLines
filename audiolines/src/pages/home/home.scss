@@ -1,3 +1,11 @@
 page-home {
-
+  .homeContent {
+    background-color: color($colors, secondary);
+  }
+  .btn-floating {
+    .material-icons {
+      color: color($colors, primary);
+      font-size: 4rem;
+    }
+  }
 }

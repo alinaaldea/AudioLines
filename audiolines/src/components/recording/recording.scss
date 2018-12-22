@@ -1,0 +1,23 @@
+recording {
+  button.btn-floating {
+    height: 7rem;
+    width: 7rem;
+    background-color: color($colors, primary);
+
+    span.add-track-icon {
+      background: url("../assets/imgs/add-track.svg");
+      height: 5rem;
+      width: 5rem;
+      margin: auto;
+      display: block;
+    }
+
+    span.recording-icon {
+      background: url("../assets/imgs/recording.svg");
+      height: 6rem;
+      width: 6rem;
+      margin: auto;
+      display: block;
+    }
+  }
+}
