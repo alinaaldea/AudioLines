@@ -8,10 +8,19 @@ import { File } from "@ionic-native/file";
 
 import { MyApp } from "./app.component";
 import { HomePage } from "../pages/home/home";
+
 import { RecordingComponent } from "../components/recording/recording";
+import { PlayComponent } from "../components/play/play";
+import { BacktozeroComponent } from "../components/backtozero/backtozero";
 
 @NgModule({
-  declarations: [MyApp, HomePage, RecordingComponent],
+  declarations: [
+    MyApp,
+    HomePage,
+    RecordingComponent,
+    PlayComponent,
+    BacktozeroComponent
+  ],
   imports: [BrowserModule, IonicModule.forRoot(MyApp)],
   bootstrap: [IonicApp],
   entryComponents: [MyApp, HomePage],

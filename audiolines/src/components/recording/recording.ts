@@ -3,13 +3,9 @@ import { NavController } from "ionic-angular";
 import { Media, MediaObject } from "@ionic-native/media";
 import { File } from "@ionic-native/file";
 
-// declare var WaveSurfer: any;
-
 /**
- * Generated class for the RecordingComponent component.
+ * Class for the RecordingComponent.
  *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
  */
 @Component({
   selector: "recording",
