@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 /**
  * Generated class for the PlayComponent component.
@@ -7,16 +7,17 @@ import { Component } from '@angular/core';
  * Components.
  */
 @Component({
-  selector: 'play',
-  templateUrl: 'play.html'
+  selector: "play",
+  templateUrl: "play.html"
 })
 export class PlayComponent {
+  state: string = "paused";
 
-  text: string;
-
-  constructor() {
-    console.log('Hello PlayComponent Component');
-    this.text = 'Hello World';
+  onClick() {
+    if (this.state == "paused") {
+      this.state = "playing";
+    } else if (this.state == "playing") {
+      this.state = "paused";
+    }
   }
-
 }

@@ -74,14 +74,4 @@ page-home {
   .homeContent {
     background-color: color($colors, secondary);
   }
-  button.btn-floating {
-    i.material-icons {
-      color: color($colors, primary);
-      font-size: 4rem;
-    }
-    i.material-icons.disabled {
-      color: color($colors, btnDisabled);
-      font-size: 4rem;
-    }
-  }
 }
