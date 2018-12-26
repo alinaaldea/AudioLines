@@ -1,16 +1,18 @@
 metronome {
   .btn {
-    span.metronome {
+    background-color: transparent;
+    .metronome {
       background-image: url("../assets/imgs/metronome-primary.svg");
-      background-color: transparent;
       background-repeat: no-repeat;
       height: 4rem;
       width: 4rem;
       display: block;
       margin: auto;
     }
-    span.metronome.active {
-      background-color: color($colors, primary);
+  }
+  .btn.active {
+    background-color: color($colors, primary);
+    .metronome {
       background-image: url("../assets/imgs/metronome-secondary.svg");
       background-repeat: no-repeat;
     }

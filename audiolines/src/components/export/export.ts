@@ -1,18 +1,17 @@
 import { Component } from "@angular/core";
 
 /**
- * Generated class for the SetBpmComponent component.
+ * Generated class for the ExportComponent component.
  *
  * See https://angular.io/api/core/Component for more info on Angular
  * Components.
  */
 @Component({
-  selector: "set-bpm",
-  templateUrl: "set-bpm.html"
+  selector: "export",
+  templateUrl: "export.html"
 })
-export class SetBpmComponent {
+export class ExportComponent {
   state: string = "idle";
-  bpmNumber: number = 100;
 
   onClick() {
     if (this.state == "idle") this.state = "active";

@@ -16,6 +16,7 @@ import { WavesListComponent } from "../components/waves-list/waves-list";
 import { WavesListItemComponent } from "../components/waves-list-item/waves-list-item";
 import { MetronomeComponent } from "../components/metronome/metronome";
 import { SetBpmComponent } from "../components/set-bpm/set-bpm";
+import { ExportComponent } from "../components/export/export";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { SetBpmComponent } from "../components/set-bpm/set-bpm";
     WavesListComponent,
     WavesListItemComponent,
     MetronomeComponent,
-    SetBpmComponent
+    SetBpmComponent,
+    ExportComponent
   ],
   imports: [BrowserModule, IonicModule.forRoot(MyApp)],
   bootstrap: [IonicApp],
