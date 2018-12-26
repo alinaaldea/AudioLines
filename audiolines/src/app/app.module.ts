@@ -14,6 +14,7 @@ import { PlayComponent } from "../components/play/play";
 import { BacktozeroComponent } from "../components/backtozero/backtozero";
 import { WavesListComponent } from "../components/waves-list/waves-list";
 import { WavesListItemComponent } from "../components/waves-list-item/waves-list-item";
+import { MetronomeComponent } from "../components/metronome/metronome";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { WavesListItemComponent } from "../components/waves-list-item/waves-list
     PlayComponent,
     BacktozeroComponent,
     WavesListComponent,
-    WavesListItemComponent
+    WavesListItemComponent,
+    MetronomeComponent
   ],
   imports: [BrowserModule, IonicModule.forRoot(MyApp)],
   bootstrap: [IonicApp],

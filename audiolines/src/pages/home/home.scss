@@ -7,29 +7,6 @@ page-home {
       margin-top: 20px;
     }
 
-    button#metronome-toggle-btn {
-      background-color: transparent;
-      span.metronome {
-        background-image: url("../assets/imgs/metronome-primary.svg");
-        background-repeat: no-repeat;
-        height: 4rem;
-        width: 4rem;
-        display: block;
-        margin: auto;
-      }
-    }
-    button#metronome-toggle-btn.active {
-      background-color: color($colors, primary);
-      span.metronome {
-        background-image: url("../assets/imgs/metronome-secondary.svg");
-        background-repeat: no-repeat;
-        height: 4rem;
-        width: 4rem;
-        display: block;
-        margin: auto;
-      }
-    }
-
     button#set-bpm-btn {
       background-color: transparent;
       width: 7rem;
