@@ -12,6 +12,8 @@ import { HomePage } from "../pages/home/home";
 import { RecordingComponent } from "../components/recording/recording";
 import { PlayComponent } from "../components/play/play";
 import { BacktozeroComponent } from "../components/backtozero/backtozero";
+import { WavesListComponent } from "../components/waves-list/waves-list";
+import { WavesListItemComponent } from "../components/waves-list-item/waves-list-item";
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { BacktozeroComponent } from "../components/backtozero/backtozero";
     HomePage,
     RecordingComponent,
     PlayComponent,
-    BacktozeroComponent
+    BacktozeroComponent,
+    WavesListComponent,
+    WavesListItemComponent
   ],
   imports: [BrowserModule, IonicModule.forRoot(MyApp)],
   bootstrap: [IonicApp],

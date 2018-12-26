@@ -1,0 +1,33 @@
+waves-list-item {
+  .btn {
+    background-color: color($colors, primary);
+    color: color($colors, secondary);
+    font-size: 1rem;
+  }
+
+  ion-row.row {
+    margin: 5px;
+    padding: 0;
+  }
+
+  ion-col {
+    .card-panel {
+      margin: 0;
+      padding: 5px;
+    }
+    .card-panel.active {
+      background-color: color($colors, primary);
+      .btn {
+        background-color: color($colors, secondary);
+        color: color($colors, primary);
+        font-size: 2.5rem;
+        width: 5.5rem;
+      }
+      #delete-btn {
+        background-color: transparent;
+        color: color($colors, secondary);
+        font-size: 2rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+<ion-row>
+  <ion-col col-2 align-self-center>
+    <button (click)="onClick()" class="btn waves-effect waves-light">
+      <span> <i class="fas fa-ellipsis-v"></i> </span>
+    </button>
+  </ion-col>
+  <ion-col col-10 align-self-center>
+    <div *ngIf="!menuIsOpen" class="card-panel">WAVESURFER THING</div>
+    <div *ngIf="menuIsOpen" class="card-panel active">
+      <ion-row>
+        <ion-col col-3>
+          <button id="mute-btn" class="btn waves-effect waves-light z-depth-0">
+            <span>M</span>
+          </button>
+        </ion-col>
+        <ion-col col-3>
+          <button id="solo-btn" class="btn waves-effect waves-light z-depth-0">
+            <span>S</span>
+          </button>
+        </ion-col>
+        <ion-col col-3 push-3
+          ><button
+            id="delete-btn"
+            class="btn waves-effect waves-light z-depth-0"
+          >
+            <i class="fas fa-trash"></i></button
+        ></ion-col>
+      </ion-row>
+    </div>
+  </ion-col>
+</ion-row>
