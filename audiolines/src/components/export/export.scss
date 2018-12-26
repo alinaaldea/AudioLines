@@ -1,0 +1,17 @@
+export {
+  .btn {
+    background-color: transparent;
+    color: color($colors, primary);
+    .fa-file-export {
+      font-size: 4rem;
+    }
+  }
+  .btn.active {
+    background-color: color($colors, primary);
+    color: color($colors, secondary);
+  }
+  .btn.disabled {
+    background-color: transparent;
+    color: color($colors, btnDisabled);
+  }
+}

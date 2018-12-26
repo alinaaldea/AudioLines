@@ -3,8 +3,8 @@ import { ErrorHandler, NgModule } from "@angular/core";
 import { IonicApp, IonicErrorHandler, IonicModule } from "ionic-angular";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { StatusBar } from "@ionic-native/status-bar";
-import { Media } from "@ionic-native/media";
-import { File } from "@ionic-native/file";
+// import { Media } from "@ionic-native/media";
+// import { File } from "@ionic-native/file";
 
 import { MyApp } from "./app.component";
 import { HomePage } from "../pages/home/home";
@@ -12,6 +12,11 @@ import { HomePage } from "../pages/home/home";
 import { RecordingComponent } from "../components/recording/recording";
 import { PlayComponent } from "../components/play/play";
 import { BacktozeroComponent } from "../components/backtozero/backtozero";
+import { WavesListComponent } from "../components/waves-list/waves-list";
+import { WavesListItemComponent } from "../components/waves-list-item/waves-list-item";
+import { MetronomeComponent } from "../components/metronome/metronome";
+import { SetBpmComponent } from "../components/set-bpm/set-bpm";
+import { ExportComponent } from "../components/export/export";
 
 @NgModule({
   declarations: [
@@ -19,7 +24,12 @@ import { BacktozeroComponent } from "../components/backtozero/backtozero";
     HomePage,
     RecordingComponent,
     PlayComponent,
-    BacktozeroComponent
+    BacktozeroComponent,
+    WavesListComponent,
+    WavesListItemComponent,
+    MetronomeComponent,
+    SetBpmComponent,
+    ExportComponent
   ],
   imports: [BrowserModule, IonicModule.forRoot(MyApp)],
   bootstrap: [IonicApp],
@@ -27,10 +37,10 @@ import { BacktozeroComponent } from "../components/backtozero/backtozero";
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
     // Platform,
-    Media,
-    File
+    // Media,
+    // File
   ]
 })
 export class AppModule {}

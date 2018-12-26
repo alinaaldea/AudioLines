@@ -6,82 +6,9 @@ page-home {
       padding: 5px;
       margin-top: 20px;
     }
-
-    button#metronome-toggle-btn {
-      background-color: transparent;
-      span.metronome {
-        background-image: url("../assets/imgs/metronome-primary.svg");
-        background-repeat: no-repeat;
-        height: 4rem;
-        width: 4rem;
-        display: block;
-        margin: auto;
-      }
-    }
-    button#metronome-toggle-btn.active {
-      background-color: color($colors, primary);
-      span.metronome {
-        background-image: url("../assets/imgs/metronome-secondary.svg");
-        background-repeat: no-repeat;
-        height: 4rem;
-        width: 4rem;
-        display: block;
-        margin: auto;
-      }
-    }
-
-    button#set-bpm-btn {
-      background-color: transparent;
-      width: 7rem;
-      span.bpm-text {
-        font-size: 3rem;
-        color: color($colors, primary);
-      }
-    }
-    button#set-bpm-btn.active {
-      width: 7rem;
-      background-color: color($colors, primary);
-      span.bpm-text {
-        font-size: 3rem;
-        color: color($colors, secondary);
-      }
-    }
-
-    button#export-btn {
-      background-color: transparent;
-      span.export-menu {
-        background-image: url("../assets/imgs/file-export-primary.svg");
-        background-repeat: no-repeat;
-        height: 4rem;
-        width: 4rem;
-        display: block;
-        margin: auto;
-      }
-    }
-    button#export-btn.active {
-      background-color: color($colors, primary);
-      span.export-menu {
-        background-image: url("../assets/imgs/file-export-secondary.svg");
-        background-repeat: no-repeat;
-        height: 4rem;
-        width: 4rem;
-        display: block;
-        margin: auto;
-      }
-    }
   }
 
   .homeContent {
     background-color: color($colors, secondary);
-  }
-  button.btn-floating {
-    i.material-icons {
-      color: color($colors, primary);
-      font-size: 4rem;
-    }
-    i.material-icons.disabled {
-      color: color($colors, btnDisabled);
-      font-size: 4rem;
-    }
   }
 }

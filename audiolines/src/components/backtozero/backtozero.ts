@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 /**
  * Generated class for the BacktozeroComponent component.
@@ -7,16 +7,9 @@ import { Component } from '@angular/core';
  * Components.
  */
 @Component({
-  selector: 'backtozero',
-  templateUrl: 'backtozero.html'
+  selector: "backtozero",
+  templateUrl: "backtozero.html"
 })
 export class BacktozeroComponent {
-
-  text: string;
-
-  constructor() {
-    console.log('Hello BacktozeroComponent Component');
-    this.text = 'Hello World';
-  }
-
+  state: string = "idle";
 }

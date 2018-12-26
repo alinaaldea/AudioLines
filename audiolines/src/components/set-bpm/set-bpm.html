@@ -1,0 +1,20 @@
+<button
+  (click)="onClick()"
+  *ngIf="state == 'idle'"
+  class="btn btn-flat waves-effect waves-light"
+>
+  <span class="bpm-text">{{ bpmNumber }}</span>
+</button>
+<button
+  (click)="onClick()"
+  *ngIf="state == 'active'"
+  class="btn btn-flat waves-effect waves-light active"
+>
+  <span class="bpm-text">{{ bpmNumber }}</span>
+</button>
+<button
+  *ngIf="state == 'disabled'"
+  class="btn btn-flat waves-effect waves-light disabled"
+>
+  <span class="bpm-text">{{ bpmNumber }}</span>
+</button>

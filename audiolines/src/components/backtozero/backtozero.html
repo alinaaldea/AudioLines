@@ -1,3 +1,4 @@
 <button class="btn-floating waves-effect waves-light transparent btn-flat">
-  <i class="material-icons">skip_previous</i>
+  <i *ngIf="state == 'idle'" class="fas fa-step-backward"></i
+  ><i *ngIf="state == 'disabled'" class="fas fa-step-backward disabled"></i>
 </button>

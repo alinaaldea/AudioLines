@@ -1,3 +1,8 @@
-<button class="btn-floating waves-effect waves-light transparent btn-flat">
-  <i class="material-icons">play_arrow</i>
+<button
+  (click)="onClick()"
+  class="btn-floating waves-effect waves-light transparent btn-flat"
+>
+  <i *ngIf="state == 'paused'" class="fas fa-play"></i>
+  <i *ngIf="state == 'disabled'" class="fas fa-play disabled"></i>
+  <i *ngIf="state == 'playing'" class="fas fa-pause"></i>
 </button>

@@ -1,0 +1,13 @@
+<button (click)="onClick()" *ngIf="state == 'idle'" class="btn btn-flat">
+  <i class="fas fa-file-export"></i>
+</button>
+<button
+  (click)="onClick()"
+  *ngIf="state == 'active'"
+  class="btn btn-flat active"
+>
+  <i class="fas fa-file-export"></i>
+</button>
+<button *ngIf="state == 'disabled'" class="btn btn-flatdisabled">
+  <i class="fas fa-file-export"></i>
+</button>
