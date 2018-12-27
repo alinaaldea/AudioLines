@@ -1,4 +1,6 @@
-import { Component } from "@angular/core";
+import { Component, DoCheck } from "@angular/core";
+
+import { StateManagerProvider } from "../../providers/state-manager/state-manager";
 
 /**
  * Generated class for the PlayComponent component.
@@ -10,11 +12,19 @@ import { Component } from "@angular/core";
   selector: "play",
   templateUrl: "play.html"
 })
-export class PlayComponent {
-  state: string = "paused";
+export class PlayComponent implements DoCheck {
+  constructor(public stateManager: StateManagerProvider) {}
+
+  ngDoCheck(): void {
+    //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
+    // console.log("[PLAY]: " + this.stateManager.state);
+  }
 
   onClick() {
-    if (this.state == "paused") this.state = "playing";
-    else if (this.state == "playing") this.state = "paused";
+    if (this.stateManager.state == "IDLE") {
+      this.stateManager.state = "PLAYING";
+    } else if (this.stateManager.state == "PLAYING") {
+      this.stateManager.state = "IDLE";
+    }
   }
 }

@@ -2,17 +2,26 @@
   RECORDING implemented in branch "recording-functionality"
 -->
 
-<button
-  *ngIf="!recording"
-  (click)="startRecord()"
-  class="btn-floating waves-effect waves-dark"
->
-  <span class="add-track-icon"></span>
-</button>
-<button
-  *ngIf="recording"
-  (click)="stopRecord()"
-  class="btn-floating waves-effect waves-dark pulse"
->
-  <span class="recording-icon"></span>
-</button>
+<ng-container *ngIf="stateManager.state == 'RECORDING'; else elseTemplate">
+  <button
+    (click)="stopRecord()"
+    class="btn-floating waves-effect waves-dark pulse"
+  >
+    <span class="recording-icon"></span>
+  </button>
+</ng-container>
+<ng-template #elseTemplate>
+  <ng-container *ngIf="stateManager.state == 'IDLE'; else elseTemplate">
+    <button
+      (click)="startRecord()"
+      class="btn-floating waves-effect waves-dark"
+    >
+      <span class="add-track-icon"></span>
+    </button>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <button class="btn-floating waves-effect waves-dark disabled">
+      <span class="add-track-icon"></span>
+    </button>
+  </ng-template>
+</ng-template>

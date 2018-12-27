@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, DoCheck } from "@angular/core";
+import { StateManagerProvider } from "../../providers/state-manager/state-manager";
 
 /**
  * Class for the RecordingComponent.
@@ -8,19 +9,28 @@ import { Component } from "@angular/core";
   selector: "recording",
   templateUrl: "recording.html"
 })
-export class RecordingComponent {
+export class RecordingComponent implements DoCheck {
   // !!!! implemented in branch "recording-functionality" !!!
   // you can use this class to simulate the recording
   // and then reading the files to implement the wave thing
 
-  recording: boolean = false;
+  constructor(public stateManager: StateManagerProvider) {}
+
+  ngDoCheck(): void {
+    //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
+    // console.log("[RECORDING]: " + this.stateManager.state);
+  }
 
   startRecord() {
-    alert("Would be recording now!");
-    this.recording = true;
+    if (this.stateManager.state == "IDLE") {
+      alert("Would be recording now!");
+      this.stateManager.state = "RECORDING";
+    }
   }
 
   stopRecord() {
-    this.recording = false;
+    if (this.stateManager.state == "RECORDING") {
+      this.stateManager.state = "IDLE";
+    }
   }
 }
