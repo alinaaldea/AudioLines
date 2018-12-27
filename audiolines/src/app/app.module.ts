@@ -19,6 +19,7 @@ import { SetBpmComponent } from "../components/set-bpm/set-bpm";
 import { ExportComponent } from "../components/export/export";
 
 import { StateManagerProvider } from "../providers/state-manager/state-manager";
+import { BpmProvider } from "../providers/bpm/bpm";
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { StateManagerProvider } from "../providers/state-manager/state-manager";
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    StateManagerProvider
+    StateManagerProvider,
+    BpmProvider
     // Platform,
     // Media,
     // File
