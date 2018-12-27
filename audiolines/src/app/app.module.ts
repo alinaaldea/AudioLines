@@ -18,6 +18,8 @@ import { MetronomeComponent } from "../components/metronome/metronome";
 import { SetBpmComponent } from "../components/set-bpm/set-bpm";
 import { ExportComponent } from "../components/export/export";
 
+import { StateManagerProvider } from "../providers/state-manager/state-manager";
+
 @NgModule({
   declarations: [
     MyApp,
@@ -37,7 +39,8 @@ import { ExportComponent } from "../components/export/export";
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    StateManagerProvider
     // Platform,
     // Media,
     // File
