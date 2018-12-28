@@ -8,9 +8,10 @@
   </header>
 </ion-header>
 
-<ion-content padding class="homeContent">
-  <!-- <waves-list></waves-list> -->
-  <set-bpm-view></set-bpm-view>
+<ion-content padding class="homeContent" [ngSwitch]="stateManager.state">
+  <p *ngSwitchCase="'EXPORT'" class="white-text">EXPORT VIEW HERE</p>
+  <set-bpm-view *ngSwitchCase="'BPM'"> </set-bpm-view>
+  <waves-list *ngSwitchDefault></waves-list>
 </ion-content>
 
 <ion-footer>

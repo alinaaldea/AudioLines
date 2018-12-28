@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
+import { StateManagerProvider } from "../../providers/state-manager/state-manager";
 
 /**
  * Generated class for the SetBpmViewComponent component.
@@ -7,16 +8,9 @@ import { Component } from '@angular/core';
  * Components.
  */
 @Component({
-  selector: 'set-bpm-view',
-  templateUrl: 'set-bpm-view.html'
+  selector: "set-bpm-view",
+  templateUrl: "set-bpm-view.html"
 })
 export class SetBpmViewComponent {
-
-  text: string;
-
-  constructor() {
-    console.log('Hello SetBpmViewComponent Component');
-    this.text = 'Hello World';
-  }
-
+  constructor(public stateManager: StateManagerProvider) {}
 }
