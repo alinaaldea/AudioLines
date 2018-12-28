@@ -1,0 +1,41 @@
+export-view {
+  ion-grid {
+    ion-row:first-child {
+      background-color: color($colors, primary);
+      border-top-left-radius: 2%;
+      border-top-right-radius: 2%;
+      width: 80vw;
+      height: 60vw;
+      margin-bottom: 0;
+
+      #input {
+        border-bottom: 1px solid color($colors, secondary);
+      }
+    }
+    #title {
+      color: color($colors, secondary);
+      font-size: 2.5rem;
+      font-weight: 500;
+    }
+    #saveDir {
+      color: color($colors, secondary);
+      font-size: 2rem;
+      font-weight: 400;
+    }
+
+    ion-row:last-child {
+      background-color: color($colors, primary);
+      border-bottom-left-radius: 2%;
+      border-bottom-right-radius: 2%;
+      width: 80vw;
+      height: 30vw;
+      margin-bottom: 0;
+      padding-top: 2;
+
+      button {
+        background-color: color($colors, primary);
+        zoom: 1.4;
+      }
+    }
+  }
+}
