@@ -1,0 +1,30 @@
+<!-- Generated template for the SetBpmViewComponent component -->
+<ion-grid>
+  <ion-row text-center>
+    <ion-col col-12 align-self-center>
+      <button id="tap-btn" class="btn btn-flat waves-effect waves-light">
+        <span>TAP</span>
+      </button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-2 align-self-center>
+      <button class="btn btn-flat waves-effect waves-light">
+        <i class="fas fa-plus-square"></i>
+      </button>
+    </ion-col>
+    <ion-col col-6 push-1 align-self-center>
+      <input
+        type="number"
+        maxlength="3"
+        minlength="2"
+        value="{{ stateManager.projectBPM }}"
+      />
+    </ion-col>
+    <ion-col col-2 push-1 align-self-center>
+      <button class="btn btn-flat waves-effect waves-light">
+        <i class="fas fa-minus-square"></i>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-grid>

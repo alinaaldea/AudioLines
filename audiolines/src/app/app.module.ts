@@ -16,9 +16,11 @@ import { WavesListComponent } from "../components/waves-list/waves-list";
 import { WavesListItemComponent } from "../components/waves-list-item/waves-list-item";
 import { MetronomeComponent } from "../components/metronome/metronome";
 import { SetBpmComponent } from "../components/set-bpm/set-bpm";
+import { SetBpmViewComponent } from "../components/set-bpm-view/set-bpm-view";
 import { ExportComponent } from "../components/export/export";
 
 import { StateManagerProvider } from "../providers/state-manager/state-manager";
+import { BpmProvider } from "../providers/bpm/bpm";
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { StateManagerProvider } from "../providers/state-manager/state-manager";
     WavesListItemComponent,
     MetronomeComponent,
     SetBpmComponent,
+    SetBpmViewComponent,
     ExportComponent
   ],
   imports: [BrowserModule, IonicModule.forRoot(MyApp)],
@@ -40,7 +43,8 @@ import { StateManagerProvider } from "../providers/state-manager/state-manager";
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    StateManagerProvider
+    StateManagerProvider,
+    BpmProvider
     // Platform,
     // Media,
     // File
