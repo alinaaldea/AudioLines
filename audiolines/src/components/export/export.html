@@ -1,13 +1,17 @@
-<button (click)="onClick()" *ngIf="state == 'idle'" class="btn btn-flat">
-  <i class="fas fa-file-export"></i>
-</button>
-<button
-  (click)="onClick()"
-  *ngIf="state == 'active'"
-  class="btn btn-flat active"
->
-  <i class="fas fa-file-export"></i>
-</button>
-<button *ngIf="state == 'disabled'" class="btn btn-flatdisabled">
-  <i class="fas fa-file-export"></i>
-</button>
+<ng-container *ngIf="stateManager.state == 'EXPORT'; else elseTemplate">
+  <button (click)="onClick()" class="btn btn-flat active">
+    <i class="fas fa-file-export"></i>
+  </button>
+</ng-container>
+<ng-template #elseTemplate>
+  <ng-container *ngIf="stateManager.state == 'RECORDING'; else elseTemplate">
+    <button class="btn btn-flat disabled">
+      <i class="fas fa-file-export"></i>
+    </button>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <button (click)="onClick()" class="btn btn-flat">
+      <i class="fas fa-file-export"></i>
+    </button>
+  </ng-template>
+</ng-template>

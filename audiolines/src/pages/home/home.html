@@ -1,15 +1,17 @@
 <ion-header>
   <header class="container">
     <div class="row valign-wrapper">
-      <div class="col s1"><metronome></metronome></div>
+      <div class="col s1"><metronome-toggle></metronome-toggle></div>
       <div class="col s2"><set-bpm></set-bpm></div>
       <div class="col s1 offset-s4 right-align"><export></export></div>
     </div>
   </header>
 </ion-header>
 
-<ion-content padding class="homeContent">
-  <waves-list></waves-list>
+<ion-content padding class="homeContent" [ngSwitch]="stateManager.state">
+  <export-view *ngSwitchCase="'EXPORT'" class="white-text"></export-view>
+  <set-bpm-view *ngSwitchCase="'BPM'"> </set-bpm-view>
+  <waves-list *ngSwitchDefault></waves-list>
 </ion-content>
 
 <ion-footer>

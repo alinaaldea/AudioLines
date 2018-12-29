@@ -1,5 +1,8 @@
 import { Component } from "@angular/core";
 
+import { StateManagerProvider } from "../../providers/state-manager/state-manager";
+import { MetronomeProvider } from "../../providers/metronome/metronome";
+
 /**
  * Generated class for the PlayComponent component.
  *
@@ -11,10 +14,20 @@ import { Component } from "@angular/core";
   templateUrl: "play.html"
 })
 export class PlayComponent {
-  state: string = "paused";
+  constructor(
+    public stateManager: StateManagerProvider,
+    public metronome: MetronomeProvider
+  ) {}
 
   onClick() {
-    if (this.state == "paused") this.state = "playing";
-    else if (this.state == "playing") this.state = "paused";
+    if (this.stateManager.state == "IDLE") {
+      this.stateManager.state = "PLAYING";
+      if (this.stateManager.metronomeIsActive) {
+        this.metronome.startMetronome();
+      }
+    } else if (this.stateManager.state == "PLAYING") {
+      this.stateManager.state = "IDLE";
+      this.metronome.stopMetronome();
+    }
   }
 }

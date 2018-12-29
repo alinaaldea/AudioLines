@@ -1,0 +1,52 @@
+set-bpm-view {
+  ion-grid {
+    ion-row:first-child {
+      background-color: color($colors, primary);
+      border-top-left-radius: 2%;
+      border-top-right-radius: 2%;
+      width: 80vw;
+      height: 80vw;
+      margin-bottom: 0;
+
+      #tap-btn {
+        background-color: color($colors, secondary);
+        width: 70vw;
+        height: 70vw;
+        border-radius: 2%;
+        span {
+          color: color($colors, primary);
+          font-size: 5rem;
+          font-weight: 500;
+        }
+      }
+    }
+
+    ion-row:last-child {
+      background-color: color($colors, primary);
+      border-bottom-left-radius: 2%;
+      border-bottom-right-radius: 2%;
+      width: 80vw;
+      height: 20vw;
+
+      .btn {
+        background-color: transparent;
+        i.fas {
+          color: color($colors, secondary);
+          font-size: 4rem;
+        }
+      }
+      input {
+        background-color: white !important;
+        margin: 0 !important;
+        border: unset !important;
+      }
+      input {
+        border: 1px solid color($colors, secondary) !important;
+        border-radius: 2% !important;
+        padding: 1px !important;
+        text-align: center;
+        font-size: 2.5rem !important;
+      }
+    }
+  }
+}

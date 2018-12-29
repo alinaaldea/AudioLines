@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, DoCheck } from "@angular/core";
+import { StateManagerProvider } from "../../providers/state-manager/state-manager";
 
 /**
  * Generated class for the ExportComponent component.
@@ -10,11 +11,19 @@ import { Component } from "@angular/core";
   selector: "export",
   templateUrl: "export.html"
 })
-export class ExportComponent {
-  state: string = "idle";
+export class ExportComponent implements DoCheck {
+  constructor(public stateManager: StateManagerProvider) {}
+
+  ngDoCheck(): void {
+    //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
+    // console.log("[EXPORT]: " + this.stateManager.state);
+  }
 
   onClick() {
-    if (this.state == "idle") this.state = "active";
-    else if (this.state == "active") this.state = "idle";
+    if (this.stateManager.state == "IDLE") {
+      this.stateManager.state = "EXPORT";
+    } else if (this.stateManager.state == "EXPORT") {
+      this.stateManager.state = "IDLE";
+    }
   }
 }

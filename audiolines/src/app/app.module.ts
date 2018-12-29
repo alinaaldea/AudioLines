@@ -14,9 +14,15 @@ import { PlayComponent } from "../components/play/play";
 import { BacktozeroComponent } from "../components/backtozero/backtozero";
 import { WavesListComponent } from "../components/waves-list/waves-list";
 import { WavesListItemComponent } from "../components/waves-list-item/waves-list-item";
-import { MetronomeComponent } from "../components/metronome/metronome";
 import { SetBpmComponent } from "../components/set-bpm/set-bpm";
+import { SetBpmViewComponent } from "../components/set-bpm-view/set-bpm-view";
 import { ExportComponent } from "../components/export/export";
+import { ExportViewComponent } from "../components/export-view/export-view";
+import { MetronomeToggleComponent } from "../components/metronome-toggle/metronome-toggle";
+
+import { StateManagerProvider } from "../providers/state-manager/state-manager";
+import { BpmProvider } from "../providers/bpm/bpm";
+import { MetronomeProvider } from "../providers/metronome/metronome";
 
 @NgModule({
   declarations: [
@@ -27,9 +33,11 @@ import { ExportComponent } from "../components/export/export";
     BacktozeroComponent,
     WavesListComponent,
     WavesListItemComponent,
-    MetronomeComponent,
+    MetronomeToggleComponent,
     SetBpmComponent,
-    ExportComponent
+    SetBpmViewComponent,
+    ExportComponent,
+    ExportViewComponent
   ],
   imports: [BrowserModule, IonicModule.forRoot(MyApp)],
   bootstrap: [IonicApp],
@@ -37,7 +45,10 @@ import { ExportComponent } from "../components/export/export";
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    StateManagerProvider,
+    BpmProvider,
+    MetronomeProvider
     // Platform,
     // Media,
     // File
