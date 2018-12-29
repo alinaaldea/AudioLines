@@ -1,31 +1,21 @@
-import { Component } from "@angular/core";
-import { StateManagerProvider } from "../../providers/state-manager/state-manager";
+import { Injectable } from "@angular/core";
+import { StateManagerProvider } from "../state-manager/state-manager";
 
-/**
- * Generated class for the MetronomeComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
-@Component({
-  selector: "metronome",
-  templateUrl: "metronome.html"
-})
-export class MetronomeComponent {
+/*
+  Generated class for the MetronomeProvider provider.
+
+  See https://angular.io/guide/dependency-injection for more info on providers
+  and Angular DI.
+*/
+@Injectable()
+export class MetronomeProvider {
   metronomeIsPlaying: boolean = false;
 
   metronomeInterval: any;
   metronomeCounter: number = 0;
 
-  constructor(public stateManager: StateManagerProvider) {}
-
-  toggleMetronome() {
-    this.stateManager.metronomeIsActive = !this.stateManager.metronomeIsActive;
-    if (this.stateManager.metronomeIsActive) {
-      this.startMetronome();
-    } else if (!this.stateManager.metronomeIsActive) {
-      this.stopMetronome();
-    }
+  constructor(public stateManager: StateManagerProvider) {
+    console.log("Hello MetronomeProvider Provider");
   }
 
   startMetronome() {
