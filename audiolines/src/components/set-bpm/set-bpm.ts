@@ -12,12 +12,6 @@ import { StateManagerProvider } from "../../providers/state-manager/state-manage
   templateUrl: "set-bpm.html"
 })
 export class SetBpmComponent implements DoCheck {
-  bpmObject: { avg: number; count: number; ms: number } = {
-    avg: 100,
-    ms: 600,
-    count: 0
-  }; //600 ms == 100bpm
-
   constructor(public stateManager: StateManagerProvider) {}
 
   ngDoCheck(): void {

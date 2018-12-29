@@ -9,12 +9,12 @@
       (click)="onClick()"
       class="btn btn-flat waves-effect waves-light active"
     >
-      <span class="bpm-text">{{ stateManager.projectBPM }}</span>
+      <span class="bpm-text">{{ stateManager.bpmObject.avg }}</span>
     </button>
   </ng-container>
   <ng-template #elseTemplate>
     <button (click)="onClick()" class="btn btn-flat waves-effect waves-light">
-      <span class="bpm-text">{{ stateManager.projectBPM }}</span>
+      <span class="bpm-text">{{ stateManager.bpmObject.avg }}</span>
     </button>
   </ng-template>
 </ng-template>

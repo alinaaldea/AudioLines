@@ -2,7 +2,11 @@
 <ion-grid>
   <ion-row text-center>
     <ion-col col-12 align-self-center>
-      <button id="tap-btn" class="btn btn-flat waves-effect waves-light">
+      <button
+        (click)="onTap()"
+        id="tap-btn"
+        class="btn btn-flat waves-effect waves-light"
+      >
         <span>TAP</span>
       </button>
     </ion-col>
@@ -18,7 +22,7 @@
         type="number"
         maxlength="3"
         minlength="2"
-        value="{{ stateManager.projectBPM }}"
+        value="{{ stateManager.bpmObject.avg }}"
       />
     </ion-col>
     <ion-col col-2 push-1 align-self-center>
