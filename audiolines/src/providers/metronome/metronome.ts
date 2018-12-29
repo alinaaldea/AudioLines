@@ -1,5 +1,7 @@
-import { Injectable } from "@angular/core";
+import { Injectable, OnDestroy } from "@angular/core";
 import { StateManagerProvider } from "../state-manager/state-manager";
+
+import { Observable, Subscription, Scheduler } from "rxjs/Rx";
 
 /*
   Generated class for the MetronomeProvider provider.
@@ -8,28 +10,38 @@ import { StateManagerProvider } from "../state-manager/state-manager";
   and Angular DI.
 */
 @Injectable()
-export class MetronomeProvider {
+export class MetronomeProvider implements OnDestroy {
   metronomeIsPlaying: boolean = false;
 
-  metronomeInterval: any;
+  metronomeIntervalFunction: Subscription;
   metronomeCounter: number = 0;
 
+  metronomeSounds: HTMLAudioElement[] = [
+    new Audio("assets/sounds/metronome_high.wav"),
+    new Audio("assets/sounds/metronome_low.wav")
+  ];
+
   constructor(public stateManager: StateManagerProvider) {
-    console.log("Hello MetronomeProvider Provider");
+    this.metronomeSounds.forEach(track => {
+      track.playbackRate = 1;
+    });
   }
 
   startMetronome() {
     if (this.stateManager.metronomeIsActive) {
       this.metronomeIsPlaying = true;
-      this.playMetronomeAudio();
-      this.metronomeInterval = setInterval(() => {
-        this.playMetronomeAudio();
-      }, this.stateManager.bpmObject.ms);
+      this.metronomeIntervalFunction = Observable.timer(
+        0,
+        this.stateManager.bpmObject.ms,
+        Scheduler.async
+      ).subscribe(this.playMetronomeAudio.bind(this));
     }
   }
 
   stopMetronome() {
-    clearInterval(this.metronomeInterval);
+    if (this.metronomeIntervalFunction != null) {
+      this.metronomeIntervalFunction.unsubscribe();
+    }
     this.metronomeCounter = 0;
   }
 
@@ -40,16 +52,17 @@ export class MetronomeProvider {
       this.stateManager.metronomeIsActive
     ) {
       if (this.metronomeCounter % 4 == 0) {
-        let audio = new Audio("assets/sounds/metronome_high.mp3");
-        audio.volume = 1;
-        audio.play();
-        this.metronomeCounter++;
+        this.metronomeSounds[0].play();
       } else {
-        let audio = new Audio("assets/sounds/metronome_low.mp3");
-        audio.volume = 1;
-        audio.play();
-        this.metronomeCounter++;
+        this.metronomeSounds[1].play();
       }
+      this.metronomeCounter++;
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.metronomeIntervalFunction != null) {
+      this.metronomeIntervalFunction.unsubscribe();
     }
   }
 }

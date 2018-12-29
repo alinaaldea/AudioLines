@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 /**
  * Generated class for the WavesListComponent component.
@@ -7,16 +7,7 @@ import { Component } from '@angular/core';
  * Components.
  */
 @Component({
-  selector: 'waves-list',
-  templateUrl: 'waves-list.html'
+  selector: "waves-list",
+  templateUrl: "waves-list.html"
 })
-export class WavesListComponent {
-
-  text: string;
-
-  constructor() {
-    console.log('Hello WavesListComponent Component');
-    this.text = 'Hello World';
-  }
-
-}
+export class WavesListComponent {}

@@ -20,12 +20,13 @@ export class MetronomeToggleComponent {
 
   toggleMetronome() {
     this.stateManager.metronomeIsActive = !this.stateManager.metronomeIsActive;
-    // if (
-    //   this.stateManager.metronomeIsActive &&
-    //   (this.stateManager.state == "PLAYING" ||
-    //     this.stateManager.state == "RECORDING")
-    // )
-    //   this.metronome.startMetronome();
+    if (
+      // right now starts at 0 -> later the metronome has to be in time with the tracks
+      this.stateManager.metronomeIsActive &&
+      (this.stateManager.state == "PLAYING" ||
+        this.stateManager.state == "RECORDING")
+    )
+      this.metronome.startMetronome();
     if (!this.stateManager.metronomeIsActive) this.metronome.stopMetronome();
   }
 }

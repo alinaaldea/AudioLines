@@ -22,11 +22,11 @@ export class BpmProvider {
     //ignore first tap
     if (this.oldTimeStamp) {
       let ms: number = this.timeStamp - this.oldTimeStamp;
-
       let avg = Math.floor(
-        (60000 * this.count) / (this.timeStamp - this.firstTimeStamp)
+        60000 / ms
+        // (60000 * this.count) / (this.timeStamp - this.firstTimeStamp)
       );
-
+      console.log(avg + " / " + ms);
       ret.avg = avg;
       ret.ms = ms;
     }
