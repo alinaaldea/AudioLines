@@ -5,22 +5,36 @@ export-view {
       border-top-left-radius: 2%;
       border-top-right-radius: 2%;
       width: 80vw;
-      height: 60vw;
       margin-bottom: 0;
 
-      #input {
-        border-bottom: 1px solid color($colors, secondary);
+      h1 {
+        color: color($colors, secondary);
+        padding-top: 2rem;
+        font-weight: 300;
+        font-size: 3.5rem;
       }
-    }
-    #title {
-      color: color($colors, secondary);
-      font-size: 2.5rem;
-      font-weight: 500;
-    }
-    #saveDir {
-      color: color($colors, secondary);
-      font-size: 2rem;
-      font-weight: 400;
+
+      div.line {
+        background-color: color($colors, secondary);
+        display: block;
+        height: 2px;
+        margin-top: -5px;
+        margin-bottom: 4rem;
+      }
+
+      h5 {
+        color: color($colors, secondary);
+        font-weight: 300;
+      }
+
+      input {
+        width: 80% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border-bottom: 1px solid color($colors, secondary) !important;
+        text-align: center;
+        color: color($colors, secondary);
+      }
     }
 
     ion-row:last-child {
@@ -28,13 +42,25 @@ export-view {
       border-bottom-left-radius: 2%;
       border-bottom-right-radius: 2%;
       width: 80vw;
-      height: 30vw;
+      height: 50vw;
       margin-bottom: 0;
-      padding-top: 2;
+      padding: 2rem;
 
       button {
         background-color: color($colors, primary);
-        zoom: 1.4;
+        padding: 0;
+        height: 7rem;
+        width: 7rem;
+        // zoom: 2;
+        .fas {
+          vertical-align: bottom;
+          font-size: 7rem;
+        }
+      }
+      span {
+        color: color($colors, secondary);
+        font-weight: 200;
+        font-size: 2.5rem;
       }
     }
   }
