@@ -21,27 +21,32 @@ export class MetronomeComponent {
 
   toggleMetronome() {
     this.stateManager.metronomeIsActive = !this.stateManager.metronomeIsActive;
-    if (this.stateManager.metronomeIsActive) this.startMetronome();
-    else if (!this.stateManager.metronomeIsActive) this.stopMetronome();
+    if (this.stateManager.metronomeIsActive) {
+      this.startMetronome();
+    } else if (!this.stateManager.metronomeIsActive) {
+      this.stopMetronome();
+    }
   }
 
   startMetronome() {
     if (this.stateManager.metronomeIsActive) {
       this.metronomeIsPlaying = true;
-      this.playAudio();
+      this.playMetronomeAudio();
       this.metronomeInterval = setInterval(() => {
-        this.playAudio();
+        this.playMetronomeAudio();
       }, this.stateManager.bpmObject.ms);
     }
   }
 
   stopMetronome() {
     clearInterval(this.metronomeInterval);
+    this.metronomeCounter = 0;
   }
 
-  playAudio() {
+  playMetronomeAudio() {
     if (
-      this.stateManager.state == "PLAYING" &&
+      (this.stateManager.state == "PLAYING" ||
+        this.stateManager.state == "RECORDING") &&
       this.stateManager.metronomeIsActive
     ) {
       if (this.metronomeCounter % 4 == 0) {
