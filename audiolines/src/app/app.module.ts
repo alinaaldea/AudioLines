@@ -18,6 +18,7 @@ import { MetronomeComponent } from "../components/metronome/metronome";
 import { SetBpmComponent } from "../components/set-bpm/set-bpm";
 import { SetBpmViewComponent } from "../components/set-bpm-view/set-bpm-view";
 import { ExportComponent } from "../components/export/export";
+import { ExportViewComponent } from "../components/export-view/export-view";
 
 import { StateManagerProvider } from "../providers/state-manager/state-manager";
 import { BpmProvider } from "../providers/bpm/bpm";
@@ -34,7 +35,8 @@ import { BpmProvider } from "../providers/bpm/bpm";
     MetronomeComponent,
     SetBpmComponent,
     SetBpmViewComponent,
-    ExportComponent
+    ExportComponent,
+    ExportViewComponent
   ],
   imports: [BrowserModule, IonicModule.forRoot(MyApp)],
   bootstrap: [IonicApp],

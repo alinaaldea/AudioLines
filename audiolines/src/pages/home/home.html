@@ -9,7 +9,7 @@
 </ion-header>
 
 <ion-content padding class="homeContent" [ngSwitch]="stateManager.state">
-  <p *ngSwitchCase="'EXPORT'" class="white-text">EXPORT VIEW HERE</p>
+  <export-view *ngSwitchCase="'EXPORT'" class="white-text"></export-view>
   <set-bpm-view *ngSwitchCase="'BPM'"> </set-bpm-view>
   <waves-list *ngSwitchDefault></waves-list>
 </ion-content>
