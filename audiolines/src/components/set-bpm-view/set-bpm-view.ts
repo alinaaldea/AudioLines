@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { StateManagerProvider } from "../../providers/state-manager/state-manager";
+import { BpmProvider } from "../../providers/bpm/bpm";
 
 /**
  * Generated class for the SetBpmViewComponent component.
@@ -12,5 +13,12 @@ import { StateManagerProvider } from "../../providers/state-manager/state-manage
   templateUrl: "set-bpm-view.html"
 })
 export class SetBpmViewComponent {
-  constructor(public stateManager: StateManagerProvider) {}
+  constructor(
+    public stateManager: StateManagerProvider,
+    private bpm: BpmProvider
+  ) {}
+
+  onTap() {
+    this.stateManager.bpmObject = this.bpm.tap();
+  }
 }

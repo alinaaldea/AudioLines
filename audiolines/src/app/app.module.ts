@@ -14,14 +14,15 @@ import { PlayComponent } from "../components/play/play";
 import { BacktozeroComponent } from "../components/backtozero/backtozero";
 import { WavesListComponent } from "../components/waves-list/waves-list";
 import { WavesListItemComponent } from "../components/waves-list-item/waves-list-item";
-import { MetronomeComponent } from "../components/metronome/metronome";
 import { SetBpmComponent } from "../components/set-bpm/set-bpm";
 import { SetBpmViewComponent } from "../components/set-bpm-view/set-bpm-view";
 import { ExportComponent } from "../components/export/export";
 import { ExportViewComponent } from "../components/export-view/export-view";
+import { MetronomeToggleComponent } from "../components/metronome-toggle/metronome-toggle";
 
 import { StateManagerProvider } from "../providers/state-manager/state-manager";
 import { BpmProvider } from "../providers/bpm/bpm";
+import { MetronomeProvider } from "../providers/metronome/metronome";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { BpmProvider } from "../providers/bpm/bpm";
     BacktozeroComponent,
     WavesListComponent,
     WavesListItemComponent,
-    MetronomeComponent,
+    MetronomeToggleComponent,
     SetBpmComponent,
     SetBpmViewComponent,
     ExportComponent,
@@ -46,7 +47,8 @@ import { BpmProvider } from "../providers/bpm/bpm";
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     StateManagerProvider,
-    BpmProvider
+    BpmProvider,
+    MetronomeProvider
     // Platform,
     // Media,
     // File

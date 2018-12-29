@@ -1,0 +1,14 @@
+<button
+  (click)="toggleMetronome()"
+  *ngIf="!stateManager.metronomeIsActive"
+  class="btn btn-flat"
+>
+  <span class="metronome"></span>
+</button>
+<button
+  (click)="toggleMetronome()"
+  *ngIf="stateManager.metronomeIsActive"
+  class="btn btn-flat active"
+>
+  <span class="metronome"></span>
+</button>
