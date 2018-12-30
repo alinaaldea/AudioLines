@@ -60,9 +60,9 @@ export class WavesListItemComponent implements AfterViewInit {
       hideScrollbar: this.hideScrollbar
     });
     this.track.load(this.pathToRecording); // must be changed later
-    this.track.on("ready", () => {
-      console.log("TEST");
-    });
+    // this.track.on("ready", () => {
+    //   console.log("TEST");
+    // });
   }
 
   onClick() {
