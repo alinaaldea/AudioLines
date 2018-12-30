@@ -3,8 +3,8 @@ import { ErrorHandler, NgModule } from "@angular/core";
 import { IonicApp, IonicErrorHandler, IonicModule } from "ionic-angular";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { StatusBar } from "@ionic-native/status-bar";
-// import { Media } from "@ionic-native/media";
-// import { File } from "@ionic-native/file";
+import { Media } from "@ionic-native/media";
+import { File } from "@ionic-native/file";
 
 import { MyApp } from "./app.component";
 import { HomePage } from "../pages/home/home";
@@ -46,12 +46,12 @@ import { MetronomeProvider } from "../providers/metronome/metronome";
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
+    Media,
+    File,
     StateManagerProvider,
     BpmProvider,
     MetronomeProvider
     // Platform,
-    // Media,
-    // File
   ]
 })
 export class AppModule {}

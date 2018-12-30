@@ -1,8 +1,10 @@
-import { Component, DoCheck } from "@angular/core";
+import { Component } from "@angular/core";
 import {
   StateManagerProvider,
   track
 } from "../../providers/state-manager/state-manager";
+import { Media, MediaObject } from "@ionic-native/media";
+import { File } from "@ionic-native/file";
 
 /**
  * Class for the RecordingComponent.
@@ -12,39 +14,54 @@ import {
   selector: "recording",
   templateUrl: "recording.html"
 })
-export class RecordingComponent implements DoCheck {
-  // !!!! implemented in branch "recording-functionality" !!!
-  // you can use this class to simulate the recording
-  // and then reading the files to implement the wave thing
+export class RecordingComponent {
+  filePath: string;
+  fileName: string;
+  audio: MediaObject;
+  // audioList: any[] = [];
 
-  constructor(public stateManager: StateManagerProvider) {}
-
-  ngDoCheck(): void {
-    //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
-    // console.log("[RECORDING]: " + this.stateManager.state);
-  }
+  constructor(
+    public stateManager: StateManagerProvider,
+    public media: Media,
+    public file: File
+  ) {}
 
   startRecord() {
     if (this.stateManager.state == "IDLE") {
-      alert("Would be recording now!");
       this.stateManager.state = "RECORDING";
+      this.fileName =
+        "record" +
+        new Date().getDate() +
+        new Date().getMonth() +
+        new Date().getFullYear() +
+        new Date().getHours() +
+        new Date().getMinutes() +
+        new Date().getSeconds() +
+        ".mp3"; //.3gp
+      this.filePath =
+        this.file.externalDataDirectory.replace(/file:\/\//g, "") +
+        this.fileName;
+      this.audio = this.media.create(this.filePath);
+
+      this.audio.startRecord();
     }
   }
 
   stopRecord() {
     if (this.stateManager.state == "RECORDING") {
       this.stateManager.state = "IDLE";
-      this.createTrack("piano.mp3", this.stateManager.tracks.length + 1); //trackID starts at 1
+      this.audio.stopRecord();
+      this.createTrack(this.fileName, this.stateManager.tracks.length + 1); //trackID starts at 1
     }
   }
 
   createTrack(file, idx) {
-    let filePath = "assets/";
     let track: track = {
       id: idx,
-      pathToRecording: filePath + file,
+      pathToRecording: this.fileName,
       state: "ACTIVE" //possible states: "ACTIVE","TRACK_MUTE" or "TRACK_SOLO"
     };
+    alert(this.fileName);
     this.stateManager.tracks.push(track);
   }
 }

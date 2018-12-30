@@ -1,6 +1,8 @@
 import { Component, AfterViewInit, Input } from "@angular/core";
 import { StateManagerProvider } from "../../providers/state-manager/state-manager";
 import { MetronomeProvider } from "../../providers/metronome/metronome";
+import { File } from "@ionic-native/file";
+import { Media } from "@ionic-native/media";
 
 declare var WaveSurfer: any;
 /**
@@ -17,6 +19,7 @@ export class WavesListItemComponent implements AfterViewInit {
   @Input() pathToRecording: string;
   @Input() trackID: number;
   track: any;
+  // audio: MediaObject;
 
   //WaveSurfer properties
   height: number = 98; // +2px border
@@ -36,7 +39,9 @@ export class WavesListItemComponent implements AfterViewInit {
 
   constructor(
     public stateManager: StateManagerProvider,
-    public metronome: MetronomeProvider
+    public metronome: MetronomeProvider,
+    public media: Media,
+    public file: File
   ) {}
 
   ngAfterViewInit(): void {
@@ -59,10 +64,24 @@ export class WavesListItemComponent implements AfterViewInit {
       scrollParent: this.scrollParent,
       hideScrollbar: this.hideScrollbar
     });
-    this.track.load(this.pathToRecording); // must be changed later
-    // this.track.on("ready", () => {
-    //   console.log("TEST");
-    // });
+
+    this.file
+      .readAsDataURL(
+        this.file.externalApplicationStorageDirectory + "/files",
+        this.pathToRecording
+      )
+      .then((url: string) => {
+        alert(url);
+        this.track.load(url);
+      })
+      .catch(e => {
+        alert(e.message);
+        console.log(e);
+      });
+
+    this.track.on("ready", () => {
+      alert("WORKED");
+    });
   }
 
   onClick() {
