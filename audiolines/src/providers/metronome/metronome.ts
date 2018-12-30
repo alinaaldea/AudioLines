@@ -22,8 +22,8 @@ export class MetronomeProvider implements OnDestroy {
   ];
 
   constructor(public stateManager: StateManagerProvider) {
-    this.metronomeSounds.forEach(track => {
-      track.playbackRate = 1;
+    this.metronomeSounds.forEach(sound => {
+      sound.playbackRate = 1;
     });
   }
 

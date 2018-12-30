@@ -22,13 +22,18 @@ export class PlayComponent {
   onClick() {
     if (this.stateManager.state == "IDLE") {
       this.stateManager.state = "PLAYING";
-      if (this.stateManager.metronomeIsActive) {
-        this.metronome.startMetronome();
-      }
+      this.metronome.startMetronome();
       this.stateManager.tracks.forEach(track => {
         if (track.trackData != null) {
           track.trackData.setVolume(1);
           track.trackData.play();
+          track.trackData.on("finish", () => {
+            // wait for every track to be finished
+            // if loop is active
+            // -> start from the beginning
+            // else
+            // -> backtozero and stop
+          });
         }
       });
     } else if (this.stateManager.state == "PLAYING") {
