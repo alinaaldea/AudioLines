@@ -1,0 +1,10 @@
+backtozero {
+  .fa-step-backward {
+    color: color($colors, primary);
+    font-size: 3rem;
+  }
+  .fa-step-backward.disabled {
+    color: color($colors, btnDisabled);
+    font-size: 3rem;
+  }
+}

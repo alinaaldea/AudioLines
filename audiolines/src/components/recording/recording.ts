@@ -1,81 +1,50 @@
-import { Component } from "@angular/core";
-import { NavController } from "ionic-angular";
-import { Media, MediaObject } from "@ionic-native/media";
-import { File } from "@ionic-native/file";
-
-// declare var WaveSurfer: any;
+import { Component, DoCheck } from "@angular/core";
+import {
+  StateManagerProvider,
+  track
+} from "../../providers/state-manager/state-manager";
 
 /**
- * Generated class for the RecordingComponent component.
+ * Class for the RecordingComponent.
  *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
  */
 @Component({
   selector: "recording",
   templateUrl: "recording.html"
 })
-export class RecordingComponent {
-  recording: boolean = false;
-  filePath: string;
-  fileName: string;
-  audio: MediaObject;
-  audioList: any[] = [];
+export class RecordingComponent implements DoCheck {
+  // !!!! implemented in branch "recording-functionality" !!!
+  // you can use this class to simulate the recording
+  // and then reading the files to implement the wave thing
 
-  ionViewWillEnter() {
-    this.getAudioList();
+  constructor(public stateManager: StateManagerProvider) {}
+
+  ngDoCheck(): void {
+    //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
+    // console.log("[RECORDING]: " + this.stateManager.state);
   }
 
-  constructor(
-    public navCtrl: NavController,
-    private media: Media,
-    private file: File
-  ) {}
-
   startRecord() {
-    this.fileName =
-      "record" +
-      new Date().getDate() +
-      new Date().getMonth() +
-      new Date().getFullYear() +
-      new Date().getHours() +
-      new Date().getMinutes() +
-      new Date().getSeconds() +
-      ".mp3"; //.3gp
-    this.filePath =
-      this.file.externalDataDirectory.replace(/file:\/\//g, "") + this.fileName;
-    this.audio = this.media.create(this.filePath);
-
-    this.audio.startRecord();
-
-    this.recording = true;
+    if (this.stateManager.state == "IDLE") {
+      alert("Would be recording now!");
+      this.stateManager.state = "RECORDING";
+    }
   }
 
   stopRecord() {
-    this.audio.stopRecord();
-    let data = { filename: this.fileName };
-    this.audioList.push(data);
-    sessionStorage.setItem("audiolist", JSON.stringify(this.audioList));
-
-    this.recording = false;
-    this.getAudioList();
-    this.playAudio(this.fileName, 0);
-  }
-
-  // wird ersetzt durch wavesurfer
-  playAudio(file, idx) {
-    this.filePath =
-      this.file.externalDataDirectory.replace(/file:\/\//g, "") + file;
-    this.audio = this.media.create(this.filePath);
-
-    this.audio.play();
-    this.audio.setVolume(1);
-  }
-
-  getAudioList() {
-    if (sessionStorage.getItem("audiolist")) {
-      this.audioList = JSON.parse(sessionStorage.getItem("audiolist"));
-      console.log(this.audioList);
+    if (this.stateManager.state == "RECORDING") {
+      this.stateManager.state = "IDLE";
+      this.createTrack("piano.mp3", this.stateManager.tracks.length + 1); //trackID starts at 1
     }
+  }
+
+  createTrack(file, idx) {
+    let filePath = "assets/";
+    let track: track = {
+      id: idx,
+      pathToRecording: filePath + file,
+      state: "ACTIVE" //possible states: "ACTIVE","TRACK_MUTE" or "TRACK_SOLO"
+    };
+    this.stateManager.tracks.push(track);
   }
 }

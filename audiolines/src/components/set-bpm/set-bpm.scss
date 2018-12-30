@@ -1,0 +1,23 @@
+set-bpm {
+  .btn {
+    background-color: transparent;
+    .bpm-text {
+      font-size: 2rem;
+      color: color($colors, primary);
+    }
+  }
+  .btn.active {
+    background-color: color($colors, primary);
+    .bpm-text {
+      font-size: 2rem;
+      color: color($colors, secondary);
+    }
+  }
+  .btn.disabled {
+    background-color: transparent;
+    .bpm-text {
+      font-size: 2rem;
+      color: color($colors, btnDisabled);
+    }
+  }
+}

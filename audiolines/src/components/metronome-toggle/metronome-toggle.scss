@@ -1,0 +1,20 @@
+metronome-toggle {
+  .btn {
+    background-color: transparent;
+    .metronome {
+      background-image: url("../assets/imgs/metronome-primary.svg");
+      background-repeat: no-repeat;
+      height: 4rem;
+      width: 4rem;
+      display: block;
+      margin: auto;
+    }
+  }
+  .btn.active {
+    background-color: color($colors, primary);
+    .metronome {
+      background-image: url("../assets/imgs/metronome-secondary.svg");
+      background-repeat: no-repeat;
+    }
+  }
+}

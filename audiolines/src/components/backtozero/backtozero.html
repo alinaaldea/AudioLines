@@ -1,0 +1,11 @@
+<button
+  [ngSwitch]="stateManager.state"
+  class="btn-floating waves-effect waves-light transparent btn-flat"
+>
+  <i *ngSwitchCase="'IDLE'" class="fas fa-step-backward"> </i>
+  <i *ngSwitchCase="'PLAYING'" class="fas fa-step-backward"> </i>
+  <i *ngSwitchCase="'RECORDING'" class="fas fa-step-backward disabled"> </i>
+  <i *ngSwitchCase="'EXPORT'" class="fas fa-step-backward disabled"> </i>
+  <i *ngSwitchCase="'BPM'" class="fas fa-step-backward disabled"> </i>
+  <i *ngSwitchDefault class="fas fa-step-backward"> </i>
+</button>

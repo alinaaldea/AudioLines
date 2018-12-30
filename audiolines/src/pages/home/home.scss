@@ -1,11 +1,14 @@
 page-home {
+  header {
+    button.btn {
+      height: 5rem;
+      width: 5rem;
+      padding: 5px;
+      margin-top: 20px;
+    }
+  }
+
   .homeContent {
     background-color: color($colors, secondary);
-  }
-  .btn-floating {
-    .material-icons {
-      color: color($colors, primary);
-      font-size: 3rem;
-    }
   }
 }

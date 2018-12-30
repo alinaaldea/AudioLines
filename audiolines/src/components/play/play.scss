@@ -1,0 +1,14 @@
+play {
+  .fa-play {
+    color: color($colors, primary);
+    font-size: 3rem;
+  }
+  .fa-play.disabled {
+    color: color($colors, btnDisabled);
+    font-size: 3rem;
+  }
+  .fa-pause {
+    color: color($colors, primary);
+    font-size: 3rem;
+  }
+}

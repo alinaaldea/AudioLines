@@ -1,0 +1,67 @@
+export-view {
+  ion-grid {
+    ion-row:first-child {
+      background-color: color($colors, primary);
+      border-top-left-radius: 2%;
+      border-top-right-radius: 2%;
+      width: 80vw;
+      margin-bottom: 0;
+
+      h1 {
+        color: color($colors, secondary);
+        padding-top: 2rem;
+        font-weight: 300;
+        font-size: 3.5rem;
+      }
+
+      div.line {
+        background-color: color($colors, secondary);
+        display: block;
+        height: 2px;
+        margin-top: -5px;
+        margin-bottom: 4rem;
+      }
+
+      h5 {
+        color: color($colors, secondary);
+        font-weight: 300;
+      }
+
+      input {
+        width: 80% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border-bottom: 1px solid color($colors, secondary) !important;
+        text-align: center;
+        color: color($colors, secondary);
+      }
+    }
+
+    ion-row:last-child {
+      background-color: color($colors, primary);
+      border-bottom-left-radius: 2%;
+      border-bottom-right-radius: 2%;
+      width: 80vw;
+      height: 50vw;
+      margin-bottom: 0;
+      padding: 2rem;
+
+      button {
+        background-color: color($colors, primary);
+        padding: 0;
+        height: 7rem;
+        width: 7rem;
+        // zoom: 2;
+        .fas {
+          vertical-align: bottom;
+          font-size: 7rem;
+        }
+      }
+      span {
+        color: color($colors, secondary);
+        font-weight: 200;
+        font-size: 2.5rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+waves-list-item {
+  .h5 {
+    color: color($colors, primary);
+  }
+  .btn {
+    background-color: color($colors, primary);
+
+    .fas {
+      color: color($colors, secondary);
+      font-size: 3rem;
+    }
+  }
+
+  ion-col {
+    .card-panel {
+      background-color: color($colors, primary);
+      margin: 0;
+      padding: 1px;
+      .waveform-container {
+        background-color: color($colors, trkBackground);
+      }
+    }
+  }
+}
+.card-panel.active {
+  background-color: color($colors, primary);
+  height: 100px;
+  ion-row {
+    height: 100px !important;
+    padding: 5px;
+    .btn {
+      background-color: color($colors, secondary);
+      color: color($colors, primary);
+      font-size: 2.5rem;
+      width: 5.5rem;
+      height: 5.5rem;
+      border-radius: 5px;
+    }
+    #delete-btn {
+      background-color: transparent;
+      color: color($colors, secondary);
+      text-align: center;
+      .fas {
+        font-size: 3rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+<button
+  [ngSwitch]="stateManager.state"
+  (click)="onClick()"
+  class="btn-floating waves-effect waves-light transparent btn-flat"
+>
+  <i *ngSwitchCase="'IDLE'" class="fas fa-play"></i>
+  <i *ngSwitchCase="'PLAYING'" class="fas fa-pause"></i>
+  <i *ngSwitchCase="'RECORDING'" class="fas fa-play disabled"></i>
+  <i *ngSwitchCase="'EXPORT'" class="fas fa-play disabled"></i>
+  <i *ngSwitchCase="'BPM'" class="fas fa-play disabled"></i>
+  <i *ngSwitchDefault class="fas fa-play"> </i>
+</button>
