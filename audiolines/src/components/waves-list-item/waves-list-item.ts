@@ -1,4 +1,5 @@
 import { Component, AfterViewInit, Input } from "@angular/core";
+
 import { StateManagerProvider } from "../../providers/state-manager/state-manager";
 import { MetronomeProvider } from "../../providers/metronome/metronome";
 import { File } from "@ionic-native/file";
@@ -88,8 +89,14 @@ export class WavesListItemComponent implements AfterViewInit {
   }
 
   onMute() {}
-
   onSolo() {}
-
-  onDelete() {}
+  onDelete() {
+    this.stateManager.tracks.forEach((track, i) => {
+      if (track.id == this.trackID) {
+        this.stateManager.tracks.splice(i, 1);
+      }
+    });
+    //can be buggy in certain conditions -> trackID must be set in another way
+    console.log(this.stateManager.showStateManagerAsObject());
+  }
 }
