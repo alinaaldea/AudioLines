@@ -13,8 +13,6 @@ export class HomePage implements DoCheck {
   ) {}
 
   ngDoCheck(): void {
-    //Called every time that the input properties of a component or a directive are checked.
-    //Use it to extend change detection by performing a custom check.
-    console.log(this.stateManager.showStateManagerAsObject());
+    // console.log(this.stateManager.showStateManagerAsObject());
   }
 }
