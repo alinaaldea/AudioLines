@@ -16,7 +16,7 @@ declare var WaveSurfer: any;
   templateUrl: "waves-list-item.html"
 })
 export class WavesListItemComponent implements AfterViewInit {
-  @Input() pathToRecording: string;
+  @Input() fileName: string;
   @Input() trackID: number;
   track: any;
   // audio: MediaObject;
@@ -68,10 +68,9 @@ export class WavesListItemComponent implements AfterViewInit {
     this.file
       .readAsDataURL(
         this.file.externalApplicationStorageDirectory + "/files",
-        this.pathToRecording
+        this.fileName
       )
       .then((url: string) => {
-        alert(url);
         this.track.load(url);
       })
       .catch(e => {
@@ -80,7 +79,7 @@ export class WavesListItemComponent implements AfterViewInit {
       });
 
     this.track.on("ready", () => {
-      alert("WORKED");
+      this.stateManager.tracks[this.trackID - 1].trackData = this.track;
     });
   }
 

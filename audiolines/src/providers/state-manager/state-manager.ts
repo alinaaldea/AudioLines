@@ -40,7 +40,7 @@ export class StateManagerProvider {
 
 export interface track {
   id: number;
-  pathToRecording: string;
+  fileName: string;
   state: string; //possible states: "ACTIVE","TRACK_MUTE" or "TRACK_SOLO"
-  // trackData: WavesListItemComponent;
+  trackData?: any;
 }

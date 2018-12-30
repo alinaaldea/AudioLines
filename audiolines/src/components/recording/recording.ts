@@ -58,7 +58,7 @@ export class RecordingComponent {
   createTrack(file, idx) {
     let track: track = {
       id: idx,
-      pathToRecording: this.fileName,
+      fileName: this.fileName,
       state: "ACTIVE" //possible states: "ACTIVE","TRACK_MUTE" or "TRACK_SOLO"
     };
     alert(this.fileName);
