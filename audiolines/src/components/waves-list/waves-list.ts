@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, AfterViewInit } from "@angular/core";
+import { StateManagerProvider } from "../../providers/state-manager/state-manager";
 
 /**
  * Generated class for the WavesListComponent component.
@@ -10,4 +11,8 @@ import { Component } from "@angular/core";
   selector: "waves-list",
   templateUrl: "waves-list.html"
 })
-export class WavesListComponent {}
+export class WavesListComponent implements AfterViewInit {
+  constructor(public stateManager: StateManagerProvider) {}
+
+  ngAfterViewInit(): void {}
+}

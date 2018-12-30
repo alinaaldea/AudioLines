@@ -1,5 +1,10 @@
 <ion-grid>
   <ul>
-    <li><waves-list-item></waves-list-item></li>
+    <li *ngFor="let track of stateManager.tracks">
+      <waves-list-item
+        [trackID]="track.id"
+        [pathToRecording]="track.pathToRecording"
+      ></waves-list-item>
+    </li>
   </ul>
 </ion-grid>

@@ -1,13 +1,13 @@
 <ion-row>
   <ion-col col-2 align-self-center>
-    <h5 class="h5 center-align">{{ 1 }}</h5>
+    <h5 class="h5 center-align">{{ trackID }}</h5>
     <button (click)="onClick()" class="btn waves-effect waves-light">
       <span> <i class="fas fa-ellipsis-v"></i> </span>
     </button>
   </ion-col>
   <ion-col col-10 align-self-center>
     <div [hidden]="menuIsOpen" class="card-panel">
-      <div id="waveform-1" class="waveform-container"></div>
+      <div id="waveform-{{ trackID }}" class="waveform-container"></div>
     </div>
     <div *ngIf="menuIsOpen" class="card-panel active">
       <ion-row align-items-center>

@@ -16,22 +16,31 @@ export class StateManagerProvider {
     count: 0
   };
 
-  //track properties should be in here too so the export module and
-  //the solo/mute/delete functions can be global
+  tracks: track[] = [];
 
   showStateManagerAsObject(): {
     state: string;
     metronomeIsActive: boolean;
     bpmObject: { avg: number; count: number; ms: number };
+    tracks: track[];
   } {
     let state = this.state;
     let metronomeIsActive = this.metronomeIsActive;
     let bpmObject = this.bpmObject;
+    let tracks = this.tracks;
 
     return {
       state,
       metronomeIsActive,
-      bpmObject
+      bpmObject,
+      tracks
     };
   }
+}
+
+export interface track {
+  id: number;
+  pathToRecording: string;
+  state: string; //possible states: "ACTIVE","TRACK_MUTE" or "TRACK_SOLO"
+  // trackData: WavesListItemComponent;
 }
