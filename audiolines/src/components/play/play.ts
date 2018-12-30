@@ -27,6 +27,7 @@ export class PlayComponent {
       }
       this.stateManager.tracks.forEach(track => {
         if (track.trackData != null) {
+          track.trackData.setVolume(1);
           track.trackData.play();
         }
       });

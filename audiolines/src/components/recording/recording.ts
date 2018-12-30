@@ -5,6 +5,7 @@ import {
 } from "../../providers/state-manager/state-manager";
 import { Media, MediaObject } from "@ionic-native/media";
 import { File } from "@ionic-native/file";
+import { MetronomeProvider } from "../../providers/metronome/metronome";
 
 /**
  * Class for the RecordingComponent.
@@ -18,10 +19,10 @@ export class RecordingComponent {
   filePath: string;
   fileName: string;
   audio: MediaObject;
-  // audioList: any[] = [];
 
   constructor(
     public stateManager: StateManagerProvider,
+    public metronome: MetronomeProvider,
     public media: Media,
     public file: File
   ) {}
@@ -37,11 +38,18 @@ export class RecordingComponent {
         new Date().getHours() +
         new Date().getMinutes() +
         new Date().getSeconds() +
-        ".mp3"; //.3gp
+        ".mp3"; //.mp3
       this.filePath =
         this.file.externalDataDirectory.replace(/file:\/\//g, "") +
         this.fileName;
       this.audio = this.media.create(this.filePath);
+      this.stateManager.tracks.forEach(track => {
+        if (track.trackData != null) {
+          track.trackData.setVolume(1);
+          track.trackData.play();
+        }
+      });
+      this.metronome.startMetronome(); // counter first
       this.audio.startRecord();
     }
   }
@@ -50,6 +58,8 @@ export class RecordingComponent {
     if (this.stateManager.state == "RECORDING") {
       this.stateManager.state = "IDLE";
       this.audio.stopRecord();
+      this.audio.release();
+      this.metronome.stopMetronome();
       this.createTrack(this.fileName, this.stateManager.tracks.length + 1); //trackID starts at 1
     }
   }

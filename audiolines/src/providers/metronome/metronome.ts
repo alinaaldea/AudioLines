@@ -45,7 +45,7 @@ export class MetronomeProvider implements OnDestroy {
     this.metronomeCounter = 0;
   }
 
-  playMetronomeAudio() {
+  private playMetronomeAudio() {
     if (
       (this.stateManager.state == "PLAYING" ||
         this.stateManager.state == "RECORDING") &&

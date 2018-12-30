@@ -24,11 +24,11 @@ export class WavesListItemComponent implements AfterViewInit {
   //WaveSurfer properties
   height: number = 98; // +2px border
   barGap: number = 1;
-  barHeight: number = 1;
+  barHeight: number = 2;
   barWidth: number = 2;
   normalize: boolean = true;
   interact: boolean = false;
-  partialRender: boolean = true;
+  partialRender: boolean = false;
   responsive: boolean = true;
   cursorWidth: number = 3;
   cursorColor: string = "white";
@@ -83,7 +83,13 @@ export class WavesListItemComponent implements AfterViewInit {
     });
   }
 
-  onClick() {
+  onToggleMenu() {
     this.menuIsOpen = !this.menuIsOpen;
   }
+
+  onMute() {}
+
+  onSolo() {}
+
+  onDelete() {}
 }
