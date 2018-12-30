@@ -42,7 +42,6 @@ export class RecordingComponent {
         this.file.externalDataDirectory.replace(/file:\/\//g, "") +
         this.fileName;
       this.audio = this.media.create(this.filePath);
-
       this.audio.startRecord();
     }
   }
@@ -61,7 +60,6 @@ export class RecordingComponent {
       fileName: this.fileName,
       state: "ACTIVE" //possible states: "ACTIVE","TRACK_MUTE" or "TRACK_SOLO"
     };
-    alert(this.fileName);
     this.stateManager.tracks.push(track);
   }
 }

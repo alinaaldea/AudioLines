@@ -25,9 +25,19 @@ export class PlayComponent {
       if (this.stateManager.metronomeIsActive) {
         this.metronome.startMetronome();
       }
+      this.stateManager.tracks.forEach(track => {
+        if (track.trackData != null) {
+          track.trackData.play();
+        }
+      });
     } else if (this.stateManager.state == "PLAYING") {
       this.stateManager.state = "IDLE";
       this.metronome.stopMetronome();
+      this.stateManager.tracks.forEach(track => {
+        if (track.trackData != null) {
+          track.trackData.pause();
+        }
+      });
     }
   }
 }
