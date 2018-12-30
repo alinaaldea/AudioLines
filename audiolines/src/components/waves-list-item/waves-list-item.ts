@@ -1,4 +1,5 @@
 import { Component, AfterViewInit, Input } from "@angular/core";
+
 import { StateManagerProvider } from "../../providers/state-manager/state-manager";
 import { MetronomeProvider } from "../../providers/metronome/metronome";
 
@@ -63,9 +64,22 @@ export class WavesListItemComponent implements AfterViewInit {
     // this.track.on("ready", () => {
     //   console.log("TEST");
     // });
+    console.log(this.stateManager.showStateManagerAsObject());
   }
 
-  onClick() {
+  onToggleMenu() {
     this.menuIsOpen = !this.menuIsOpen;
+  }
+
+  onMute() {}
+  onSolo() {}
+  onDelete() {
+    this.stateManager.tracks.forEach((track, i) => {
+      if (track.id == this.trackID) {
+        this.stateManager.tracks.splice(i, 1);
+      }
+    });
+    //can be buggy in certain conditions -> trackID must be set in another way
+    console.log(this.stateManager.showStateManagerAsObject());
   }
 }
