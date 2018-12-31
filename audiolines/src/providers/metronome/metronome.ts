@@ -12,8 +12,6 @@ declare var Tone: any;
 */
 @Injectable()
 export class MetronomeProvider {
-  isPlaying: boolean = false;
-
   metronomeSound: any;
   metronomeLoop: any;
 
@@ -23,6 +21,7 @@ export class MetronomeProvider {
     if (this.metronomeSound == undefined) {
       this.metronomeSound = new Tone.PolySynth().toMaster();
     }
+
     if (
       this.stateManager.metronomeIsActive &&
       (this.stateManager.state == "PLAYING" ||

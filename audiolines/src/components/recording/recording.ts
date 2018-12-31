@@ -62,7 +62,7 @@ export class RecordingComponent {
       this.audio.stopRecord();
       this.audio.release();
       this.metronome.stopMetronome();
-      this.createTrack("piano.wav", this.stateManager.tracks.length + 1); //trackID starts at 1
+      this.createTrack(this.fileName, this.stateManager.tracks.length + 1); //trackID starts at 1
     }
   }
 
