@@ -1,7 +1,8 @@
-import { Injectable, OnDestroy } from "@angular/core";
+import { Injectable } from "@angular/core";
+
 import { StateManagerProvider } from "../state-manager/state-manager";
 
-import { Observable, Subscription, Scheduler } from "rxjs/Rx";
+declare var Tone: any;
 
 /*
   Generated class for the MetronomeProvider provider.
@@ -10,70 +11,35 @@ import { Observable, Subscription, Scheduler } from "rxjs/Rx";
   and Angular DI.
 */
 @Injectable()
-export class MetronomeProvider implements OnDestroy {
-  metronomeIsPlaying: boolean = false;
+export class MetronomeProvider {
+  isPlaying: boolean = false;
 
-  metronomeIntervalFunction: Subscription;
-  metronomeCounter: number = 0;
+  metronomeSound: any;
+  metronomeLoop: any;
 
-  metronomeSounds: HTMLAudioElement[] = [
-    new Audio("assets/sounds/metronome_high.wav"),
-    new Audio("assets/sounds/metronome_low.wav")
-  ];
+  constructor(public stateManager: StateManagerProvider) {}
 
-  lastTime;
-
-  constructor(public stateManager: StateManagerProvider) {
-    this.metronomeSounds.forEach(sound => {
-      sound.playbackRate = 1;
-    });
-  }
-
-  startMetronome(): Promise<any> {
-    if (this.stateManager.metronomeIsActive) {
-      this.metronomeIsPlaying = true;
-      this.metronomeIntervalFunction = Observable.timer(
-        0,
-        this.stateManager.bpmObject.ms,
-        Scheduler.async
-      ).subscribe(this.playMetronomeAudio.bind(this));
+  startMetronome() {
+    if (this.metronomeSound == undefined) {
+      this.metronomeSound = new Tone.PolySynth().toMaster();
     }
-    return Promise.resolve();
+    if (
+      this.stateManager.metronomeIsActive &&
+      (this.stateManager.state == "PLAYING" ||
+        this.stateManager.state == "RECORDING")
+    ) {
+      Tone.Transport.bpm.value = this.stateManager.bpmObject.bpm;
+      Tone.Transport.start("+0.1");
+
+      this.metronomeLoop = new Tone.Loop(time => {
+        this.metronomeSound.triggerAttackRelease("C6", "32n", time);
+      }, "4n").start(0);
+    }
   }
 
   stopMetronome() {
-    if (this.metronomeIntervalFunction != null) {
-      this.metronomeIntervalFunction.unsubscribe();
-    }
-    this.metronomeCounter = 0;
-  }
-
-  private playMetronomeAudio() {
-    if (
-      (this.stateManager.state == "PLAYING" ||
-        this.stateManager.state == "RECORDING") &&
-      this.stateManager.metronomeIsActive
-    ) {
-      if (this.metronomeCounter % 4 == 0) {
-        this.metronomeSounds[0].play();
-      } else {
-        this.metronomeSounds[1].play();
-      }
-      this.metronomeCounter++;
-    }
-
-    // ACTUAL METRONOME TIME
-    let time = Date.now();
-    if (this.lastTime) {
-      let time = Date.now() - this.lastTime;
-      console.log(time);
-    }
-    this.lastTime = time;
-  }
-
-  ngOnDestroy(): void {
-    if (this.metronomeIntervalFunction != null) {
-      this.metronomeIntervalFunction.unsubscribe();
+    if (this.metronomeLoop != undefined) {
+      this.metronomeLoop.stop();
     }
   }
 }
