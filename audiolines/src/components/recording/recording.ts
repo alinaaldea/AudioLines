@@ -30,6 +30,7 @@ export class RecordingComponent {
   startRecord() {
     if (this.stateManager.state == "IDLE") {
       this.stateManager.state = "RECORDING";
+
       this.fileName =
         "record" +
         new Date().getDate() +
@@ -38,18 +39,19 @@ export class RecordingComponent {
         new Date().getHours() +
         new Date().getMinutes() +
         new Date().getSeconds() +
-        ".mp3"; //.mp3
+        ".mp3";
       this.filePath =
         this.file.externalDataDirectory.replace(/file:\/\//g, "") +
         this.fileName;
       this.audio = this.media.create(this.filePath);
+
       this.stateManager.tracks.forEach(track => {
         if (track.trackData != null) {
           track.trackData.setVolume(1);
           track.trackData.play();
         }
       });
-      this.metronome.startMetronome(); // counter first
+      this.metronome.startMetronome();
       this.audio.startRecord();
     }
   }
@@ -60,7 +62,7 @@ export class RecordingComponent {
       this.audio.stopRecord();
       this.audio.release();
       this.metronome.stopMetronome();
-      this.createTrack(this.fileName, this.stateManager.tracks.length + 1); //trackID starts at 1
+      this.createTrack("piano.mp3", this.stateManager.tracks.length + 1); //trackID starts at 1
     }
   }
 

@@ -13,20 +13,29 @@
   </ion-row>
   <ion-row>
     <ion-col col-2 align-self-center>
-      <button class="btn btn-flat waves-effect waves-light">
+      <button
+        (click)="onIncreaseBPM()"
+        class="btn btn-flat waves-effect waves-light"
+      >
         <i class="fas fa-plus-square"></i>
       </button>
     </ion-col>
     <ion-col col-6 push-1 align-self-center>
-      <input
-        type="number"
-        maxlength="3"
-        minlength="2"
-        value="{{ stateManager.bpmObject.avg }}"
-      />
+      <form>
+        <input
+          type="number"
+          maxlength="3"
+          minlength="2"
+          value="{{ bpmObject.bpm }}"
+          (change)="onTypeIn($event)"
+        />
+      </form>
     </ion-col>
     <ion-col col-2 push-1 align-self-center>
-      <button class="btn btn-flat waves-effect waves-light">
+      <button
+        (click)="onDecreaseBPM()"
+        class="btn btn-flat waves-effect waves-light"
+      >
         <i class="fas fa-minus-square"></i>
       </button>
     </ion-col>
