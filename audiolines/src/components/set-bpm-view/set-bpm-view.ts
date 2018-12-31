@@ -25,7 +25,6 @@ export class SetBpmViewComponent {
   }
 
   onTypeIn(event: any) {
-    console.log(this.bpmObject);
     this.bpmObject.bpm = event.target.valueAsNumber;
     this.bpmObject.ms = this.bpm.calc(this.bpmObject.bpm);
     console.log(this.bpmObject);
