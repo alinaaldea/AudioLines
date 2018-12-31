@@ -62,14 +62,14 @@ export class RecordingComponent {
       this.audio.stopRecord();
       this.audio.release();
       this.metronome.stopMetronome();
-      this.createTrack("piano.mp3", this.stateManager.tracks.length + 1); //trackID starts at 1
+      this.createTrack("piano.wav", this.stateManager.tracks.length + 1); //trackID starts at 1
     }
   }
 
   createTrack(file, idx) {
     let track: track = {
       id: idx,
-      fileName: this.fileName,
+      fileName: file,
       state: "ACTIVE" //possible states: "ACTIVE","TRACK_MUTE" or "TRACK_SOLO"
     };
     this.stateManager.tracks.push(track);

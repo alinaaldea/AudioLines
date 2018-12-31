@@ -21,13 +21,15 @@ export class MetronomeProvider implements OnDestroy {
     new Audio("assets/sounds/metronome_low.wav")
   ];
 
+  lastTime;
+
   constructor(public stateManager: StateManagerProvider) {
     this.metronomeSounds.forEach(sound => {
       sound.playbackRate = 1;
     });
   }
 
-  startMetronome() {
+  startMetronome(): Promise<any> {
     if (this.stateManager.metronomeIsActive) {
       this.metronomeIsPlaying = true;
       this.metronomeIntervalFunction = Observable.timer(
@@ -36,6 +38,7 @@ export class MetronomeProvider implements OnDestroy {
         Scheduler.async
       ).subscribe(this.playMetronomeAudio.bind(this));
     }
+    return Promise.resolve();
   }
 
   stopMetronome() {
@@ -58,6 +61,14 @@ export class MetronomeProvider implements OnDestroy {
       }
       this.metronomeCounter++;
     }
+
+    // ACTUAL METRONOME TIME
+    let time = Date.now();
+    if (this.lastTime) {
+      let time = Date.now() - this.lastTime;
+      console.log(time);
+    }
+    this.lastTime = time;
   }
 
   ngOnDestroy(): void {
