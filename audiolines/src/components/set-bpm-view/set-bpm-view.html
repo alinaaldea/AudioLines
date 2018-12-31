@@ -14,10 +14,10 @@
   <ion-row>
     <ion-col col-2 align-self-center>
       <button
-        (click)="onIncreaseBPM()"
+        (click)="onDecreaseBPM()"
         class="btn btn-flat waves-effect waves-light"
       >
-        <i class="fas fa-plus-square"></i>
+        <i class="fas fa-minus-square"></i>
       </button>
     </ion-col>
     <ion-col col-6 push-1 align-self-center>
@@ -26,17 +26,17 @@
           type="number"
           maxlength="3"
           minlength="2"
-          value="{{ bpmObject.bpm }}"
+          value="{{ stateManager.bpmObject.bpm }}"
           (change)="onTypeIn($event)"
         />
       </form>
     </ion-col>
     <ion-col col-2 push-1 align-self-center>
       <button
-        (click)="onDecreaseBPM()"
+        (click)="onIncreaseBPM()"
         class="btn btn-flat waves-effect waves-light"
       >
-        <i class="fas fa-minus-square"></i>
+        <i class="fas fa-plus-square"></i>
       </button>
     </ion-col>
   </ion-row>
