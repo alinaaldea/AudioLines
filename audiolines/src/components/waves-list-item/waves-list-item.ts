@@ -1,17 +1,13 @@
 import { Component, AfterViewInit, Input } from "@angular/core";
 
-import { StateManagerProvider } from "../../providers/state-manager/state-manager";
-import { MetronomeProvider } from "../../providers/metronome/metronome";
 import { File } from "@ionic-native/file";
 import { Media } from "@ionic-native/media";
 
+import { StateManagerProvider } from "../../providers/state-manager/state-manager";
+import { MetronomeProvider } from "../../providers/metronome/metronome";
+
 declare var WaveSurfer: any;
-/**
- * Generated class for the WavesListItemComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
+
 @Component({
   selector: "waves-list-item",
   templateUrl: "waves-list-item.html"
@@ -20,7 +16,6 @@ export class WavesListItemComponent implements AfterViewInit {
   @Input() fileName: string;
   @Input() trackID: number;
   track: any;
-  // audio: MediaObject;
 
   //WaveSurfer properties
   height: number = 98; // +2px border

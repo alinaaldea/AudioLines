@@ -1,16 +1,14 @@
 import { Component } from "@angular/core";
+
+import { Media, MediaObject } from "@ionic-native/media";
+import { File } from "@ionic-native/file";
+
 import {
   StateManagerProvider,
   track
 } from "../../providers/state-manager/state-manager";
-import { Media, MediaObject } from "@ionic-native/media";
-import { File } from "@ionic-native/file";
 import { MetronomeProvider } from "../../providers/metronome/metronome";
 
-/**
- * Class for the RecordingComponent.
- *
- */
 @Component({
   selector: "recording",
   templateUrl: "recording.html"
