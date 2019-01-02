@@ -23,6 +23,7 @@ import { MetronomeToggleComponent } from "../components/metronome-toggle/metrono
 import { StateManagerProvider } from "../providers/state-manager/state-manager";
 import { BpmProvider } from "../providers/bpm/bpm";
 import { MetronomeProvider } from "../providers/metronome/metronome";
+import { TimelineProvider } from '../providers/timeline/timeline';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { MetronomeProvider } from "../providers/metronome/metronome";
     File,
     StateManagerProvider,
     BpmProvider,
-    MetronomeProvider
+    MetronomeProvider,
+    TimelineProvider
     // Platform,
   ]
 })

@@ -8,6 +8,7 @@ import {
   track
 } from "../../providers/state-manager/state-manager";
 import { MetronomeProvider } from "../../providers/metronome/metronome";
+import { TimelineProvider } from "../../providers/timeline/timeline";
 
 @Component({
   selector: "recording",
@@ -21,6 +22,7 @@ export class RecordingComponent {
   constructor(
     public stateManager: StateManagerProvider,
     public metronome: MetronomeProvider,
+    public timeLine: TimelineProvider,
     public media: Media,
     public file: File
   ) {}
@@ -42,14 +44,7 @@ export class RecordingComponent {
         this.file.externalDataDirectory.replace(/file:\/\//g, "") +
         this.fileName;
       this.audio = this.media.create(this.filePath);
-
-      this.stateManager.tracks.forEach(track => {
-        if (track.trackData != null) {
-          track.trackData.setVolume(1);
-          track.trackData.play();
-        }
-      });
-      this.metronome.startMetronome();
+      this.timeLine.start();
       this.audio.startRecord();
     }
   }
@@ -59,7 +54,7 @@ export class RecordingComponent {
       this.stateManager.state = "IDLE";
       this.audio.stopRecord();
       this.audio.release();
-      this.metronome.stopMetronome();
+      this.timeLine.stop();
       this.createTrack(this.fileName, this.stateManager.tracks.length + 1); //trackID starts at 1
     }
   }

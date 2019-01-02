@@ -15,24 +15,19 @@ export class MetronomeProvider {
     if (this.metronomeSound == undefined) {
       this.metronomeSound = new Tone.PolySynth().toMaster();
     }
-
-    if (
-      this.stateManager.metronomeIsActive &&
-      (this.stateManager.state == "PLAYING" ||
-        this.stateManager.state == "RECORDING")
-    ) {
-      Tone.Transport.bpm.value = this.stateManager.bpmObject.bpm;
-      Tone.Transport.start("+0.1");
-
-      this.metronomeLoop = new Tone.Loop(time => {
-        this.metronomeSound.triggerAttackRelease("C6", "32n", time);
-      }, "4n").start(0);
+    if (this.stateManager.metronomeIsActive) {
+      this.metronomeLoop = Tone.Transport.scheduleRepeat(time => {
+        this.triggerSynth(time);
+        console.log(Tone.Transport.getSecondsAtTime());
+      }, "4n");
     }
   }
 
   stopMetronome() {
-    if (this.metronomeLoop != undefined) {
-      this.metronomeLoop.stop();
-    }
+    Tone.Transport.clear(this.metronomeLoop);
+  }
+
+  triggerSynth(time) {
+    this.metronomeSound.triggerAttackRelease("C6", "64n", time);
   }
 }
