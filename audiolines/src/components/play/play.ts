@@ -1,8 +1,9 @@
 import { Component } from "@angular/core";
 
 import { StateManagerProvider } from "../../providers/state-manager/state-manager";
-import { MetronomeProvider } from "../../providers/metronome/metronome";
 import { TimelineProvider } from "../../providers/timeline/timeline";
+
+//TODO: synchronized looping
 
 @Component({
   selector: "play",
@@ -11,22 +12,18 @@ import { TimelineProvider } from "../../providers/timeline/timeline";
 export class PlayComponent {
   constructor(
     public stateManager: StateManagerProvider,
-    public metronome: MetronomeProvider,
     public timeLine: TimelineProvider
   ) {}
 
   onClick() {
-    if (this.stateManager.state == "IDLE") {
+    if (
+      this.stateManager.state == "STOPPED" ||
+      this.stateManager.state == "PAUSED"
+    ) {
       this.stateManager.state = "PLAYING";
-      this.stateManager.tracks.forEach(track => {
-        track.trackData.play();
-      });
       this.timeLine.start();
     } else if (this.stateManager.state == "PLAYING") {
-      this.stateManager.state = "IDLE";
-      this.stateManager.tracks.forEach(track => {
-        track.trackData.pause();
-      });
+      this.stateManager.state = "PAUSED";
       this.timeLine.pause();
     }
   }

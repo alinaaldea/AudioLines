@@ -16,10 +16,12 @@ export class BacktozeroComponent {
   ) {}
 
   onClick() {
-    if (this.stateManager.state == "IDLE") {
-      this.stateManager.tracks.forEach(track => {
-        track.trackData.stop();
-      });
+    if (this.stateManager.state == "PAUSED") {
+      /**
+       * TODO: BUG when stopping while playing
+       * -> play button stays on "pause"
+       */
+      this.stateManager.state = "STOPPED";
       this.timeLine.stop();
     }
   }

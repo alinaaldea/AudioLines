@@ -11,7 +11,7 @@
   </button>
 </ng-container>
 <ng-template #elseTemplate>
-  <ng-container *ngIf="stateManager.state == 'IDLE'; else elseTemplate">
+  <ng-container *ngIf="stateManager.state == 'STOPPED'; else elseTemplate">
     <button
       (click)="startRecord()"
       class="btn-floating waves-effect waves-dark"

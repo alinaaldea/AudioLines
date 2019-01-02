@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 
 import { StateManagerProvider } from "../state-manager/state-manager";
-import { BpmProvider } from "../bpm/bpm";
 import { MetronomeProvider } from "../metronome/metronome";
 
 declare var Tone: any;
@@ -10,7 +9,6 @@ declare var Tone: any;
 export class TimelineProvider {
   constructor(
     public stateManager: StateManagerProvider,
-    public bpm: BpmProvider,
     public metronome: MetronomeProvider
   ) {
     Tone.Transport.bpm.value = this.stateManager.bpmObject.bpm;
@@ -21,19 +19,32 @@ export class TimelineProvider {
     Tone.Transport.bpm.value = this.stateManager.bpmObject.bpm;
 
     this.metronome.startMetronome();
-
+    this.stateManager.tracks.forEach(track => {
+      if (track.trackData != undefined) {
+        track.trackData.WaveSurfer.play();
+      }
+    });
     Tone.Transport.start();
     console.log(Tone.Transport.state);
   }
 
   pause() {
     this.metronome.stopMetronome();
-
+    this.stateManager.tracks.forEach(track => {
+      if (track.trackData != undefined) {
+        track.trackData.WaveSurfer.pause();
+      }
+    });
     Tone.Transport.pause();
     console.log(Tone.Transport.state);
   }
 
   stop() {
+    this.stateManager.tracks.forEach(track => {
+      if (track.trackData != undefined) {
+        track.trackData.WaveSurfer.stop();
+      }
+    });
     Tone.Transport.stop();
     console.log(Tone.Transport.state);
   }
