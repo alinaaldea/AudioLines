@@ -2,7 +2,7 @@
   <h3 *ngIf="stateManager.tracks.length == 0" class="white-text center-align">
     Start recording something...
   </h3>
-  <ul *ngIf="stateManager.tracks.length > 0">
+  <ul [hidden]="stateManager.tracks.length == 0">
     <li *ngFor="let track of stateManager.tracks">
       <waves-list-item
         [trackID]="track.id"

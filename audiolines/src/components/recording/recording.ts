@@ -73,5 +73,6 @@ export class RecordingComponent {
       state: "ACTIVE" //possible states: "ACTIVE","TRACK_MUTE" or "TRACK_SOLO"
     };
     this.stateManager.tracks.push(track);
+    console.log(this.stateManager.showStateManagerAsObject());
   }
 }

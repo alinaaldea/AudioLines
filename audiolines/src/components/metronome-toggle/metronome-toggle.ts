@@ -19,6 +19,7 @@ export class MetronomeToggleComponent {
       /**
        * TODO: right now starts at 0
        * -> later the metronome has to be in time with the tracks
+       * see TODO in recording.ts
        */
       this.stateManager.metronomeIsActive &&
       (this.stateManager.state == "PLAYING" ||

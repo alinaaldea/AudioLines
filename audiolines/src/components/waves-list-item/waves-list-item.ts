@@ -20,14 +20,16 @@ declare var Tone: any;
 export class WavesListItemComponent implements AfterViewInit {
   @Input() fileName: string;
   @Input() trackID: number;
-  track: { WaveSurfer: any; TonePlayer: any };
+  track: { WaveSurfer: any; TonePlayer: any } = {
+    WaveSurfer: "WaveSurfer", // to be replaced by the Object
+    TonePlayer: "TonePlayer" // to be replaced by the Object
+  };
 
   //WaveSurfer properties
   height: number = 98; // +2px border
   barGap: number = 1;
-  barHeight: number = 2;
+  barHeight: number = 3;
   barWidth: number = 2;
-  fillParent: boolean = true;
   interact: boolean = false;
   partialRender: boolean = false;
   responsive: boolean = true;
@@ -56,7 +58,6 @@ export class WavesListItemComponent implements AfterViewInit {
       barGap: this.barGap,
       barHeight: this.barHeight,
       barWidth: this.barWidth,
-      fillParent: this.fillParent,
       interact: this.interact,
       partialRender: this.partialRender,
       responsive: this.responsive,
