@@ -3,6 +3,9 @@ import { Component } from "@angular/core";
 import { StateManagerProvider } from "../../providers/state-manager/state-manager";
 import { BpmProvider } from "../../providers/bpm/bpm";
 
+/**
+ * TODO: BUG when bpm is set with tapping and then you try to increase or decrease directly without leaving the menu
+ */
 @Component({
   selector: "set-bpm-view",
   templateUrl: "set-bpm-view.html"

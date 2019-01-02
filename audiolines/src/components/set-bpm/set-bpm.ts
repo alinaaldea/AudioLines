@@ -10,10 +10,10 @@ export class SetBpmComponent {
   constructor(public stateManager: StateManagerProvider) {}
 
   onClick() {
-    if (this.stateManager.state == "IDLE") {
+    if (this.stateManager.state == "STOPPED") {
       this.stateManager.state = "BPM";
     } else if (this.stateManager.state == "BPM") {
-      this.stateManager.state = "IDLE";
+      this.stateManager.state = "STOPPED";
     }
   }
 }

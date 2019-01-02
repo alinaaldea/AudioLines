@@ -1,7 +1,6 @@
 import { Component } from "@angular/core";
 
 import { StateManagerProvider } from "../../providers/state-manager/state-manager";
-import { MetronomeProvider } from "../../providers/metronome/metronome";
 import { TimelineProvider } from "../../providers/timeline/timeline";
 
 @Component({
@@ -11,16 +10,18 @@ import { TimelineProvider } from "../../providers/timeline/timeline";
 export class PlayComponent {
   constructor(
     public stateManager: StateManagerProvider,
-    public metronome: MetronomeProvider,
     public timeLine: TimelineProvider
   ) {}
 
   onClick() {
-    if (this.stateManager.state == "IDLE") {
+    if (
+      this.stateManager.state == "STOPPED" ||
+      this.stateManager.state == "PAUSED"
+    ) {
       this.stateManager.state = "PLAYING";
       this.timeLine.start();
     } else if (this.stateManager.state == "PLAYING") {
-      this.stateManager.state = "IDLE";
+      this.stateManager.state = "PAUSED";
       this.timeLine.pause();
     }
   }

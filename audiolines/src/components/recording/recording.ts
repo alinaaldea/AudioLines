@@ -7,9 +7,17 @@ import {
   StateManagerProvider,
   track
 } from "../../providers/state-manager/state-manager";
-import { MetronomeProvider } from "../../providers/metronome/metronome";
 import { TimelineProvider } from "../../providers/timeline/timeline";
 
+/**
+ * TODO: if Metronome is active ->
+ * count 1 measure (4 BEATS) before the app starts recording
+ *
+ * right now that leads to a UX problem:
+ * -> if the user starts to play without having recorded anything
+ * the record-button gets greyed out.
+ * this should not be happening until the user has recorded at least 1 track
+ */
 @Component({
   selector: "recording",
   templateUrl: "recording.html"
@@ -21,14 +29,13 @@ export class RecordingComponent {
 
   constructor(
     public stateManager: StateManagerProvider,
-    public metronome: MetronomeProvider,
     public timeLine: TimelineProvider,
     public media: Media,
     public file: File
   ) {}
 
   startRecord() {
-    if (this.stateManager.state == "IDLE") {
+    if (this.stateManager.state == "STOPPED") {
       this.stateManager.state = "RECORDING";
 
       this.fileName =
@@ -51,7 +58,7 @@ export class RecordingComponent {
 
   stopRecord() {
     if (this.stateManager.state == "RECORDING") {
-      this.stateManager.state = "IDLE";
+      this.stateManager.state = "STOPPED";
       this.audio.stopRecord();
       this.audio.release();
       this.timeLine.stop();

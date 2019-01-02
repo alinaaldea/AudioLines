@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 export class StateManagerProvider {
-  state: string = "IDLE"; // possible States: "IDLE","PLAYING","RECORDING","EXPORT","BPM"
+  state: string = "STOPPED"; // possible States: "STOPPED","PAUSED","PLAYING","RECORDING","EXPORT","BPM"
   metronomeIsActive: boolean = false; //standard set to OFF
   bpmObject: { bpm: number; ms: number } = {
     bpm: 100, //standard BPM set to 100

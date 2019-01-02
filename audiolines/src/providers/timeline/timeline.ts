@@ -21,7 +21,7 @@ export class TimelineProvider {
     this.metronome.startMetronome();
     this.stateManager.tracks.forEach(track => {
       if (track.trackData != undefined) {
-        track.trackData.play();
+        track.trackData.WaveSurfer.play();
       }
     });
     Tone.Transport.start();
@@ -32,7 +32,7 @@ export class TimelineProvider {
     this.metronome.stopMetronome();
     this.stateManager.tracks.forEach(track => {
       if (track.trackData != undefined) {
-        track.trackData.pause();
+        track.trackData.WaveSurfer.pause();
       }
     });
     Tone.Transport.pause();
@@ -42,7 +42,7 @@ export class TimelineProvider {
   stop() {
     this.stateManager.tracks.forEach(track => {
       if (track.trackData != undefined) {
-        track.trackData.stop();
+        track.trackData.WaveSurfer.stop();
       }
     });
     Tone.Transport.stop();
