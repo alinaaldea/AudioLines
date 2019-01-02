@@ -11,7 +11,6 @@ declare var Tone: any;
 
 /**
  * TODO: MUTE & SOLO Button-Functionality
- * TODO: WAVESURFER Multicoloring
  */
 @Component({
   selector: "waves-list-item",
@@ -20,6 +19,8 @@ declare var Tone: any;
 export class WavesListItemComponent implements AfterViewInit {
   @Input() fileName: string;
   @Input() trackID: number;
+  @Input() colors: { waveColor: string; progressColor: string };
+
   track: { WaveSurfer: any; TonePlayer: any } = {
     WaveSurfer: "WaveSurfer", // to be replaced by the Object
     TonePlayer: "TonePlayer" // to be replaced by the Object
@@ -51,8 +52,8 @@ export class WavesListItemComponent implements AfterViewInit {
     this.track.WaveSurfer = WaveSurfer.create({
       container: "#waveform-" + this.trackID,
 
-      waveColor: "red",
-      progressColor: "orange",
+      waveColor: this.colors.waveColor,
+      progressColor: this.colors.progressColor,
 
       height: this.height,
       barGap: this.barGap,
@@ -94,6 +95,5 @@ export class WavesListItemComponent implements AfterViewInit {
       }
     });
     //TODO: can be buggy in certain conditions -> trackID must be set in another way
-    console.log(this.stateManager.showStateManagerAsObject());
   }
 }
