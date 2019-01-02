@@ -1,5 +1,8 @@
 import { Component, DoCheck } from "@angular/core";
-import { StateManagerProvider } from "../../providers/state-manager/state-manager";
+import {
+  StateManagerProvider,
+  track
+} from "../../providers/state-manager/state-manager";
 
 /**
  * Class for the RecordingComponent.
@@ -31,6 +34,17 @@ export class RecordingComponent implements DoCheck {
   stopRecord() {
     if (this.stateManager.state == "RECORDING") {
       this.stateManager.state = "IDLE";
+      this.createTrack("piano.mp3", this.stateManager.tracks.length + 1); //trackID starts at 1
     }
+  }
+
+  createTrack(file, idx) {
+    let filePath = "assets/";
+    let track: track = {
+      id: idx,
+      pathToRecording: filePath + file,
+      state: "ACTIVE" //possible states: "ACTIVE","TRACK_MUTE" or "TRACK_SOLO"
+    };
+    this.stateManager.tracks.push(track);
   }
 }

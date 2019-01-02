@@ -1,26 +1,38 @@
 <ion-row>
   <ion-col col-2 align-self-center>
-    <button (click)="onClick()" class="btn waves-effect waves-light">
+    <h5 class="h5 center-align">{{ trackID }}</h5>
+    <button (click)="onToggleMenu()" class="btn waves-effect waves-light">
       <span> <i class="fas fa-ellipsis-v"></i> </span>
     </button>
   </ion-col>
   <ion-col col-10 align-self-center>
-    <div *ngIf="!menuIsOpen" class="card-panel">WAVESURFER THING</div>
+    <div [hidden]="menuIsOpen" class="card-panel">
+      <div id="waveform-{{ trackID }}" class="waveform-container"></div>
+    </div>
     <div *ngIf="menuIsOpen" class="card-panel active">
-      <ion-row>
+      <ion-row align-items-center>
         <ion-col col-3>
-          <button id="mute-btn" class="btn waves-effect waves-light z-depth-0">
+          <button
+            id="mute-btn"
+            (click)="onMute()"
+            class="btn waves-effect waves-light z-depth-0"
+          >
             <span>M</span>
           </button>
         </ion-col>
         <ion-col col-3>
-          <button id="solo-btn" class="btn waves-effect waves-light z-depth-0">
+          <button
+            id="solo-btn"
+            (click)="onSolo()"
+            class="btn waves-effect waves-light z-depth-0"
+          >
             <span>S</span>
           </button>
         </ion-col>
         <ion-col col-3 push-3
           ><button
             id="delete-btn"
+            (click)="onDelete()"
             class="btn waves-effect waves-light z-depth-0"
           >
             <i class="fas fa-trash"></i></button
