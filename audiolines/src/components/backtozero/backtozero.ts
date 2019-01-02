@@ -17,6 +17,9 @@ export class BacktozeroComponent {
 
   onClick() {
     if (this.stateManager.state == "IDLE") {
+      this.stateManager.tracks.forEach(track => {
+        track.trackData.stop();
+      });
       this.timeLine.stop();
     }
   }

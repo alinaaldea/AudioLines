@@ -18,9 +18,15 @@ export class PlayComponent {
   onClick() {
     if (this.stateManager.state == "IDLE") {
       this.stateManager.state = "PLAYING";
+      this.stateManager.tracks.forEach(track => {
+        track.trackData.play();
+      });
       this.timeLine.start();
     } else if (this.stateManager.state == "PLAYING") {
       this.stateManager.state = "IDLE";
+      this.stateManager.tracks.forEach(track => {
+        track.trackData.pause();
+      });
       this.timeLine.pause();
     }
   }

@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 
-import { Media, MediaObject } from "@ionic-native/media";
+import { Media } from "@ionic-native/media";
 import { File } from "@ionic-native/file";
 
 import {
@@ -16,7 +16,6 @@ import { MetronomeProvider } from "../../providers/metronome/metronome";
 export class RecordingComponent {
   filePath: string;
   fileName: string;
-  audio: MediaObject;
 
   constructor(
     public stateManager: StateManagerProvider,
@@ -27,40 +26,15 @@ export class RecordingComponent {
 
   startRecord() {
     if (this.stateManager.state == "IDLE") {
+      alert("Would be recording now!");
       this.stateManager.state = "RECORDING";
-
-      this.fileName =
-        "record" +
-        new Date().getDate() +
-        new Date().getMonth() +
-        new Date().getFullYear() +
-        new Date().getHours() +
-        new Date().getMinutes() +
-        new Date().getSeconds() +
-        ".mp3";
-      this.filePath =
-        this.file.externalDataDirectory.replace(/file:\/\//g, "") +
-        this.fileName;
-      this.audio = this.media.create(this.filePath);
-
-      this.stateManager.tracks.forEach(track => {
-        if (track.trackData != null) {
-          track.trackData.setVolume(1);
-          track.trackData.play();
-        }
-      });
-      this.metronome.startMetronome();
-      this.audio.startRecord();
     }
   }
 
   stopRecord() {
     if (this.stateManager.state == "RECORDING") {
       this.stateManager.state = "IDLE";
-      this.audio.stopRecord();
-      this.audio.release();
-      this.metronome.stopMetronome();
-      this.createTrack(this.fileName, this.stateManager.tracks.length + 1); //trackID starts at 1
+      this.createTrack("piano.mp3", this.stateManager.tracks.length + 1); //trackID starts at 1
     }
   }
 

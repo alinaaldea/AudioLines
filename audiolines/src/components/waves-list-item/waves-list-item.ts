@@ -5,9 +5,10 @@ import { Media } from "@ionic-native/media";
 
 import { StateManagerProvider } from "../../providers/state-manager/state-manager";
 import { MetronomeProvider } from "../../providers/metronome/metronome";
+import { TimelineProvider } from "../../providers/timeline/timeline";
 
 declare var WaveSurfer: any;
-
+declare var Tone: any;
 @Component({
   selector: "waves-list-item",
   templateUrl: "waves-list-item.html"
@@ -36,6 +37,7 @@ export class WavesListItemComponent implements AfterViewInit {
   constructor(
     public stateManager: StateManagerProvider,
     public metronome: MetronomeProvider,
+    public timeLine: TimelineProvider,
     public media: Media,
     public file: File
   ) {}
@@ -61,20 +63,13 @@ export class WavesListItemComponent implements AfterViewInit {
       hideScrollbar: this.hideScrollbar
     });
 
-    this.file
-      .readAsDataURL(
-        this.file.externalApplicationStorageDirectory + "/files",
-        this.fileName
-      )
-      .then((url: string) => {
-        this.track.load(url);
-      })
-      .catch(e => {
-        alert(e.message);
-        console.log(e);
-      });
+    let player = new Tone.Player("assets/piano.mp3", () => {
+      player.sync().start(0);
+      this.track.load("assets/piano.mp3");
+    }).toMaster();
 
     this.track.on("ready", () => {
+      this.track.setMute(true);
       this.stateManager.tracks[this.trackID - 1].trackData = this.track;
     });
   }

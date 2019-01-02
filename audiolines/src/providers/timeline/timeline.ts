@@ -37,4 +37,8 @@ export class TimelineProvider {
     Tone.Transport.stop();
     console.log(Tone.Transport.state);
   }
+
+  getTimeline() {
+    return Tone.Transport;
+  }
 }
