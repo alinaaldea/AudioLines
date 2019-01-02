@@ -3,7 +3,7 @@
     <li *ngFor="let track of stateManager.tracks">
       <waves-list-item
         [trackID]="track.id"
-        [pathToRecording]="track.pathToRecording"
+        [fileName]="track.fileName"
       ></waves-list-item>
     </li>
   </ul>

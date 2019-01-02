@@ -2,13 +2,8 @@ import { Component } from "@angular/core";
 
 import { StateManagerProvider } from "../../providers/state-manager/state-manager";
 import { MetronomeProvider } from "../../providers/metronome/metronome";
+import { TimelineProvider } from "../../providers/timeline/timeline";
 
-/**
- * Generated class for the PlayComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
 @Component({
   selector: "play",
   templateUrl: "play.html"
@@ -16,21 +11,23 @@ import { MetronomeProvider } from "../../providers/metronome/metronome";
 export class PlayComponent {
   constructor(
     public stateManager: StateManagerProvider,
-    public metronome: MetronomeProvider
+    public metronome: MetronomeProvider,
+    public timeLine: TimelineProvider
   ) {}
 
   onClick() {
     if (this.stateManager.state == "IDLE") {
       this.stateManager.state = "PLAYING";
-      this.metronome.startMetronome();
       this.stateManager.tracks.forEach(track => {
-        if (track.trackData != null) {
-          track.trackData.play();
-        }
+        track.trackData.play();
       });
+      this.timeLine.start();
     } else if (this.stateManager.state == "PLAYING") {
       this.stateManager.state = "IDLE";
-      this.metronome.stopMetronome();
+      this.stateManager.tracks.forEach(track => {
+        track.trackData.pause();
+      });
+      this.timeLine.pause();
     }
   }
 }

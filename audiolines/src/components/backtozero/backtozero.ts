@@ -1,21 +1,26 @@
-import { Component, DoCheck } from "@angular/core";
-import { StateManagerProvider } from "../../providers/state-manager/state-manager";
+import { Component } from "@angular/core";
 
-/**
- * Generated class for the BacktozeroComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
+import { StateManagerProvider } from "../../providers/state-manager/state-manager";
+import { MetronomeProvider } from "../../providers/metronome/metronome";
+import { TimelineProvider } from "../../providers/timeline/timeline";
+
 @Component({
   selector: "backtozero",
   templateUrl: "backtozero.html"
 })
-export class BacktozeroComponent implements DoCheck {
-  constructor(public stateManager: StateManagerProvider) {}
+export class BacktozeroComponent {
+  constructor(
+    public stateManager: StateManagerProvider,
+    public metronome: MetronomeProvider,
+    public timeLine: TimelineProvider
+  ) {}
 
-  ngDoCheck(): void {
-    //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
-    // console.log("[BACKTOZERO]: " + this.stateManager.state);
+  onClick() {
+    if (this.stateManager.state == "IDLE") {
+      this.stateManager.tracks.forEach(track => {
+        track.trackData.stop();
+      });
+      this.timeLine.stop();
+    }
   }
 }

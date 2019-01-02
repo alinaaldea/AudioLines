@@ -1,28 +1,28 @@
-import { Component, DoCheck } from "@angular/core";
+import { Component } from "@angular/core";
+
+import { Media } from "@ionic-native/media";
+import { File } from "@ionic-native/file";
+
 import {
   StateManagerProvider,
   track
 } from "../../providers/state-manager/state-manager";
+import { MetronomeProvider } from "../../providers/metronome/metronome";
 
-/**
- * Class for the RecordingComponent.
- *
- */
 @Component({
   selector: "recording",
   templateUrl: "recording.html"
 })
-export class RecordingComponent implements DoCheck {
-  // !!!! implemented in branch "recording-functionality" !!!
-  // you can use this class to simulate the recording
-  // and then reading the files to implement the wave thing
+export class RecordingComponent {
+  filePath: string;
+  fileName: string;
 
-  constructor(public stateManager: StateManagerProvider) {}
-
-  ngDoCheck(): void {
-    //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
-    // console.log("[RECORDING]: " + this.stateManager.state);
-  }
+  constructor(
+    public stateManager: StateManagerProvider,
+    public metronome: MetronomeProvider,
+    public media: Media,
+    public file: File
+  ) {}
 
   startRecord() {
     if (this.stateManager.state == "IDLE") {
@@ -39,10 +39,9 @@ export class RecordingComponent implements DoCheck {
   }
 
   createTrack(file, idx) {
-    let filePath = "assets/";
     let track: track = {
       id: idx,
-      pathToRecording: filePath + file,
+      fileName: file,
       state: "ACTIVE" //possible states: "ACTIVE","TRACK_MUTE" or "TRACK_SOLO"
     };
     this.stateManager.tracks.push(track);

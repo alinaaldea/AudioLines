@@ -1,32 +1,31 @@
 import { Component, AfterViewInit, Input } from "@angular/core";
 
+import { File } from "@ionic-native/file";
+import { Media } from "@ionic-native/media";
+
 import { StateManagerProvider } from "../../providers/state-manager/state-manager";
 import { MetronomeProvider } from "../../providers/metronome/metronome";
+import { TimelineProvider } from "../../providers/timeline/timeline";
 
 declare var WaveSurfer: any;
-/**
- * Generated class for the WavesListItemComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
+declare var Tone: any;
 @Component({
   selector: "waves-list-item",
   templateUrl: "waves-list-item.html"
 })
 export class WavesListItemComponent implements AfterViewInit {
-  @Input() pathToRecording: string;
+  @Input() fileName: string;
   @Input() trackID: number;
   track: any;
 
   //WaveSurfer properties
   height: number = 98; // +2px border
   barGap: number = 1;
-  barHeight: number = 1;
+  barHeight: number = 2;
   barWidth: number = 2;
   normalize: boolean = true;
   interact: boolean = false;
-  partialRender: boolean = true;
+  partialRender: boolean = false;
   responsive: boolean = true;
   cursorWidth: number = 3;
   cursorColor: string = "white";
@@ -37,7 +36,10 @@ export class WavesListItemComponent implements AfterViewInit {
 
   constructor(
     public stateManager: StateManagerProvider,
-    public metronome: MetronomeProvider
+    public metronome: MetronomeProvider,
+    public timeLine: TimelineProvider,
+    public media: Media,
+    public file: File
   ) {}
 
   ngAfterViewInit(): void {
@@ -60,11 +62,16 @@ export class WavesListItemComponent implements AfterViewInit {
       scrollParent: this.scrollParent,
       hideScrollbar: this.hideScrollbar
     });
-    this.track.load(this.pathToRecording); // must be changed later
-    // this.track.on("ready", () => {
-    //   console.log("TEST");
-    // });
-    console.log(this.stateManager.showStateManagerAsObject());
+
+    let player = new Tone.Player("assets/piano.mp3", () => {
+      player.sync().start(0);
+      this.track.load("assets/piano.mp3");
+    }).toMaster();
+
+    this.track.on("ready", () => {
+      this.track.setMute(true);
+      this.stateManager.tracks[this.trackID - 1].trackData = this.track;
+    });
   }
 
   onToggleMenu() {
