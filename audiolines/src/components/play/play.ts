@@ -22,9 +22,12 @@ export class PlayComponent {
   onClick() {
     if (this.stateManager.state == "IDLE") {
       this.stateManager.state = "PLAYING";
-      if (this.stateManager.metronomeIsActive) {
-        this.metronome.startMetronome();
-      }
+      this.metronome.startMetronome();
+      this.stateManager.tracks.forEach(track => {
+        if (track.trackData != null) {
+          track.trackData.play();
+        }
+      });
     } else if (this.stateManager.state == "PLAYING") {
       this.stateManager.state = "IDLE";
       this.metronome.stopMetronome();
