@@ -87,7 +87,8 @@ export class WavesListItemComponent implements AfterViewInit {
   onSolo() {}
   onDelete() {
     /**
-     * TODO: Make sure that all data belonging to the deleted track actually gets deleted
+     * TODO: Make sure that all data belonging to the deleted track
+     * actually gets deleted
      */
     this.stateManager.tracks.forEach((track, i) => {
       if (track.id == this.trackID) {

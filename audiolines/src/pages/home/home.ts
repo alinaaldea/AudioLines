@@ -3,7 +3,6 @@ import { NavController } from "ionic-angular";
 import { StateManagerProvider } from "../../providers/state-manager/state-manager";
 
 /**
- * TODO: METRONOME REMAINS ACTIVE AFTER RECORDING
  * TODO: DELETE TRACK DOESNT ACTUALLY DELETE TRACK -> ONLY WAVESURFER
  */
 @Component({
