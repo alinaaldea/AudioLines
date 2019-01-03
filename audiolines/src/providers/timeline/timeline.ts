@@ -12,7 +12,7 @@ export class TimelineProvider {
     public metronome: MetronomeProvider
   ) {
     Tone.Transport.bpm.value = this.stateManager.bpmObject.bpm;
-    console.log(Tone.Transport);
+    // console.log(Tone.Transport);
   }
 
   start() {
