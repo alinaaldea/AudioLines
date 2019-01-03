@@ -87,7 +87,9 @@ export class WavesListItemComponent implements AfterViewInit {
   onSolo() {}
   onDelete() {
     /**
-     * TODO: Make sure that all data belonging to the deleted track
+     * TODO: DELETE TRACK
+     *
+     * Make sure that all data belonging to the deleted track
      * actually gets deleted
      */
     this.stateManager.tracks.forEach((track, i) => {
@@ -95,6 +97,6 @@ export class WavesListItemComponent implements AfterViewInit {
         this.stateManager.tracks.splice(i, 1);
       }
     });
-    //TODO: can be buggy in certain conditions -> trackID must be set in another way
+    //TODO: ID can be buggy in certain conditions -> trackID must be set in another way
   }
 }

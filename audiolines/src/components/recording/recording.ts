@@ -10,8 +10,10 @@ import {
 import { TimelineProvider } from "../../providers/timeline/timeline";
 
 /**
- * TODO: if Metronome is active ->
- * count 1 measure (4 BEATS) before the app starts recording
+ * TODO: Metronome count-in for recording
+ *
+ * if Metronome is active
+ * -> count 1 measure (4 BEATS) before the app starts recording
  *
  * right now that leads to a UX problem:
  * -> if the user starts to play without having recorded anything
