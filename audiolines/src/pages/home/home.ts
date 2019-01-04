@@ -1,5 +1,6 @@
 import { Component, DoCheck } from "@angular/core";
 import { NavController } from "ionic-angular";
+
 import { StateManagerProvider } from "../../providers/state-manager/state-manager";
 
 /**
@@ -20,7 +21,7 @@ export class HomePage implements DoCheck {
     public stateManager: StateManagerProvider
   ) {}
 
-  ngDoCheck(): void {
-    // console.log(this.stateManager.showStateManagerAsObject());
+  ngDoCheck() {
+    console.log(this.stateManager.showStateManagerAsObject());
   }
 }
