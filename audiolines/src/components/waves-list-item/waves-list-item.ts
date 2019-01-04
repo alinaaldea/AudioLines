@@ -12,6 +12,12 @@ declare var Tone: any;
 /**
  * TODO: MUTE & SOLO Button-Functionality
  */
+
+/**
+ * TODO: DELETE BY SWIPING -> Ionic ItemSliding or Hammer.js
+ *
+ * Delete the track by swiping it to the right
+ */
 @Component({
   selector: "waves-list-item",
   templateUrl: "waves-list-item.html"
@@ -87,7 +93,7 @@ export class WavesListItemComponent implements AfterViewInit {
   onSolo() {}
   onDelete() {
     /**
-     * TODO: DELETE TRACK
+     * TODO: DELETE TRACK Completely
      *
      * Make sure that all data belonging to the deleted track
      * actually gets deleted

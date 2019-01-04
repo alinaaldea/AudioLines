@@ -6,6 +6,9 @@ import { TimelineProvider } from "../../providers/timeline/timeline";
 /**
  * TODO: Synchronized looping
  *
+ * Looping of the Tracks is not in the App yet.
+ * Look at the Tone.js Documentation!
+ *
  * tracks will probably have different durations
  * so:
  * -> while playing the longest track must be the "master track"

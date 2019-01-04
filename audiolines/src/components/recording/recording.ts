@@ -20,6 +20,13 @@ import { TimelineProvider } from "../../providers/timeline/timeline";
  * the record-button gets greyed out.
  * this should not be happening until the user has recorded at least 1 track
  */
+
+/**
+ * TODO: Displaying the new Track WHILE recording
+ *
+ * right now the recorded track appears only after it has been recorded completely
+ * it would be nice to see it already while its recording
+ */
 @Component({
   selector: "recording",
   templateUrl: "recording.html"
