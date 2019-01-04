@@ -74,10 +74,28 @@ export class WavesListItemComponent implements AfterViewInit {
       hideScrollbar: this.hideScrollbar
     });
 
-    this.track.TonePlayer = new Tone.Player("assets/piano.mp3", () => {
-      this.track.TonePlayer.sync().start(0);
-      this.track.WaveSurfer.load("assets/piano.mp3");
-    }).toMaster();
+    // +++++ONLY FOR TEST+++++
+    // this.track.TonePlayer = new Tone.Player("assets/piano.mp3", () => {
+    //   this.track.TonePlayer.sync().start(0);
+    //   this.track.WaveSurfer.load("assets/piano.mp3");
+    // }).toMaster();
+    // +++++++++++++++++++++++
+
+    this.file
+      .readAsDataURL(
+        this.file.externalApplicationStorageDirectory + "/files",
+        this.fileName
+      )
+      .then((url: string) => {
+        this.track.TonePlayer = new Tone.Player(url, () => {
+          this.track.TonePlayer.sync().start(0);
+          this.track.WaveSurfer.load(url);
+        }).toMaster();
+      })
+      .catch(e => {
+        alert(e.message);
+        console.log(e);
+      });
 
     this.track.WaveSurfer.on("ready", () => {
       this.track.WaveSurfer.setMute(true);
