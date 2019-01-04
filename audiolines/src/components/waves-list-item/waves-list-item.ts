@@ -10,7 +10,7 @@ declare var WaveSurfer: any;
 declare var Tone: any;
 
 /**
- * TODO: MUTE & SOLO Button-Functionality
+ * TODO: MUTE & SOLO Button-Functionality -- Me (Philipp K. going to do that)
  */
 
 /**
@@ -107,8 +107,11 @@ export class WavesListItemComponent implements AfterViewInit {
     this.menuIsOpen = !this.menuIsOpen;
   }
 
+    // Started testing thoose Functionality on my own App. Going to make them fit into our Application
   onMute() {}
   onSolo() {}
+
+
   onDelete() {
     /**
      * TODO: DELETE TRACK Completely
