@@ -1,8 +1,9 @@
 import { Component } from "@angular/core";
 
-import { StateManagerProvider } from "../../providers/state-manager/state-manager";
 import { File } from "@ionic-native/file";
 import { Media } from "@ionic-native/media";
+
+import { StateManagerProvider } from "../../providers/state-manager/state-manager";
 
 declare var lamejs: any;
 
