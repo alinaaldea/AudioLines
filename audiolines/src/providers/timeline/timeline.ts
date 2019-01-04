@@ -12,13 +12,14 @@ export class TimelineProvider {
     public metronome: MetronomeProvider
   ) {
     Tone.Transport.bpm.value = this.stateManager.bpmObject.bpm;
-    console.log(Tone.Transport);
+    // console.log(Tone.Transport);
   }
 
   start() {
     Tone.Transport.bpm.value = this.stateManager.bpmObject.bpm;
 
     this.metronome.startMetronome();
+
     this.stateManager.tracks.forEach(track => {
       if (track.trackData != undefined) {
         track.trackData.WaveSurfer.play();
@@ -40,6 +41,7 @@ export class TimelineProvider {
   }
 
   stop() {
+    this.metronome.stopMetronome();
     this.stateManager.tracks.forEach(track => {
       if (track.trackData != undefined) {
         track.trackData.WaveSurfer.stop();

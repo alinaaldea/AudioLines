@@ -7,7 +7,6 @@ import { StateManagerProvider } from "../../providers/state-manager/state-manage
   templateUrl: "export.html"
 })
 export class ExportComponent {
-  //ALREADY IMPLEMENTED IN BRANCH EXPORT-FUNCTIONALITY
   constructor(public stateManager: StateManagerProvider) {}
 
   onClick() {

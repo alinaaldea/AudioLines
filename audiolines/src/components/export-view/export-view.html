@@ -3,14 +3,21 @@
     <ion-col col-12 align-self-center> <h1>Export Audio</h1> </ion-col>
     <ion-col col-12 align-self-center> <div class="line"></div></ion-col>
     <ion-col col-12 align-self-center> <h5>Choose a filename:</h5></ion-col>
+
     <ion-col col-12 align-self-center>
-      <input type="text" required minlength="1" />
+      <form>
+        <input type="text" minlength="2" />
+        <!-- <input type="text"  minlength="2" (change)="onTypeIn($event)" /> -->
+      </form>
     </ion-col>
   </ion-row>
 
   <ion-row text-center>
     <ion-col col-6 align-self-center>
-      <button class="btn btn-flat waves-effect waves-light">
+      <button
+        (click)="storeFiles()"
+        class="btn btn-flat waves-effect waves-light"
+      >
         <i class="fas fa-save"></i>
       </button>
       <br />

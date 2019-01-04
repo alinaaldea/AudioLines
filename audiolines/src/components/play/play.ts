@@ -3,7 +3,21 @@ import { Component } from "@angular/core";
 import { StateManagerProvider } from "../../providers/state-manager/state-manager";
 import { TimelineProvider } from "../../providers/timeline/timeline";
 
-//TODO: synchronized looping
+/**
+ * TODO: Synchronized looping
+ *
+ * Looping of the Tracks is not in the App yet.
+ * Look at the Tone.js Documentation!
+ *
+ * tracks will probably have different durations
+ * so:
+ * -> while playing the longest track must be the "master track"
+ * -> while recording:
+ *    -> if the recorded track going to be longer than the longest track
+ *       -> continue recording and set the new track as "master track"
+ *    -> if the recorded track is shorter than the longest track
+ *       -> keep everything as it is
+ */
 
 @Component({
   selector: "play",
