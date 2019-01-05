@@ -7,19 +7,13 @@ import { Media } from "@ionic-native/media";
 declare var lamejs: any;
 
 /**
- * TODO: EXPORT NameInput and Files
+ * TODO: EXPORT NameInput and Files (REQUIRED)
  *
  * The export functionality is working but right now its taking 2 files
  * that are located in the @param filePath and then rendering the merged file
  * in there too with a predefined name.
  *
- * What should happen is:
- *
- * 1. The Name that the user has put in should be the name the file gets when its saved onto the system.
- * if the name already exists add a dash and a number counting from 1 upwards.
- * EXAMPLE: "bla-1.mp3"
- *
- * 2. The files that are going to be merged need to be checked by their status
+ * The files that are going to be merged need to be checked by their status
  * -> if they're all active -> export all
  * -> if one or more are soloed -> export only the soloed
  * -> if one or more are muted -> dont export them.
@@ -29,18 +23,19 @@ declare var lamejs: any;
  */
 
 /**
- * TODO: Export-Status Progress
+ * TODO: Export-Status Progress (OPTIONAL)
  *
  * for the UX it would be nice too see some kind of progressbar for the exporting
  * right now its just waiting until its done after about 10-15 seconds
  */
 
 /**
- * TODO: SHARE-functionality
+ * TODO: EXPORTED TAB (OPTIONAL)
  *
- * basically exporting (look at EXPORT NameInput and Files)
- * and after its completed
- * -> send SHARE-Intention
+ * Tab to show all the exported files that are still on the device.
+ * From there
+ * -> every track can be listened to directly from the app
+ * -> every track can be shared again directly from the app
  */
 @Component({
   selector: "export-view",
