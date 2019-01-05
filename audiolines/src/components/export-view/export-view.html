@@ -5,10 +5,7 @@
     <ion-col col-12 align-self-center> <h5>Choose a filename:</h5></ion-col>
 
     <ion-col col-12 align-self-center>
-      <form>
-        <input type="text" minlength="2" />
-        <!-- <input type="text"  minlength="2" (change)="onTypeIn($event)" /> -->
-      </form>
+      <input type="text" minlength="2" [(ngModel)]="chosenFileName" />
     </ion-col>
   </ion-row>
 

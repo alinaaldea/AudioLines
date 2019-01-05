@@ -47,6 +47,9 @@ declare var lamejs: any;
   templateUrl: "export-view.html"
 })
 export class ExportViewComponent {
+  chosenFileName: string = "myRecording";
+  private versionCounter: number = 0;
+
   constructor(
     public stateManager: StateManagerProvider,
     public file: File,
@@ -104,14 +107,27 @@ export class ExportViewComponent {
 
         let blob: Blob = this.generateMp3(mixedSource.buffer);
 
-        this.file
-          .writeFile(filePath, "TEST-" + Date.now() + ".mp3", blob)
-          .then(() => {
-            alert("NEW FILE !");
-          })
-          .catch();
+        this.writeFileToSystem(filePath, blob);
       })
       .catch();
+  }
+
+  private writeFileToSystem(filePath: string, blob: Blob, version?: string) {
+    if (version == undefined) version = "";
+
+    this.file
+      .writeFile(filePath, this.chosenFileName + version + ".mp3", blob)
+      .then(() => {
+        alert("NEW FILE !");
+        this.versionCounter = 0;
+      })
+      .catch(e => {
+        alert("WRITEFILE ERROR");
+        if (e.message == "PATH_EXISTS_ERR") {
+          alert("Chosen Filename already exists!");
+          this.writeFileToSystem(filePath, blob, "-" + ++this.versionCounter);
+        }
+      });
   }
 
   private generateMp3(context: AudioBuffer): Blob {
