@@ -1,23 +1,25 @@
 import { Component } from "@angular/core";
 
-import { StateManagerProvider } from "../../providers/state-manager/state-manager";
+import { ToastController } from "ionic-angular";
 import { File } from "@ionic-native/file";
 import { Media } from "@ionic-native/media";
+
+import { StateManagerProvider } from "../../providers/state-manager/state-manager";
 
 declare var lamejs: any;
 
 /**
- * TODO: EXPORT NameInput and Files
+ * TODO: EXPORT NameInput and Files (REQUIRED)
  *
  * The export functionality is working but right now its taking 2 files
- * that are located in the @param filePath and then rendering the merged file
+ * that are pre-located in the @param filePath and then rendering the merged file
  * in there too with a predefined name.
  *
  * What should happen is:
  *
  * 1. The Name that the user has put in should be the name the file gets when its saved onto the system.
  * if the name already exists add a dash and a number counting from 1 upwards.
- * EXAMPLE: "bla-1.mp3"
+ * EXAMPLE: "bla-1.mp3" @complete
  *
  * 2. The files that are going to be merged need to be checked by their status
  * -> if they're all active -> export all
@@ -29,19 +31,20 @@ declare var lamejs: any;
  */
 
 /**
- * TODO: Export-Status Progress
- *
- * for the UX it would be nice too see some kind of progressbar for the exporting
- * right now its just waiting until its done after about 10-15 seconds
- */
-
-/**
- * TODO: SHARE-functionality
+ * TODO: SHARE-functionality (REQUIRED)
  *
  * basically exporting (look at EXPORT NameInput and Files)
  * and after its completed
  * -> send SHARE-Intention
  */
+
+/**
+ * TODO: Export-Status Progress (OPTIONAL)
+ *
+ * for the UX it would be nice too see some kind of progressbar for the exporting
+ * right now its just waiting until its done after about 10-15 seconds
+ */
+
 @Component({
   selector: "export-view",
   templateUrl: "export-view.html"
@@ -52,19 +55,21 @@ export class ExportViewComponent {
 
   constructor(
     public stateManager: StateManagerProvider,
+    private toastCtrl: ToastController,
     public file: File,
     public media: Media
   ) {}
 
   storeFiles() {
+    // path to folder on android filesystem
     let filePath: string =
-      this.file.externalApplicationStorageDirectory + "/files"; // path to folder
+      this.file.externalApplicationStorageDirectory + "/files";
 
-    let fileNames: string[] = ["piano.mp3", "stabs.mp3"]; // to be replaced by recordings!
+    // to be replaced by recordings!
+    let fileNames: string[] = ["piano.mp3", "stabs.mp3"];
 
     let audioCtx: AudioContext = new AudioContext();
     let sources: AudioBufferSourceNode[] = [];
-
     let buffers: ArrayBuffer[] = [];
 
     let promises = [];
@@ -118,13 +123,31 @@ export class ExportViewComponent {
     this.file
       .writeFile(filePath, this.chosenFileName + version + ".mp3", blob)
       .then(() => {
-        alert("NEW FILE !");
+        this.toastCtrl
+          .create({
+            message:
+              "New File: '" +
+              this.chosenFileName +
+              version +
+              ".mp3'" +
+              " created!",
+            duration: 3000,
+            position: "bottom",
+            showCloseButton: true
+          })
+          .present();
         this.versionCounter = 0;
       })
       .catch(e => {
-        alert("WRITEFILE ERROR");
         if (e.message == "PATH_EXISTS_ERR") {
-          alert("Chosen Filename already exists!");
+          // this.toastCtrl
+          //   .create({
+          //     message: "Chosen Filename already exists!",
+          //     duration: 3000,
+          //     position: "middle",
+          //     showCloseButton: true
+          //   })
+          //   .present();
           this.writeFileToSystem(filePath, blob, "-" + ++this.versionCounter);
         }
       });
