@@ -3,6 +3,7 @@ import { Component } from "@angular/core";
 import { ToastController } from "ionic-angular";
 import { File } from "@ionic-native/file";
 import { Media } from "@ionic-native/media";
+import { SocialSharing } from "@ionic-native/social-sharing";
 
 import { StateManagerProvider } from "../../providers/state-manager/state-manager";
 
@@ -31,14 +32,6 @@ declare var lamejs: any;
  */
 
 /**
- * TODO: SHARE-functionality (REQUIRED)
- *
- * basically exporting (look at EXPORT NameInput and Files)
- * and after its completed
- * -> send SHARE-Intention
- */
-
-/**
  * TODO: Export-Status Progress (OPTIONAL)
  *
  * for the UX it would be nice too see some kind of progressbar for the exporting
@@ -52,15 +45,17 @@ declare var lamejs: any;
 export class ExportViewComponent {
   chosenFileName: string = "myRecording";
   private versionCounter: number = 0;
+  private nativeUrl = "";
 
   constructor(
     public stateManager: StateManagerProvider,
     private toastCtrl: ToastController,
+    private socialSharing: SocialSharing,
     public file: File,
     public media: Media
   ) {}
 
-  storeFiles() {
+  exportFile() {
     // path to folder on android filesystem
     let filePath: string =
       this.file.externalApplicationStorageDirectory + "/files";
@@ -111,10 +106,22 @@ export class ExportViewComponent {
         // mixedSource.start();
 
         let blob: Blob = this.generateMp3(mixedSource.buffer);
-
         this.writeFileToSystem(filePath, blob);
       })
       .catch();
+  }
+
+  shareFile() {
+    if (this.nativeUrl == "") {
+      alert("Export a file first!");
+    } else {
+      this.socialSharing
+        .share("", "", this.nativeUrl, "")
+        .then(() => {
+          alert("Sharing works!");
+        })
+        .catch();
+    }
   }
 
   private writeFileToSystem(filePath: string, blob: Blob, version?: string) {
@@ -122,7 +129,7 @@ export class ExportViewComponent {
 
     this.file
       .writeFile(filePath, this.chosenFileName + version + ".mp3", blob)
-      .then(() => {
+      .then(file => {
         this.toastCtrl
           .create({
             message:
@@ -137,17 +144,10 @@ export class ExportViewComponent {
           })
           .present();
         this.versionCounter = 0;
+        this.nativeUrl = file.nativeURL;
       })
       .catch(e => {
         if (e.message == "PATH_EXISTS_ERR") {
-          // this.toastCtrl
-          //   .create({
-          //     message: "Chosen Filename already exists!",
-          //     duration: 3000,
-          //     position: "middle",
-          //     showCloseButton: true
-          //   })
-          //   .present();
           this.writeFileToSystem(filePath, blob, "-" + ++this.versionCounter);
         }
       });

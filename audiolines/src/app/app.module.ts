@@ -23,7 +23,9 @@ import { MetronomeToggleComponent } from "../components/metronome-toggle/metrono
 import { StateManagerProvider } from "../providers/state-manager/state-manager";
 import { BpmProvider } from "../providers/bpm/bpm";
 import { MetronomeProvider } from "../providers/metronome/metronome";
-import { TimelineProvider } from '../providers/timeline/timeline';
+import { TimelineProvider } from "../providers/timeline/timeline";
+import { FileChooser } from "@ionic-native/file-chooser";
+import { SocialSharing } from "@ionic-native/social-sharing";
 
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ import { TimelineProvider } from '../providers/timeline/timeline';
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     Media,
     File,
+    FileChooser,
+    SocialSharing,
     StateManagerProvider,
     BpmProvider,
     MetronomeProvider,

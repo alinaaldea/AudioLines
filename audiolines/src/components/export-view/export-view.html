@@ -12,7 +12,7 @@
   <ion-row text-center>
     <ion-col col-6 align-self-center>
       <button
-        (click)="storeFiles()"
+        (click)="exportFile()"
         class="btn btn-flat waves-effect waves-light"
       >
         <i class="fas fa-save"></i>
@@ -22,7 +22,10 @@
     </ion-col>
 
     <ion-col col-6 align-self-center>
-      <button class="btn btn-flat waves-effect waves-light">
+      <button
+        (click)="shareFile()"
+        class="btn btn-flat waves-effect waves-light"
+      >
         <i class="fas fa-share-alt"></i>
       </button>
       <br />
