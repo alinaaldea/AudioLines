@@ -1,8 +1,11 @@
 import { Component } from "@angular/core";
 
-import { StateManagerProvider } from "../../providers/state-manager/state-manager";
+import { ToastController } from "ionic-angular";
 import { File } from "@ionic-native/file";
 import { Media } from "@ionic-native/media";
+import { SocialSharing } from "@ionic-native/social-sharing";
+
+import { StateManagerProvider } from "../../providers/state-manager/state-manager";
 
 declare var lamejs: any;
 
@@ -10,7 +13,7 @@ declare var lamejs: any;
  * TODO: EXPORT NameInput and Files (REQUIRED)
  *
  * The export functionality is working but right now its taking 2 files
- * that are located in the @param filePath and then rendering the merged file
+ * that are pre-located in the @param filePath and then rendering the merged file
  * in there too with a predefined name.
  *
  * The files that are going to be merged need to be checked by their status
@@ -42,21 +45,28 @@ declare var lamejs: any;
   templateUrl: "export-view.html"
 })
 export class ExportViewComponent {
+  chosenFileName: string = "myRecording";
+  private versionCounter: number = 0;
+  private nativeUrl = "";
+
   constructor(
     public stateManager: StateManagerProvider,
+    private toastCtrl: ToastController,
+    private socialSharing: SocialSharing,
     public file: File,
     public media: Media
   ) {}
 
-  storeFiles() {
+  exportFile() {
+    // path to folder on android filesystem
     let filePath: string =
-      this.file.externalApplicationStorageDirectory + "/files"; // path to folder
+      this.file.externalApplicationStorageDirectory + "/files";
 
-    let fileNames: string[] = ["piano.mp3", "stabs.mp3"]; // to be replaced by recordings!
+    // to be replaced by recordings!
+    let fileNames: string[] = ["piano.mp3", "stabs.mp3"];
 
     let audioCtx: AudioContext = new AudioContext();
     let sources: AudioBufferSourceNode[] = [];
-
     let buffers: ArrayBuffer[] = [];
 
     let promises = [];
@@ -98,15 +108,51 @@ export class ExportViewComponent {
         // mixedSource.start();
 
         let blob: Blob = this.generateMp3(mixedSource.buffer);
-
-        this.file
-          .writeFile(filePath, "TEST-" + Date.now() + ".mp3", blob)
-          .then(() => {
-            alert("NEW FILE !");
-          })
-          .catch();
+        this.writeFileToSystem(filePath, blob);
       })
       .catch();
+  }
+
+  shareFile() {
+    if (this.nativeUrl == "") {
+      alert("Export a file first!");
+    } else {
+      this.socialSharing
+        .share("", "", this.nativeUrl, "")
+        .then(() => {
+          alert("Sharing works!");
+        })
+        .catch();
+    }
+  }
+
+  private writeFileToSystem(filePath: string, blob: Blob, version?: string) {
+    if (version == undefined) version = "";
+
+    this.file
+      .writeFile(filePath, this.chosenFileName + version + ".mp3", blob)
+      .then(file => {
+        this.toastCtrl
+          .create({
+            message:
+              "New File: '" +
+              this.chosenFileName +
+              version +
+              ".mp3'" +
+              " created!",
+            duration: 3000,
+            position: "bottom",
+            showCloseButton: true
+          })
+          .present();
+        this.versionCounter = 0;
+        this.nativeUrl = file.nativeURL;
+      })
+      .catch(e => {
+        if (e.message == "PATH_EXISTS_ERR") {
+          this.writeFileToSystem(filePath, blob, "-" + ++this.versionCounter);
+        }
+      });
   }
 
   private generateMp3(context: AudioBuffer): Blob {
