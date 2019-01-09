@@ -98,6 +98,7 @@ export class WavesListItemComponent implements AfterViewInit {
      * Make sure that all data belonging to the deleted track
      * actually gets deleted
      */
+    console.log("delete should work");
     this.stateManager.tracks.forEach((track, i) => {
       if (track.id == this.trackID) {
         this.stateManager.tracks.splice(i, 1);
