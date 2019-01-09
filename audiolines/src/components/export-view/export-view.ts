@@ -62,9 +62,6 @@ export class ExportViewComponent {
     let filePath: string =
       this.file.externalApplicationStorageDirectory + "/files";
 
-    // to be replaced by recordings! Only for testing
-    //let fileNames: string[] = ["piano.mp3", "stabs.mp3"];
-
     let fileNames: string[] = [];
 
     //add all active tracks to array, ignoring mute tracks and if a track is set on solo, it will stand alone in array
@@ -80,7 +77,14 @@ export class ExportViewComponent {
           return;
       }
     });
-    alert(`Filenames: ${fileNames}`);
+
+    if (fileNames.length == 0) {
+      //create toast WARNING
+      alert("No files to export found!");
+      return;
+    } else {
+      alert(`Filenames: ${fileNames}`);
+    }
 
     let audioCtx: AudioContext = new AudioContext();
     let sources: AudioBufferSourceNode[] = [];
