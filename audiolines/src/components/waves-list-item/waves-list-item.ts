@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Input } from "@angular/core";
+import { Component, AfterViewInit, Input, state } from "@angular/core";
 
 import { File } from "@ionic-native/file";
 import { Media } from "@ionic-native/media";
@@ -81,8 +81,16 @@ export class WavesListItemComponent implements AfterViewInit {
 
     this.track.WaveSurfer.on("ready", () => {
       this.track.WaveSurfer.setMute(true);
-      this.stateManager.tracks[this.trackID - 1].trackData = this.track;
+      this.stateManager.tracks[
+        this.positionOfTrackID(this.trackID)
+      ].trackData = this.track;
     });
+  }
+
+  positionOfTrackID(trackID): number {
+    for (var i = 0; i < this.stateManager.tracks.length; i++) {
+      if (trackID === this.stateManager.tracks[i].id) return i;
+    }
   }
 
   onToggleMenu() {
