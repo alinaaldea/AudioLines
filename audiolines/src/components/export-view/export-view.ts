@@ -60,8 +60,26 @@ export class ExportViewComponent {
     let filePath: string =
       this.file.externalApplicationStorageDirectory + "/files";
 
-    // to be replaced by recordings!
-    let fileNames: string[] = ["piano.mp3", "stabs.mp3"];
+    // to be replaced by recordings! Only for testing
+    //let fileNames: string[] = ["piano.mp3", "stabs.mp3"];
+
+    let fileNames: string[];
+    
+    //add all active tracks to array, ignoring mute tracks and if a track is set on solo, it will stand alone in array
+    this.stateManager.tracks.forEach(element => {
+      switch (element.state){
+        case 'ACTIVE':
+            fileNames.push(element.fileName);
+            break;
+        case 'TRACK_MUTE':
+            break;
+        case 'TRACK_SOLO':
+            fileNames = [];
+            fileNames.push(element.fileName);
+            return;
+      }
+    });
+    console.log(`Filenames: ${fileNames}`);
 
     let audioCtx: AudioContext = new AudioContext();
     let sources: AudioBufferSourceNode[] = [];
