@@ -22,7 +22,7 @@ export class TimelineProvider {
       if(this.stateManager.state == "RECORDING" && this.stateManager.metronomeIsActive){ //Aufnahme ohne laufendes Metronom -> kein count-in!
 
           this.stateManager.tracks.forEach(track => {
-          track.TonePlayer.start("1m");
+          track.trackData.TonePlayer.start("1m");
           setTimeout(visualizationStart(track), this.stateManager.bpmObject.ms);
           });
       }
@@ -30,7 +30,7 @@ export class TimelineProvider {
       if(this.stateManager.state == "PLAYING" || (this.stateManager.state == "RECORDING" && !this.stateManager.metronomeIsActive)){
 
         this.stateManager.tracks.forEach(track => {
-          track.TonePlayer.start(0);
+          track.trackData.TonePlayer.start(0);
           visualizationStart(track);
         });
 
