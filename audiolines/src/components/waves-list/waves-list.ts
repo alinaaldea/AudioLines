@@ -1,5 +1,5 @@
 import { Component, AfterViewChecked } from "@angular/core";
-
+import "hammerjs";
 import { StateManagerProvider } from "../../providers/state-manager/state-manager";
 
 @Component({
@@ -28,4 +28,15 @@ export class WavesListComponent implements AfterViewChecked {
     this.waveTrackColors.push(color);
     return color;
   }
+
+  // swipe(currentIndex: string, action) {
+  //   alert("swipe to left working... Delete track " + currentIndex);
+  //   if (action === "swipeleft") {
+  //     this.stateManager.tracks.forEach((track, i) => {
+  //       if (track === this.stateManager.tracks[parseInt(currentIndex)]) {
+  //         this.stateManager.tracks.splice(i, 1);
+  //       }
+  //     });
+  //   }
+  // }
 }

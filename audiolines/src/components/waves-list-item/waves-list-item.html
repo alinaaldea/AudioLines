@@ -7,7 +7,12 @@
   </ion-col>
   <ion-col col-10 align-self-center>
     <div [hidden]="menuIsOpen" class="card-panel">
-      <div id="waveform-{{ trackID }}" class="waveform-container"></div>
+      <div
+        id="waveform-{{ trackID }}"
+        class="waveform-container"
+        (swipeleft)="onDelete()"
+        (swiperight)="onDelete()"
+      ></div>
     </div>
     <div *ngIf="menuIsOpen" class="card-panel active">
       <ion-row align-items-center>
