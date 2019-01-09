@@ -16,26 +16,36 @@ export class TimelineProvider {
   }
 
   start() {
-      Tone.Transport.bpm.value = this.stateManager.bpmObject.bpm;
-      this.metronome.startMetronome();
+    Tone.Transport.bpm.value = this.stateManager.bpmObject.bpm;
+    this.metronome.startMetronome();
 
-      if(this.stateManager.state == "RECORDING" && this.stateManager.metronomeIsActive){ //Aufnahme ohne laufendes Metronom -> kein count-in!
+    if (
+      this.stateManager.state == "RECORDING" &&
+      this.stateManager.metronomeIsActive
+    ) {
+      //Aufnahme ohne laufendes Metronom -> kein count-in!
 
-          this.stateManager.tracks.forEach(track => {
-          track.trackData.TonePlayer.start("1m");
-          setTimeout(visualizationStart(track), this.stateManager.bpmObject.ms);
-          });
-      }
-
-      if(this.stateManager.state == "PLAYING" || (this.stateManager.state == "RECORDING" && !this.stateManager.metronomeIsActive)){
-
-        this.stateManager.tracks.forEach(track => {
-          track.trackData.TonePlayer.start(0);
-          visualizationStart(track);
-        });
-
-      }
+      this.stateManager.tracks.forEach(track => {
+        track.trackData.TonePlayer.start(); // verzögerung audio
+        setTimeout(track => {
+          this.visualizationStart(track);
+        }, this.stateManager.bpmObject.ms); // *4
+      });
     }
+
+    if (
+      this.stateManager.state == "PLAYING" ||
+      (this.stateManager.state == "RECORDING" &&
+        !this.stateManager.metronomeIsActive)
+    ) {
+      this.stateManager.tracks.forEach(track => {
+        track.trackData.TonePlayer.start(0);
+        this.visualizationStart(track);
+      });
+    }
+    Tone.Transport.start();
+    console.log(Tone.Transport.state);
+  }
 
   pause() {
     this.metronome.stopMetronome();
@@ -63,10 +73,10 @@ export class TimelineProvider {
     return Tone.Transport;
   }
 
-  visualizationStart(track:any){
-        if (track.trackData != undefined) {
-          track.trackData.WaveSurfer.play();
-        }
+  visualizationStart(track: any) {
+    if (track.trackData != undefined) {
+      console.log("TEST");
+      track.trackData.WaveSurfer.play();
+    }
   }
-
 }
