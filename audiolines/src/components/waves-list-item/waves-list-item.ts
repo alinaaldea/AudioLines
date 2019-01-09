@@ -26,6 +26,7 @@ export class WavesListItemComponent implements AfterViewInit {
   @Input() fileName: string;
   @Input() trackID: number;
   @Input() colors: { waveColor: string; progressColor: string };
+  @Input() frontendID: number;
 
   track: { WaveSurfer: any; TonePlayer: any } = {
     WaveSurfer: "WaveSurfer", // to be replaced by the Object
@@ -81,6 +82,7 @@ export class WavesListItemComponent implements AfterViewInit {
 
     this.track.WaveSurfer.on("ready", () => {
       this.track.WaveSurfer.setMute(true);
+      console.log("my track ID = " + this.trackID);
       this.stateManager.tracks[
         this.positionOfTrackID(this.trackID)
       ].trackData = this.track;
