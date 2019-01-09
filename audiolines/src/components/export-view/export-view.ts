@@ -63,23 +63,22 @@ export class ExportViewComponent {
     // to be replaced by recordings! Only for testing
     //let fileNames: string[] = ["piano.mp3", "stabs.mp3"];
 
-    let fileNames: string[];
-    
+    let fileNames: string[] = [];
+
     //add all active tracks to array, ignoring mute tracks and if a track is set on solo, it will stand alone in array
-    this.stateManager.tracks.forEach(element => {
-      switch (element.state){
-        case 'ACTIVE':
-            fileNames.push(element.fileName);
-            break;
-        case 'TRACK_MUTE':
-            break;
-        case 'TRACK_SOLO':
-            fileNames = [];
-            fileNames.push(element.fileName);
-            return;
+    this.stateManager.tracks.forEach(track => {
+      switch (track.state) {
+        case "ACTIVE":
+          fileNames.push(track.fileName);
+          break;
+        case "TRACK_MUTE":
+          break;
+        case "TRACK_SOLO":
+          fileNames.push(track.fileName);
+          return;
       }
     });
-    console.log(`Filenames: ${fileNames}`);
+    alert(`Filenames: ${fileNames}`);
 
     let audioCtx: AudioContext = new AudioContext();
     let sources: AudioBufferSourceNode[] = [];
