@@ -50,11 +50,29 @@ export class RecordingComponent {
     }
   }
 
+  generateUniqueId(): number {
+    let random = Math.floor(Math.random() * 200) + 1;
+    while (this.checkIdDuplicate(random)) {
+      random = Math.floor(Math.random() * 200) + 1;
+    }
+    return random;
+  }
+
+  checkIdDuplicate(number): boolean {
+    var ok = false;
+    for (var i = 0; i < this.stateManager.tracks.length; i++) {
+      if (number === this.stateManager.tracks[i].id) {
+        ok = true; //id is duplicate
+      }
+    }
+    return ok;
+  }
+
   stopRecord() {
     if (this.stateManager.state == "RECORDING") {
       this.stateManager.state = "STOPPED";
       this.timeLine.stop();
-      this.createTrack("piano.mp3", this.stateManager.tracks.length + 1); //trackID starts at 1
+      this.createTrack("piano.mp3", this.generateUniqueId());
     }
   }
 
