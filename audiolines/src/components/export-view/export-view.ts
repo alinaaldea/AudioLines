@@ -7,13 +7,6 @@ import { StateManagerProvider } from "../../providers/state-manager/state-manage
 
 declare var lamejs: any;
 
-/**
- * TODO: Export-Status Progress (OPTIONAL)
- *
- * for the UX it would be nice too see some kind of progressbar or spinner for the exporting
- * right now its just waiting until its done after about 10-15 seconds
- */
-
 @Component({
   selector: "export-view",
   templateUrl: "export-view.html"
