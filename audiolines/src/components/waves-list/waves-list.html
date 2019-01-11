@@ -3,11 +3,12 @@
     Start recording something...
   </h3>
   <ul [hidden]="stateManager.tracks.length == 0">
-    <li *ngFor="let track of stateManager.tracks">
+    <li *ngFor="let track of stateManager.tracks; let i = index">
       <waves-list-item
         [trackID]="track.id"
         [fileName]="track.fileName"
         [colors]="nextColor"
+        [frontendID]="i + 1"
       ></waves-list-item>
     </li>
   </ul>

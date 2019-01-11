@@ -26,6 +26,7 @@ import { MetronomeProvider } from "../providers/metronome/metronome";
 import { TimelineProvider } from "../providers/timeline/timeline";
 import { FileChooser } from "@ionic-native/file-chooser";
 import { SocialSharing } from "@ionic-native/social-sharing";
+import "hammerjs";
 
 @NgModule({
   declarations: [
