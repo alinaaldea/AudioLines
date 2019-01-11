@@ -26,6 +26,7 @@ import { MetronomeProvider } from "../providers/metronome/metronome";
 import { TimelineProvider } from "../providers/timeline/timeline";
 import { FileChooser } from "@ionic-native/file-chooser";
 import { SocialSharing } from "@ionic-native/social-sharing";
+import { NgProgressModule } from "ngx-progressbar";
 import "hammerjs";
 
 @NgModule({
@@ -43,7 +44,7 @@ import "hammerjs";
     ExportComponent,
     ExportViewComponent
   ],
-  imports: [BrowserModule, IonicModule.forRoot(MyApp)],
+  imports: [BrowserModule, IonicModule.forRoot(MyApp), NgProgressModule],
   bootstrap: [IonicApp],
   entryComponents: [MyApp, HomePage],
   providers: [
