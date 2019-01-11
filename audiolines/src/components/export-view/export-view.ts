@@ -6,6 +6,7 @@ import { Media } from "@ionic-native/media";
 import { SocialSharing } from "@ionic-native/social-sharing";
 
 import { StateManagerProvider } from "../../providers/state-manager/state-manager";
+import { NgProgress } from "ngx-progressbar";
 
 declare var lamejs: any;
 
@@ -30,10 +31,12 @@ export class ExportViewComponent {
     private toastCtrl: ToastController,
     private socialSharing: SocialSharing,
     public file: File,
-    public media: Media
+    public media: Media,
+    public ngProgress: NgProgress
   ) {}
 
   exportFile() {
+    this.ngProgress.start();
     // path to folder on android filesystem
     let filePath: string =
       this.file.externalApplicationStorageDirectory + "/files";
@@ -72,12 +75,12 @@ export class ExportViewComponent {
         this.file
           .readAsArrayBuffer(filePath, fileName)
           .then(async (buffer: ArrayBuffer) => {
-            alert("FILE " + fileName + " FOUND");
+            // alert("FILE " + fileName + " FOUND");
             buffers.push(buffer);
             await audioCtx
               .decodeAudioData(buffer)
               .then((decodedBuffer: AudioBuffer) => {
-                alert("SOURCE " + fileName);
+                // alert("SOURCE " + fileName);
                 let source: AudioBufferSourceNode = audioCtx.createBufferSource();
                 source.buffer = decodedBuffer;
                 source.connect(audioCtx.destination);
@@ -95,10 +98,10 @@ export class ExportViewComponent {
 
     Promise.all(promises)
       .then(() => {
-        alert("TEST / " + sources.length);
+        // alert("TEST / " + sources.length);
         // mixes the AudioBuffers in sources and creates 1 AudioBuffer
         let context: AudioBuffer = this.mix(sources, audioCtx);
-        alert("BUFFER?");
+        // alert("BUFFER?");
         let mixedSource: AudioBufferSourceNode = audioCtx.createBufferSource();
         mixedSource.buffer = context;
         mixedSource.connect(audioCtx.destination);
@@ -106,6 +109,7 @@ export class ExportViewComponent {
 
         let blob: Blob = this.generateMp3(mixedSource.buffer);
         this.writeFileToSystem(filePath, blob);
+        this.ngProgress.done();
       })
       .catch();
   }
