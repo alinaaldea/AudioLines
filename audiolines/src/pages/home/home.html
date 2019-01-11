@@ -11,7 +11,11 @@
 <ion-content padding class="homeContent" [ngSwitch]="stateManager.state">
   <export-view *ngSwitchCase="'EXPORT'" class="white-text"></export-view>
   <set-bpm-view *ngSwitchCase="'BPM'"> </set-bpm-view>
-  <waves-list *ngSwitchDefault></waves-list>
+  <waves-list
+    [hidden]="
+      this.stateManager.state == 'BPM' || this.stateManager.state == 'EXPORT'
+    "
+  ></waves-list>
 </ion-content>
 
 <ion-footer>
