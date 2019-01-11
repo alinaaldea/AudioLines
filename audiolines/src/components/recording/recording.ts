@@ -10,7 +10,7 @@ import {
 import { TimelineProvider } from "../../providers/timeline/timeline";
 
 /**
- * TODO: Metronome count-in for recording
+ * TODO: Metronome count-in for recording (REQUIRED) -> Julian
  *
  * if Metronome is active
  * -> count 1 measure (4 BEATS) before the app starts recording
@@ -22,7 +22,7 @@ import { TimelineProvider } from "../../providers/timeline/timeline";
  */
 
 /**
- * TODO: Displaying the new Track WHILE recording
+ * TODO: Displaying the new Track WHILE recording (OPTIONAL)
  *
  * right now the recorded track appears only after it has been recorded completely
  * it would be nice to see it already while its recording

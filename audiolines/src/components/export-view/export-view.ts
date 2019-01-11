@@ -10,36 +10,12 @@ import { StateManagerProvider } from "../../providers/state-manager/state-manage
 declare var lamejs: any;
 
 /**
- * TODO: EXPORT NameInput and Files (REQUIRED)
- *
- * The export functionality is working but right now its taking 2 files
- * that are pre-located in the @param filePath and then rendering the merged file
- * in there too with a predefined name.
- *
- * The files that are going to be merged need to be checked by their status
- * -> if they're all active -> export all
- * -> if one or more are soloed -> export only the soloed
- * -> if one or more are muted -> dont export them.
- * ERRORCASES:
- * -> if there are no tracks yet -> SEND WARNING AND DONT EXPORT!
- * -> if all tracks are muted -> SEND WARNING AND DONT EXPORT!
- */
-
-/**
  * TODO: Export-Status Progress (OPTIONAL)
  *
- * for the UX it would be nice too see some kind of progressbar for the exporting
+ * for the UX it would be nice too see some kind of progressbar or spinner for the exporting
  * right now its just waiting until its done after about 10-15 seconds
  */
 
-/**
- * TODO: EXPORTED TAB (OPTIONAL)
- *
- * Tab to show all the exported files that are still on the device.
- * From there
- * -> every track can be listened to directly from the app
- * -> every track can be shared again directly from the app
- */
 @Component({
   selector: "export-view",
   templateUrl: "export-view.html"

@@ -10,14 +10,9 @@ declare var WaveSurfer: any;
 declare var Tone: any;
 
 /**
- * TODO: MUTE & SOLO Button-Functionality -- Me (Philipp K. going to do that)
+ * TODO: MUTE & SOLO Button-Functionality (REQUIRED) -> Philipp K.
  */
 
-/**
- * TODO: DELETE BY SWIPING -> Ionic ItemSliding or Hammer.js
- *
- * Delete the track by swiping it to the right
- */
 @Component({
   selector: "waves-list-item",
   templateUrl: "waves-list-item.html"
@@ -123,18 +118,11 @@ export class WavesListItemComponent implements AfterViewInit {
 
 
   onDelete() {
-    /**
-     * TODO: DELETE TRACK Completely
-     *
-     * Make sure that all data belonging to the deleted track
-     * actually gets deleted
-     */
     console.log("delete should work");
     this.stateManager.tracks.forEach((track, i) => {
       if (track.id == this.trackID) {
         this.stateManager.tracks.splice(i, 1);
       }
     });
-    //TODO: ID can be buggy in certain conditions -> trackID must be set in another way
   }
 }
