@@ -8,41 +8,12 @@ import { StateManagerProvider } from "../../providers/state-manager/state-manage
 declare var lamejs: any;
 
 /**
- * TODO: EXPORT NameInput and Files
+ * TODO: Export-Status Progress (OPTIONAL)
  *
- * The export functionality is working but right now its taking 2 files
- * that are located in the @param filePath and then rendering the merged file
- * in there too with a predefined name.
- *
- * What should happen is:
- *
- * 1. The Name that the user has put in should be the name the file gets when its saved onto the system.
- * if the name already exists add a dash and a number counting from 1 upwards.
- * EXAMPLE: "bla-1.mp3"
- *
- * 2. The files that are going to be merged need to be checked by their status
- * -> if they're all active -> export all
- * -> if one or more are soloed -> export only the soloed
- * -> if one or more are muted -> dont export them.
- * ERRORCASES:
- * -> if there are no tracks yet -> SEND WARNING AND DONT EXPORT!
- * -> if all tracks are muted -> SEND WARNING AND DONT EXPORT!
- */
-
-/**
- * TODO: Export-Status Progress
- *
- * for the UX it would be nice too see some kind of progressbar for the exporting
+ * for the UX it would be nice too see some kind of progressbar or spinner for the exporting
  * right now its just waiting until its done after about 10-15 seconds
  */
 
-/**
- * TODO: SHARE-functionality
- *
- * basically exporting (look at EXPORT NameInput and Files)
- * and after its completed
- * -> send SHARE-Intention
- */
 @Component({
   selector: "export-view",
   templateUrl: "export-view.html"

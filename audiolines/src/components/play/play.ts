@@ -4,7 +4,7 @@ import { StateManagerProvider } from "../../providers/state-manager/state-manage
 import { TimelineProvider } from "../../providers/timeline/timeline";
 
 /**
- * TODO: Synchronized looping
+ * TODO: Synchronized looping (REQUIRED) -> Gabriel
  *
  * Looping of the Tracks is not in the App yet.
  * Look at the Tone.js Documentation!
