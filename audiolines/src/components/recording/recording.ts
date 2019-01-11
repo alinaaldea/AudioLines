@@ -10,13 +10,22 @@ import {
 import { TimelineProvider } from "../../providers/timeline/timeline";
 
 /**
- * TODO: if Metronome is active ->
- * count 1 measure (4 BEATS) before the app starts recording
+ * TODO: Metronome count-in for recording
+ *
+ * if Metronome is active
+ * -> count 1 measure (4 BEATS) before the app starts recording
  *
  * right now that leads to a UX problem:
  * -> if the user starts to play without having recorded anything
  * the record-button gets greyed out.
  * this should not be happening until the user has recorded at least 1 track
+ */
+
+/**
+ * TODO: Displaying the new Track WHILE recording
+ *
+ * right now the recorded track appears only after it has been recorded completely
+ * it would be nice to see it already while its recording
  */
 @Component({
   selector: "recording",
@@ -56,13 +65,31 @@ export class RecordingComponent {
     }
   }
 
+  generateUniqueId(): number {
+    let random = Math.floor(Math.random() * 200) + 1;
+    while (this.checkIdDuplicate(random)) {
+      random = Math.floor(Math.random() * 200) + 1;
+    }
+    return random;
+  }
+
+  checkIdDuplicate(number): boolean {
+    var ok = false;
+    for (var i = 0; i < this.stateManager.tracks.length; i++) {
+      if (number === this.stateManager.tracks[i].id) {
+        ok = true; //id is duplicate
+      }
+    }
+    return ok;
+  }
+
   stopRecord() {
     if (this.stateManager.state == "RECORDING") {
       this.stateManager.state = "STOPPED";
       this.audio.stopRecord();
       this.audio.release();
       this.timeLine.stop();
-      this.createTrack(this.fileName, this.stateManager.tracks.length + 1); //trackID starts at 1
+      this.createTrack(this.fileName, this.generateUniqueId()); //trackID starts at 1
     }
   }
 
