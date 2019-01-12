@@ -113,14 +113,13 @@ export class WavesListItemComponent implements AfterViewInit {
 
 
   onDelete() {
-    /**
-     * TODO: DELETE TRACK Completely
-     *
-     * Make sure that all data belonging to the deleted track
-     * actually gets deleted
-     */
     this.stateManager.tracks.forEach((track, i) => {
       if (track.id == this.trackID) {
+
+        //Remove Track completely
+        this.track.TonePlayer.dispose();
+        this.file.removeFile(this.file.externalApplicationStorageDirectory + "/files", track.fileName);
+        //Remove File from tracks
         this.stateManager.tracks.splice(i, 1);
       }
     });
