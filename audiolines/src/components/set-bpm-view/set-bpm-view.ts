@@ -18,20 +18,22 @@ export class SetBpmViewComponent {
   }
 
   onTypeIn(event: any) {
-    if (event.target.valueAsNumber > 300) {
-      event.preventDefault();
+    console.log(event.target.valueAsNumber);
+    if (event.target.valueAsNumber >= 300) {
       this.stateManager.bpmObject.bpm = 300;
       this.stateManager.bpmObject.ms = this.bpm.calc(
         this.stateManager.bpmObject.bpm
       );
-      event.target.value = this.stateManager.bpmObject.bpm;
-    } else if (event.target.valueAsNumber < 30) {
-      event.preventDefault();
+    } else if (event.target.valueAsNumber <= 30) {
       this.stateManager.bpmObject.bpm = 30;
       this.stateManager.bpmObject.ms = this.bpm.calc(
         this.stateManager.bpmObject.bpm
       );
-      event.target.value = this.stateManager.bpmObject.bpm;
+    } else {
+      this.stateManager.bpmObject.bpm = event.target.valueAsNumber;
+      this.stateManager.bpmObject.ms = this.bpm.calc(
+        this.stateManager.bpmObject.bpm
+      );
     }
     console.log(this.stateManager.bpmObject);
   }
