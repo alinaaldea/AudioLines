@@ -28,6 +28,8 @@
           minlength="2"
           value="{{ stateManager.bpmObject.bpm }}"
           (change)="onTypeIn($event)"
+          (keyup)="onTypeIn($event)"
+          (keydown)="onTypeIn($event)"
         />
       </form>
     </ion-col>

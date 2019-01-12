@@ -19,9 +19,13 @@ export class BpmProvider {
       let bpm = Math.round(60000 / ms);
       // Math.floor((60000 * this.count) / (this.timeStamp - this.firstTimeStamp))
 
-      console.log(bpm + "bpm" + " / " + ms + "ms");
       ret.bpm = bpm;
-      ret.ms = ms;
+
+      if (ret.bpm <= 30) ret.bpm = 30;
+      if (ret.bpm >= 300) ret.bpm = 300;
+
+      ret.ms = 60000 / ret.bpm;
+      console.log(ret.bpm + "bpm" + " / " + ret.ms + "ms");
     }
 
     this.count++;
