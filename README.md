@@ -16,7 +16,6 @@ AudioLines uses a number of open source projects to work properly:
 * [Ionic] -  Open-source SDK for hybrid mobile app development
 * [Cordova] - build applications for mobile devices using CSS3, HTML5, and JavaScript
 * [node.js] - evented I/O for the backend
-* [Express] - fast node.js network app framework
 * [Materialize] - modern responsive front-end framework based on Material Design
 * [jQuery]
 
@@ -53,6 +52,5 @@ To test the app directly on your phone, make sure it is plugged in while buildin
    [Cordova]: <https://cordova.apache.org/>
    [node.js]: <http://nodejs.org>
    [jQuery]: <http://jquery.com>
-   [express]: <http://expressjs.com>
    [AngularJS]: <http://angularjs.org>
    [Ionic]: <https://ionicframework.com/>
