@@ -18,26 +18,41 @@ export class SetBpmViewComponent {
   }
 
   onTypeIn(event: any) {
-    this.stateManager.bpmObject.bpm = event.target.valueAsNumber;
-    this.stateManager.bpmObject.ms = this.bpm.calc(
-      this.stateManager.bpmObject.bpm
-    );
+    if (event.target.valueAsNumber > 300) {
+      event.preventDefault();
+      this.stateManager.bpmObject.bpm = 300;
+      this.stateManager.bpmObject.ms = this.bpm.calc(
+        this.stateManager.bpmObject.bpm
+      );
+      event.target.value = this.stateManager.bpmObject.bpm;
+    } else if (event.target.valueAsNumber < 30) {
+      event.preventDefault();
+      this.stateManager.bpmObject.bpm = 30;
+      this.stateManager.bpmObject.ms = this.bpm.calc(
+        this.stateManager.bpmObject.bpm
+      );
+      event.target.value = this.stateManager.bpmObject.bpm;
+    }
     console.log(this.stateManager.bpmObject);
   }
 
   onIncreaseBPM() {
-    this.stateManager.bpmObject.bpm++;
-    this.stateManager.bpmObject.ms = this.bpm.calc(
-      this.stateManager.bpmObject.bpm
-    );
-    console.log(this.stateManager.bpmObject);
+    if (this.stateManager.bpmObject.bpm < 300) {
+      this.stateManager.bpmObject.bpm++;
+      this.stateManager.bpmObject.ms = this.bpm.calc(
+        this.stateManager.bpmObject.bpm
+      );
+      console.log(this.stateManager.bpmObject);
+    }
   }
 
   onDecreaseBPM() {
-    this.stateManager.bpmObject.bpm--;
-    this.stateManager.bpmObject.ms = this.bpm.calc(
-      this.stateManager.bpmObject.bpm
-    );
-    console.log(this.stateManager.bpmObject);
+    if (this.stateManager.bpmObject.bpm > 30) {
+      this.stateManager.bpmObject.bpm--;
+      this.stateManager.bpmObject.ms = this.bpm.calc(
+        this.stateManager.bpmObject.bpm
+      );
+      console.log(this.stateManager.bpmObject);
+    }
   }
 }
