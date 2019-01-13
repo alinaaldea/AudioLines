@@ -97,9 +97,11 @@ export class WavesListItemComponent implements AfterViewInit {
   onMute() {}
   onSolo() {}
   onDelete() {
-    console.log("delete should work");
     this.stateManager.tracks.forEach((track, i) => {
       if (track.id == this.trackID) {
+        //Remove Track completely
+        this.track.TonePlayer.dispose();
+        //Remove File from tracks
         this.stateManager.tracks.splice(i, 1);
       }
     });
