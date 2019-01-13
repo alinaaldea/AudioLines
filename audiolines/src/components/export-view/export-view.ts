@@ -51,11 +51,13 @@ export class ExportViewComponent {
     });
 
     if (fileNames.length == 0) {
-      //create toast WARNING
-      alert("No files to export found!");
+      //Display toast with warning
+      this.presentToast("No files to export found!");
+      //alert("No files to export found!");
       return;
     } else {
-      alert(`Filenames: ${fileNames}`);
+      this.presentToast(`Filenames: ${fileNames}`);
+      //alert(`Filenames: ${fileNames}`);
     }
 
     let audioCtx: AudioContext = new AudioContext();
@@ -196,13 +198,13 @@ export class ExportViewComponent {
     context: AudioContext
   ): AudioBuffer {
     // Get the number of buffer contained in the array buffers
-    var nbBuffer = buffers.length;
+    let nbBuffer = buffers.length;
     // Get the maximum number of channels across all buffers
-    var maxChannels = 0;
+    let maxChannels = 0;
     // Get the maximum length
-    var maxDuration = 0;
+    let maxDuration = 0;
 
-    for (var i = 0; i < nbBuffer; i++) {
+    for (let i = 0; i < nbBuffer; i++) {
       if (buffers[i].buffer.numberOfChannels > maxChannels) {
         maxChannels = buffers[i].buffer.numberOfChannels;
       }
@@ -212,30 +214,43 @@ export class ExportViewComponent {
     }
 
     // Get the output buffer (which is an array of datas) with the right number of channels and size/duration
-    var mixed = context.createBuffer(
+    let mixed = context.createBuffer(
       maxChannels,
       context.sampleRate * maxDuration,
       context.sampleRate
     );
 
-    for (var j = 0; j < nbBuffer; j++) {
+    for (let j = 0; j < nbBuffer; j++) {
       // For each channel contained in a buffer...
       for (
-        var srcChannel = 0;
+        let srcChannel = 0;
         srcChannel < buffers[j].buffer.numberOfChannels;
         srcChannel++
       ) {
         // Get the channel we will mix into
-        var _out = mixed.getChannelData(srcChannel);
+        let _out = mixed.getChannelData(srcChannel);
         // Get the channel we want to mix in
-        var _in = buffers[j].buffer.getChannelData(srcChannel);
+        let _in = buffers[j].buffer.getChannelData(srcChannel);
 
-        for (var i = 0; i < _in.length; i++) {
+        for (let i = 0; i < _in.length; i++) {
           // Calculate the new value for each index of the buffer array
           _out[i] += _in[i];
         }
       }
     }
     return mixed;
+  }
+  presentToast(message) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000,
+      position: 'top'
+    });
+  
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+  
+    toast.present();
   }
 }
