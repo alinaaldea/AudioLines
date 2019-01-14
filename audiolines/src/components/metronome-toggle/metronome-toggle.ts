@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import {Component, Input} from "@angular/core";
 
 import { StateManagerProvider } from "../../providers/state-manager/state-manager";
 import { MetronomeProvider } from "../../providers/metronome/metronome";
@@ -7,7 +7,9 @@ import { MetronomeProvider } from "../../providers/metronome/metronome";
   selector: "metronome-toggle",
   templateUrl: "metronome-toggle.html"
 })
+
 export class MetronomeToggleComponent {
+  @Input() disabled: boolean = false;
   constructor(
     public stateManager: StateManagerProvider,
     public metronome: MetronomeProvider
@@ -15,7 +17,7 @@ export class MetronomeToggleComponent {
 
   toggleMetronome() {
     this.stateManager.metronomeIsActive = !this.stateManager.metronomeIsActive;
-    if (
+    if (!this.disabled &&
       this.stateManager.metronomeIsActive &&
       (this.stateManager.state == "PLAYING" ||
         this.stateManager.state == "RECORDING")

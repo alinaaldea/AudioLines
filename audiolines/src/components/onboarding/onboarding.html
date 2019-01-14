@@ -1,0 +1,47 @@
+<ion-content>
+  <ion-slides pager>
+    <ion-slide (ionSlideDidChange)="slideChanged()">
+      <div class="diag">
+        <h1>Welcome to Audiolines!</h1>
+        <div class="pt-30">
+          <recording [disabled]="true"></recording>
+        </div>
+      </div>
+      <div>
+        <h2>Create your own recordings!</h2>
+        <p>Tap the record icon to record a new track!</p>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="diag pt-40">
+        <metronome-toggle [disabled]="true"></metronome-toggle>
+      </div>
+      <div>
+        <h2></h2>
+        <p>Click the metronome to hear the BPM while recording!</p>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="diag">
+        <set-bpm-view></set-bpm-view>
+      </div>
+      <div>
+        <h2>Set the BPM!</h2>
+        <p>You can set the BPM by clicking on the BPM at the top of the screen!</p>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="diag pt-40">
+        <export></export>
+      </div>
+      <div class="pt-2">
+        <h2>Export your track!</h2>
+        <p>To save your recording, export the track to your phone(and share it)!</p>
+      </div>
+    </ion-slide>
+  </ion-slides>
+  <button (click)="skip()" id="skip">{{ skipMsg }}</button>
+</ion-content>
+
