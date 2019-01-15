@@ -1,13 +1,17 @@
 onboarding {
 
-  ion-content {
-    background-color: white;
+  .ion-content {
+    background-color: color($colors, secondary);
     font-family:'Raleway';
   }
 
   $colors: (
   );
 
+  .swiper-pagination-bullet
+  {
+    border: 4px solid white
+  }
 
   .pt-40{
     padding-top: 40vh;
@@ -15,6 +19,10 @@ onboarding {
 
   .pt-30{
     padding-top: 30vh;
+  }
+
+  .text-white{
+    color: white;
   }
 
   .diag {
@@ -28,6 +36,12 @@ onboarding {
   ion-icon {
     margin-top: 40%;
     font-size:7em;
+  }
+
+  h1 {
+    margin-top:50% !important;
+    font-weight:bold;
+    font-size:2em;
   }
 
   h2 {

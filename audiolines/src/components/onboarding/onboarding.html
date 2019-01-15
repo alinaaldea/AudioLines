@@ -1,47 +1,54 @@
-<ion-content>
+<ion-content class="ion-content">
   <ion-slides pager>
+    <!-- Welcome -->
     <ion-slide (ionSlideDidChange)="slideChanged()">
       <div class="diag">
-        <h1>Welcome to Audiolines!</h1>
+        <h1 class="text-white">Welcome to Audiolines!</h1>
+      </div>
+    </ion-slide>
+    <!-- BPM -->
+    <ion-slide (ionSlideDidChange)="slideChanged()">
+      <div class="diag">
+        <set-bpm-view></set-bpm-view>
+      </div>
+      <div>
+        <h2 class="text-white">Set the BPM!</h2>
+        <p class="text-white">You can set the BPM by clicking on the BPM at the top of the screen!</p>
+      </div>
+    </ion-slide>
+    <!-- Metronome BPM -->
+    <ion-slide (ionSlideDidChange)="slideChanged()">
+      <div class="diag pt-30">
+        <metronome-toggle [disabled]="true"></metronome-toggle>
+      </div>
+      <div>
+        <h2 class="text-white"></h2>
+        <p class="text-white">Click the metronome to hear the BPM while recording!</p>
+      </div>
+    </ion-slide>
+    <!-- Record Button -->
+    <ion-slide (ionSlideDidChange)="slideChanged()">
+      <div class="diag">
         <div class="pt-30">
           <recording [disabled]="true"></recording>
         </div>
       </div>
       <div>
-        <h2>Create your own recordings!</h2>
-        <p>Tap the record icon to record a new track!</p>
+        <h2 class="text-white">Create your own recordings!</h2>
+        <p class="text-white">Tap the record icon to record a new track!</p>
       </div>
     </ion-slide>
-
-    <ion-slide>
-      <div class="diag pt-40">
-        <metronome-toggle [disabled]="true"></metronome-toggle>
-      </div>
-      <div>
-        <h2></h2>
-        <p>Click the metronome to hear the BPM while recording!</p>
-      </div>
-    </ion-slide>
-
-    <ion-slide>
-      <div class="diag">
-        <set-bpm-view></set-bpm-view>
-      </div>
-      <div>
-        <h2>Set the BPM!</h2>
-        <p>You can set the BPM by clicking on the BPM at the top of the screen!</p>
-      </div>
-    </ion-slide>
-    <ion-slide>
-      <div class="diag pt-40">
+    <!-- Exporting -->
+    <ion-slide (ionSlideDidChange)="slideChanged()">
+      <div class="diag pt-30">
         <export></export>
       </div>
       <div class="pt-2">
-        <h2>Export your track!</h2>
-        <p>To save your recording, export the track to your phone(and share it)!</p>
+        <h2 class="text-white">Export your track!</h2>
+        <p class="text-white">To save your recording, export the track to your phone(and share it)!</p>
       </div>
     </ion-slide>
   </ion-slides>
-  <button (click)="skip()" id="skip">{{ skipMsg }}</button>
+  <button (click)="skip()" class="text-white" id="skip">{{ skipMsg }}</button>
 </ion-content>
 
