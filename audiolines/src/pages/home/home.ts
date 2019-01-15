@@ -4,12 +4,7 @@ import { NavController } from "ionic-angular";
 import { StateManagerProvider } from "../../providers/state-manager/state-manager";
 
 /**
- * TODO: DELETE TRACK DOESNT ACTUALLY DELETE TRACK (REQUIRED) -> Philipp S.
- *
- * right now if a track gets deleted it only deletes the WaveSurfer-Part
- * means it doesnt get displayed anymore but the data from Tone.js
- * and the actual recording on the phone are still there.
- * This can lead to performance issues and storage of useless data.
+ * TODO: ONBOARDING (REQUIRED)-> Philipp S.
  */
 @Component({
   selector: "page-home",
