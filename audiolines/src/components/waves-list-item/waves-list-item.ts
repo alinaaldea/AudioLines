@@ -76,7 +76,7 @@ export class WavesListItemComponent implements AfterViewInit {
     }).toMaster();
 
     this.track.WaveSurfer.on("ready", () => {
-      this.track.WaveSurfer.setMute(true);
+      this.track.WaveSurfer.setMute(false);
       console.log("my track ID = " + this.trackID);
       this.stateManager.tracks[
         this.positionOfTrackID(this.trackID)
@@ -94,8 +94,29 @@ export class WavesListItemComponent implements AfterViewInit {
     this.menuIsOpen = !this.menuIsOpen;
   }
 
-  onMute() {}
-  onSolo() {}
+  onMute(){ // dunno what is the Problem but it seems that somewhere else is playing the track too. 
+            //it sounds like there 2 Tracks on each other. one of them i can mute but not both
+
+    // this.track.WaveSurfer.toggleMute();    // --- Another simpler Option but on the browser i can not prove 100% if it works or not 
+
+    if (this.track.WaveSurfer.getMute() == false){
+      console.log("Muted track with ID = " + this.trackID);
+      this.track.WaveSurfer.setMute(true);
+    }else{
+      console.log("unMuted track with ID = " + this.trackID);
+      this.track.WaveSurfer.setMute(false);
+    }
+    
+  }
+  onSolo() { // same Problem as the onMute it looks like the song is playing in the backgroud a sekond time 
+    this.stateManager.tracks.forEach((track, i) => {
+      if (track.id != this.trackID) {
+      this.stateManager.tracks[i].trackData.WaveSurfer.toggleMute();
+      console.log(" ToggleMute the track with ID = " + this.stateManager.tracks[i].id);
+      }
+    });
+  }
+
   onDelete() {
     this.stateManager.tracks.forEach((track, i) => {
       if (track.id == this.trackID) {
