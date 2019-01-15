@@ -1,9 +1,11 @@
-import { Component } from "@angular/core";
-import { NavController } from "ionic-angular";
-import { HomePage } from "../../pages/home/home";
-import { ViewChild } from "@angular/core";
-import { Slides } from "ionic-angular";
 import { Storage } from "@ionic/storage";
+import { NavController } from "ionic-angular";
+import { Slides } from "ionic-angular";
+
+import { Component } from "@angular/core";
+import { ViewChild } from "@angular/core";
+
+import { HomePage } from "../../pages/home/home";
 
 @Component({
   selector: "onboarding",

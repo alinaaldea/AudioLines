@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Input, state } from "@angular/core";
+import { Component, AfterViewInit, Input } from "@angular/core";
 
 import { File } from "@ionic-native/file";
 import { Media } from "@ionic-native/media";
@@ -112,10 +112,9 @@ export class WavesListItemComponent implements AfterViewInit {
     this.menuIsOpen = !this.menuIsOpen;
   }
 
-    // Started testing thoose Functionality on my own App. Going to make them fit into our Application
+  // Started testing thoose Functionality on my own App. Going to make them fit into our Application
   onMute() {}
   onSolo() {}
-
 
   onDelete() {
     console.log("delete should work");
