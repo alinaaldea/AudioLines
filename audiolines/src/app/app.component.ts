@@ -24,6 +24,7 @@ export class MyApp {
       // statusBar.styleDefault();
       statusBar.styleBlackOpaque();
       splashScreen.hide();
+
       //check if Onboarding should be displayed
       this.storage
         .ready()
