@@ -4,6 +4,8 @@ import { File } from "@ionic-native/file";
 import { Media } from "@ionic-native/media";
 
 import { StateManagerProvider } from "../../providers/state-manager/state-manager";
+import { File } from "@ionic-native/file";
+import { Media } from "@ionic-native/media";
 
 declare var lamejs: any;
 
