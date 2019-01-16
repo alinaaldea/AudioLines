@@ -16,15 +16,16 @@ export class TimelineProvider {
   }
 
   start() {
+    let delay=0;
     Tone.Transport.bpm.value = this.stateManager.bpmObject.bpm;
     this.metronome.startMetronome();
 
     if (this.stateManager.state == "RECORDING" && this.stateManager.metronomeIsActive) {
+      delay = Tone.TransportTime("1:0:0").toMilliseconds();
       this.stateManager.tracks.forEach(track => {
         track.trackData.TonePlayer.stop()
           .start(Tone.TransportTime("1:0:0").valueOf())
           .sync();
-        this.visualizationStart(track);
       });
     }
 
@@ -34,12 +35,16 @@ export class TimelineProvider {
             track.trackData.TonePlayer.stop()
             .start()
             .sync();
-            this.visualizationStart(track);
           });
     }
 
 
     Tone.Transport.start();
+    this.stateManager.tracks.forEach(track => {
+        setTimeout( () => {
+          this.visualizationStart(track);
+        }, delay);
+    });
   }
 
   pause() {
