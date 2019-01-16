@@ -19,6 +19,9 @@ waves-list-item {
       .waveform-container {
         background-color: color($colors, trkBackground);
       }
+      .waveform-container .waveformDisabled {
+        background-color: color($colors, trkDisabled) !important;
+      }
     }
   }
 }
