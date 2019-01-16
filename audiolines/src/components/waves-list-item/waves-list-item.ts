@@ -154,11 +154,26 @@ export class WavesListItemComponent implements AfterViewInit {
       }else if (track.id == this.trackID){
         if(this.stateManager.tracks[i].state == "ACTIVE"||this.stateManager.tracks[i].state == "TRACK_MUTE"){
           this.stateManager.tracks[i].state = "TRACK_SOLO";
+          this.stateManager.tracks[i].trackData.TonePlayer.mute = false;
           console.log("enable solo " + this.stateManager.tracks[i].id + " to " + this.stateManager.tracks[i].state );
+
         }else if (this.stateManager.tracks[i].state == "TRACK_SOLO"||this.stateManager.tracks[i].state == "TRACK_MUTE"){
+          var otherSolo;
+          this.stateManager.tracks.forEach((track) => {
+            if(track.state == 'TRACK_SOLO'&& track.id != this.trackID){
+              otherSolo = true;
+            }
+          });
+          if(otherSolo){
+            this.stateManager.tracks[i].state = "TRACK_MUTE";
+            this.stateManager.tracks[i].trackData.TonePlayer.mute = true;
+            console.log("Track " + this.stateManager.tracks[i].id + "becaus another track is on Solo" );
+          }else{
           this.stateManager.tracks[i].state = "ACTIVE";
+          this.stateManager.tracks[i].trackData.TonePlayer.mute = false;
           console.log("disable Solo " + this.stateManager.tracks[i].id + " to " + this.stateManager.tracks[i].state );
-        }
+          }
+        }  
       }
     });
   }
