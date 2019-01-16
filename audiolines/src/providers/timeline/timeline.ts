@@ -16,11 +16,14 @@ export class TimelineProvider {
   }
 
   start() {
-    let delay=0;
+    let delay = 0;
     Tone.Transport.bpm.value = this.stateManager.bpmObject.bpm;
     this.metronome.startMetronome();
 
-    if (this.stateManager.state == "RECORDING" && this.stateManager.metronomeIsActive) {
+    if (
+      this.stateManager.state == "RECORDING" &&
+      this.stateManager.metronomeIsActive
+    ) {
       delay = Tone.TransportTime("1:0:0").toMilliseconds();
       this.stateManager.tracks.forEach(track => {
         track.trackData.TonePlayer.stop()
@@ -29,25 +32,23 @@ export class TimelineProvider {
       });
     }
 
-    if (this.stateManager.state == "PLAYING" ||
-        this.stateManager.state == "RECORDING" && !this.stateManager.metronomeIsActive){
-          this.stateManager.tracks.forEach(track => {
-            track.trackData.TonePlayer.stop()
-            .start()
-            .sync();
-          });
+    if (
+      this.stateManager.state == "PLAYING" ||
+      (this.stateManager.state == "RECORDING" &&
+        !this.stateManager.metronomeIsActive)
+    ) {
+      this.stateManager.tracks.forEach(track => {
+        track.trackData.TonePlayer.stop()
+          .start()
+          .sync();
+      });
     }
-
 
     Tone.Transport.start();
     this.stateManager.tracks.forEach(track => {
-      if (track.trackData != undefined) {
-        track.trackData.TonePlayer.loop = true;
-        track.trackData.WaveSurfer.play();
-      }
-        setTimeout( () => {
-          this.visualizationStart(track);
-        }, delay);
+      setTimeout(() => {
+        this.visualizationStart(track);
+      }, delay);
     });
   }
 
@@ -79,6 +80,7 @@ export class TimelineProvider {
 
   visualizationStart(track: any) {
     if (track.trackData != undefined) {
+      track.trackData.TonePlayer.loop = true;
       track.trackData.WaveSurfer.play();
     }
   }

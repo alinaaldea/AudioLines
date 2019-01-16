@@ -70,9 +70,9 @@ export class WavesListItemComponent implements AfterViewInit {
       hideScrollbar: this.hideScrollbar
     });
 
-    this.track.TonePlayer = new Tone.Player("assets/piano.mp3", () => {
+    this.track.TonePlayer = new Tone.Player("assets/beat.mp3", () => {
       this.track.TonePlayer.sync().start(0);
-      this.track.WaveSurfer.load("assets/piano.mp3");
+      this.track.WaveSurfer.load("assets/beat.mp3");
     }).toMaster();
 
     this.track.WaveSurfer.on("ready", () => {
@@ -84,10 +84,9 @@ export class WavesListItemComponent implements AfterViewInit {
     });
 
     //Used for looping, once it's finished it will loop again
-    this.track.WaveSurfer.on('finish',()=>{
-        this.track.WaveSurfer.play();
+    this.track.WaveSurfer.on("finish", () => {
+      this.track.WaveSurfer.play();
     });
-
   }
 
   positionOfTrackID(trackID): number {
