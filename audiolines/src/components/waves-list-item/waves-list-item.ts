@@ -119,8 +119,6 @@ export class WavesListItemComponent implements AfterViewInit {
                   isSolo = true;
                 }
               });
-
-
               if(!isSolo){
                 this.stateManager.tracks[i].trackData.TonePlayer.mute = false;
                 this.stateManager.tracks[i].state = "ACTIVE";
@@ -134,21 +132,30 @@ export class WavesListItemComponent implements AfterViewInit {
 
   onSolo() {
     this.stateManager.tracks.forEach((track, i) => {
+      
       if (track.id != this.trackID) {
         if(this.stateManager.tracks[i].state == "ACTIVE"){
           this.stateManager.tracks[i].trackData.TonePlayer.mute = true;
           this.stateManager.tracks[i].state = "TRACK_MUTE";
           console.log("Mute because solo Track: " + this.stateManager.tracks[i].id + " to " + this.stateManager.tracks[i].state );
         }else if (this.stateManager.tracks[i].state == "TRACK_MUTE"){
-          this.stateManager.tracks[i].trackData.TonePlayer.mute = false;
-          this.stateManager.tracks[i].state = "ACTIVE";
-          console.log("unMute because solo Track: " + this.stateManager.tracks[i].id + " to " + this.stateManager.tracks[i].state );
+          var isSolo;
+          this.stateManager.tracks.forEach((track) => {
+            if(track.state == 'TRACK_SOLO'){
+              isSolo = true;
+            }
+          });
+          if(!isSolo){
+            this.stateManager.tracks[i].trackData.TonePlayer.mute = false;
+            this.stateManager.tracks[i].state = "ACTIVE";
+            console.log("unMute because solo Track: " + this.stateManager.tracks[i].id + " to " + this.stateManager.tracks[i].state );
+          }
         }
       }else if (track.id == this.trackID){
-        if(this.stateManager.tracks[i].state == "ACTIVE"){
+        if(this.stateManager.tracks[i].state == "ACTIVE"||this.stateManager.tracks[i].state == "TRACK_MUTE"){
           this.stateManager.tracks[i].state = "TRACK_SOLO";
           console.log("enable solo " + this.stateManager.tracks[i].id + " to " + this.stateManager.tracks[i].state );
-        }else if (this.stateManager.tracks[i].state == "TRACK_SOLO"||this.stateManager.tracks[i].state == "TRACK_MUTED"){
+        }else if (this.stateManager.tracks[i].state == "TRACK_SOLO"||this.stateManager.tracks[i].state == "TRACK_MUTE"){
           this.stateManager.tracks[i].state = "ACTIVE";
           console.log("disable Solo " + this.stateManager.tracks[i].id + " to " + this.stateManager.tracks[i].state );
         }
