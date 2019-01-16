@@ -2,6 +2,7 @@ import { Component, AfterViewInit, Input, state } from "@angular/core";
 
 import { File } from "@ionic-native/file";
 import { Media } from "@ionic-native/media";
+import { ToastController } from "ionic-angular";
 
 import { StateManagerProvider } from "../../providers/state-manager/state-manager";
 import { TimelineProvider } from "../../providers/timeline/timeline";
@@ -46,6 +47,7 @@ export class WavesListItemComponent implements AfterViewInit {
   constructor(
     public stateManager: StateManagerProvider,
     public timeLine: TimelineProvider,
+    private toastCtrl: ToastController,
     public media: Media,
     public file: File
   ) {}
@@ -89,7 +91,8 @@ export class WavesListItemComponent implements AfterViewInit {
         }).toMaster();
       })
       .catch(e => {
-        alert(e.message);
+        //alert(e.message);
+        this.presentToast("No rights to record were given!");
         console.log(e);
       });
 
@@ -128,5 +131,18 @@ export class WavesListItemComponent implements AfterViewInit {
         this.stateManager.tracks.splice(i, 1);
       }
     });
+  }
+
+  presentToast(message) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 5000,
+      position: 'top'
+    });
+  
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+    toast.present();
   }
 }

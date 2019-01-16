@@ -83,10 +83,12 @@ export class ExportViewComponent {
               })
               .catch(e => {
                 alert(e);
+                //alert("Test 1");
               });
           })
           .catch(e => {
-            alert(e);
+            this.presentToast("No wright-right were given, exported track can not be saved!");
+            //alert(e);
           })
       );
     });
@@ -243,14 +245,13 @@ export class ExportViewComponent {
   presentToast(message) {
     let toast = this.toastCtrl.create({
       message: message,
-      duration: 3000,
+      duration: 5000,
       position: 'top'
     });
   
     toast.onDidDismiss(() => {
       console.log('Dismissed toast');
     });
-  
     toast.present();
   }
 }
