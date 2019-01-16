@@ -4,19 +4,9 @@ import { StateManagerProvider } from "../../providers/state-manager/state-manage
 import { TimelineProvider } from "../../providers/timeline/timeline";
 
 /**
- * TODO: Synchronized looping (REQUIRED) -> Gabriel
- *
- * Looping of the Tracks is not in the App yet.
- * Look at the Tone.js Documentation!
- *
- * tracks will probably have different durations
- * so:
- * -> while playing the longest track must be the "master track"
- * -> while recording:
- *    -> if the recorded track going to be longer than the longest track
- *       -> continue recording and set the new track as "master track"
- *    -> if the recorded track is shorter than the longest track
- *       -> keep everything as it is
+ * TODO: Weird thing when looping
+ * -> after recording a few tracks it starts looping again and again
+ * and it can not be stopped except by deleting the tracks
  */
 
 @Component({
