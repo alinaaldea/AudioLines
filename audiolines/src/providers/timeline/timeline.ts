@@ -19,7 +19,7 @@ export class TimelineProvider {
     Tone.Transport.bpm.value = this.stateManager.bpmObject.bpm;
     this.metronome.startMetronome();
 
-    if (this.stateManager.state == "PLAYING") {
+    if (this.stateManager.state == "RECORDING" && this.stateManager.metronomeIsActive) {
       this.stateManager.tracks.forEach(track => {
         track.trackData.TonePlayer.stop()
           .start(Tone.TransportTime("1:0:0").valueOf())
@@ -27,6 +27,18 @@ export class TimelineProvider {
         this.visualizationStart(track);
       });
     }
+
+    if (this.stateManager.state == "PLAYING" ||
+        this.stateManager.state == "RECORDING" && !this.stateManager.metronomeIsActive){
+          this.stateManager.tracks.forEach(track => {
+            track.trackData.TonePlayer.stop()
+            .start()
+            .sync();
+            this.visualizationStart(track);
+          });
+    }
+
+
     Tone.Transport.start();
   }
 

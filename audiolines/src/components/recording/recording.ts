@@ -45,8 +45,8 @@ export class RecordingComponent {
   startRecord() {
     if (this.stateManager.state == "STOPPED") {
       alert("Would be recording now!");
-      this.timeLine.start();
       this.stateManager.state = "RECORDING";
+      this.timeLine.start();
     }
   }
 
