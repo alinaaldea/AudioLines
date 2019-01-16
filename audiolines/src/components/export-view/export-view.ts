@@ -56,7 +56,7 @@ export class ExportViewComponent {
       return;
     } else {
       this.ngProgress.start();
-      this.presentToast(`Filenames: ${fileNames}`);
+      // this.presentToast(`Filenames: ${fileNames}`);
       //alert(`Filenames: ${fileNames}`);
     }
 
@@ -87,7 +87,9 @@ export class ExportViewComponent {
               });
           })
           .catch(e => {
-            this.presentToast("No wright-right were given, exported track can not be saved!");
+            this.presentToast(
+              "No wright-right were given, exported track can not be saved!"
+            );
             //alert(e);
           })
       );
@@ -246,11 +248,11 @@ export class ExportViewComponent {
     let toast = this.toastCtrl.create({
       message: message,
       duration: 5000,
-      position: 'top'
+      position: "top"
     });
-  
+
     toast.onDidDismiss(() => {
-      console.log('Dismissed toast');
+      console.log("Dismissed toast");
     });
     toast.present();
   }
