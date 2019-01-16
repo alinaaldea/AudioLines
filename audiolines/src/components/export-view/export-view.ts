@@ -29,7 +29,6 @@ export class ExportViewComponent {
   ) {}
 
   exportFile() {
-    this.ngProgress.start();
     // path to folder on android filesystem
     let filePath: string =
       this.file.externalApplicationStorageDirectory + "/files";
@@ -56,6 +55,7 @@ export class ExportViewComponent {
       //alert("No files to export found!");
       return;
     } else {
+      this.ngProgress.start();
       this.presentToast(`Filenames: ${fileNames}`);
       //alert(`Filenames: ${fileNames}`);
     }
