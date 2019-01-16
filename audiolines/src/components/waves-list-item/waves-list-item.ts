@@ -76,7 +76,7 @@ export class WavesListItemComponent implements AfterViewInit {
     }).toMaster();
 
     this.track.WaveSurfer.on("ready", () => {
-      this.track.WaveSurfer.setMute(false);
+      this.track.WaveSurfer.setMute(true);
       console.log("my track ID = " + this.trackID);
       this.stateManager.tracks[
         this.positionOfTrackID(this.trackID)
@@ -94,28 +94,59 @@ export class WavesListItemComponent implements AfterViewInit {
     this.menuIsOpen = !this.menuIsOpen;
   }
 
-  onMute(){ // dunno what is the Problem but it seems that somewhere else is playing the track too. 
-            //it sounds like there 2 Tracks on each other. one of them i can mute but not both
 
-    // this.track.WaveSurfer.toggleMute();    // --- Another simpler Option but on the browser i can not prove 100% if it works or not 
+  // die Funktion für die Track ID 
+  /*
+      this.stateManager.tracks.forEach((track, i) => {
+        if (track.id == this.trackID) {
+          console.log("The state of Track: " + this.trackID + " is " + this.stateManager.tracks[i].state );
+        }
+      }); 
+  */
+  onMute(){   
 
-    if (this.track.WaveSurfer.getMute() == false){
-      console.log("Muted track with ID = " + this.trackID);
-      this.track.WaveSurfer.setMute(true);
-    }else{
-      console.log("unMuted track with ID = " + this.trackID);
-      this.track.WaveSurfer.setMute(false);
-    }
+    
+      this.stateManager.tracks.forEach((track, i) => {
+        if (track.id == this.trackID) {
+          console.log("The state of Track: " + this.stateManager.tracks[i].id + " is " + this.stateManager.tracks[i].state );
+          if (this.stateManager.tracks[i].state == "ACTIVE"){
+            this.stateManager.tracks[i].trackData.TonePlayer.mute = true;
+            this.stateManager.tracks[i].state = "TRACK_MUTE";
+            console.log("Update The state of Track: " + this.stateManager.tracks[i].id + " to " + this.stateManager.tracks[i].state );
+          }else if(this.stateManager.tracks[i].state == "TRACK_MUTE")  {
+            this.stateManager.tracks[i].trackData.TonePlayer.mute = false;
+            this.stateManager.tracks[i].state = "ACTIVE";
+            console.log("Update The state of Track: " + this.stateManager.tracks[i].id + " to " + this.stateManager.tracks[i].state );
+          }
+        }
+      }); 
+    
     
   }
-  onSolo() { // same Problem as the onMute it looks like the song is playing in the backgroud a sekond time 
+  onSolo() {
     this.stateManager.tracks.forEach((track, i) => {
       if (track.id != this.trackID) {
-      this.stateManager.tracks[i].trackData.WaveSurfer.toggleMute();
-      console.log(" ToggleMute the track with ID = " + this.stateManager.tracks[i].id);
+        if(this.stateManager.tracks[i].state == "ACTIVE"){
+          this.stateManager.tracks[i].trackData.TonePlayer.mute = true;
+          this.stateManager.tracks[i].state = "TRACK_MUTE";
+          console.log("Mute because solo Track: " + this.stateManager.tracks[i].id + " to " + this.stateManager.tracks[i].state );
+        }else if (this.stateManager.tracks[i].state == "TRACK_MUTE"){
+          this.stateManager.tracks[i].trackData.TonePlayer.mute = false;
+          this.stateManager.tracks[i].state = "ACTIVE";
+          console.log("unMute because solo Track: " + this.stateManager.tracks[i].id + " to " + this.stateManager.tracks[i].state );
+        }
+      }else if (track.id == this.trackID){
+        if(this.stateManager.tracks[i].state == "ACTIVE"){
+          this.stateManager.tracks[i].state = "TRACK_SOLO";
+          console.log("enable solo " + this.stateManager.tracks[i].id + " to " + this.stateManager.tracks[i].state );
+        }else if (this.stateManager.tracks[i].state == "TRACK_SOLO"||this.stateManager.tracks[i].state == "TRACK_MUTED"){
+          this.stateManager.tracks[i].state = "ACTIVE";
+          console.log("disable Solo " + this.stateManager.tracks[i].id + " to " + this.stateManager.tracks[i].state );
+        }
       }
     });
   }
+
 
   onDelete() {
     this.stateManager.tracks.forEach((track, i) => {
