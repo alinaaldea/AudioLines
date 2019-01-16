@@ -103,6 +103,7 @@ export class WavesListItemComponent implements AfterViewInit {
         }
       }); 
   */
+<<<<<<< HEAD
   onMute() {
     this.stateManager.tracks.forEach((track, i) => {
       if (track.id == this.trackID) {
@@ -149,13 +150,43 @@ export class WavesListItemComponent implements AfterViewInit {
         }
       }
     });
+=======
+  onMute(){   
+
+       this.stateManager.tracks.forEach((track, i) => {
+          if (track.id == this.trackID) {
+            console.log("The state of Track: " + this.stateManager.tracks[i].id + " is " + this.stateManager.tracks[i].state );
+            if (this.stateManager.tracks[i].state == "ACTIVE"){
+              this.stateManager.tracks[i].trackData.TonePlayer.mute = true;
+              this.stateManager.tracks[i].state = "TRACK_MUTE";
+              console.log("Update The state of Track: " + this.stateManager.tracks[i].id + " to " + this.stateManager.tracks[i].state );
+            }else if(this.stateManager.tracks[i].state == "TRACK_MUTE")  {
+              var isSolo = false;
+              this.stateManager.tracks.forEach((track) => {
+                if(track.state == 'TRACK_SOLO'){
+                  isSolo = true;
+                }
+              });
+              if(!isSolo){
+                this.stateManager.tracks[i].trackData.TonePlayer.mute = false;
+                this.stateManager.tracks[i].state = "ACTIVE";
+                console.log("Update The state of Track: " + this.stateManager.tracks[i].id + " to " + this.stateManager.tracks[i].state );  
+              }
+            }
+          }
+        });      
+>>>>>>> 8710db1e918ff1e66c8889ceae1e6209686595bf
   }
+
+
   onSolo() {
     this.stateManager.tracks.forEach((track, i) => {
+      
       if (track.id != this.trackID) {
         if (this.stateManager.tracks[i].state == "ACTIVE") {
           this.stateManager.tracks[i].trackData.TonePlayer.mute = true;
           this.stateManager.tracks[i].state = "TRACK_MUTE";
+<<<<<<< HEAD
           console.log(
             "Mute because solo Track: " +
               this.stateManager.tracks[i].id +
@@ -185,6 +216,27 @@ export class WavesListItemComponent implements AfterViewInit {
           this.stateManager.tracks[i].state == "TRACK_SOLO" ||
           this.stateManager.tracks[i].state == "TRACK_MUTED"
         ) {
+=======
+          console.log("Mute because solo Track: " + this.stateManager.tracks[i].id + " to " + this.stateManager.tracks[i].state );
+        }else if (this.stateManager.tracks[i].state == "TRACK_MUTE"){
+          var isSolo;
+          this.stateManager.tracks.forEach((track) => {
+            if(track.state == 'TRACK_SOLO'){
+              isSolo = true;
+            }
+          });
+          if(!isSolo){
+            this.stateManager.tracks[i].trackData.TonePlayer.mute = false;
+            this.stateManager.tracks[i].state = "ACTIVE";
+            console.log("unMute because solo Track: " + this.stateManager.tracks[i].id + " to " + this.stateManager.tracks[i].state );
+          }
+        }
+      }else if (track.id == this.trackID){
+        if(this.stateManager.tracks[i].state == "ACTIVE"||this.stateManager.tracks[i].state == "TRACK_MUTE"){
+          this.stateManager.tracks[i].state = "TRACK_SOLO";
+          console.log("enable solo " + this.stateManager.tracks[i].id + " to " + this.stateManager.tracks[i].state );
+        }else if (this.stateManager.tracks[i].state == "TRACK_SOLO"||this.stateManager.tracks[i].state == "TRACK_MUTE"){
+>>>>>>> 8710db1e918ff1e66c8889ceae1e6209686595bf
           this.stateManager.tracks[i].state = "ACTIVE";
           console.log(
             "disable Solo " +
