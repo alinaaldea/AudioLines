@@ -84,6 +84,7 @@ export class WavesListItemComponent implements AfterViewInit {
       )
       .then((url: string) => {
         this.track.TonePlayer = new Tone.Player(url, () => {
+          this.track.TonePlayer.loop = true;
           this.track.TonePlayer.sync().start(0);
           this.track.WaveSurfer.load(url);
         }).toMaster();
@@ -100,6 +101,12 @@ export class WavesListItemComponent implements AfterViewInit {
         this.positionOfTrackID(this.trackID)
       ].trackData = this.track;
     });
+
+    //Used for looping, once it's finished it will loop again
+    this.track.WaveSurfer.on('finish',()=>{
+        this.track.WaveSurfer.play();
+    });
+
   }
 
   positionOfTrackID(trackID): number {
