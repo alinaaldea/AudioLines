@@ -22,6 +22,7 @@ export class TimelineProvider {
 
     this.stateManager.tracks.forEach(track => {
       if (track.trackData != undefined) {
+        track.trackData.TonePlayer.loop = true;
         track.trackData.WaveSurfer.play();
       }
     });
