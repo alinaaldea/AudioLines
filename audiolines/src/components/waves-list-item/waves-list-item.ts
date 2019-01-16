@@ -105,24 +105,33 @@ export class WavesListItemComponent implements AfterViewInit {
   */
   onMute(){   
 
-    
-      this.stateManager.tracks.forEach((track, i) => {
-        if (track.id == this.trackID) {
-          console.log("The state of Track: " + this.stateManager.tracks[i].id + " is " + this.stateManager.tracks[i].state );
-          if (this.stateManager.tracks[i].state == "ACTIVE"){
-            this.stateManager.tracks[i].trackData.TonePlayer.mute = true;
-            this.stateManager.tracks[i].state = "TRACK_MUTE";
-            console.log("Update The state of Track: " + this.stateManager.tracks[i].id + " to " + this.stateManager.tracks[i].state );
-          }else if(this.stateManager.tracks[i].state == "TRACK_MUTE")  {
-            this.stateManager.tracks[i].trackData.TonePlayer.mute = false;
-            this.stateManager.tracks[i].state = "ACTIVE";
-            console.log("Update The state of Track: " + this.stateManager.tracks[i].id + " to " + this.stateManager.tracks[i].state );
+       this.stateManager.tracks.forEach((track, i) => {
+          if (track.id == this.trackID) {
+            console.log("The state of Track: " + this.stateManager.tracks[i].id + " is " + this.stateManager.tracks[i].state );
+            if (this.stateManager.tracks[i].state == "ACTIVE"){
+              this.stateManager.tracks[i].trackData.TonePlayer.mute = true;
+              this.stateManager.tracks[i].state = "TRACK_MUTE";
+              console.log("Update The state of Track: " + this.stateManager.tracks[i].id + " to " + this.stateManager.tracks[i].state );
+            }else if(this.stateManager.tracks[i].state == "TRACK_MUTE")  {
+              var isSolo = false;
+              this.stateManager.tracks.forEach((track) => {
+                if(track.state == 'TRACK_SOLO'){
+                  isSolo = true;
+                }
+              });
+
+
+              if(!isSolo){
+                this.stateManager.tracks[i].trackData.TonePlayer.mute = false;
+                this.stateManager.tracks[i].state = "ACTIVE";
+                console.log("Update The state of Track: " + this.stateManager.tracks[i].id + " to " + this.stateManager.tracks[i].state );  
+              }
+            }
           }
-        }
-      }); 
-    
-    
+        });      
   }
+
+
   onSolo() {
     this.stateManager.tracks.forEach((track, i) => {
       if (track.id != this.trackID) {
