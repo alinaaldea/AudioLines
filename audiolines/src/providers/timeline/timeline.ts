@@ -19,32 +19,15 @@ export class TimelineProvider {
     Tone.Transport.bpm.value = this.stateManager.bpmObject.bpm;
     this.metronome.startMetronome();
 
-    if (
-      this.stateManager.state == "RECORDING" &&
-      this.stateManager.metronomeIsActive
-    ) {
-      //Aufnahme ohne laufendes Metronom -> kein count-in!
-
+    if (this.stateManager.state == "PLAYING") {
       this.stateManager.tracks.forEach(track => {
-        track.trackData.TonePlayer.start(); // verzögerung audio
-        setTimeout(track => {
-          this.visualizationStart(track);
-        }, this.stateManager.bpmObject.ms); // *4
-      });
-    }
-
-    if (
-      this.stateManager.state == "PLAYING" ||
-      (this.stateManager.state == "RECORDING" &&
-        !this.stateManager.metronomeIsActive)
-    ) {
-      this.stateManager.tracks.forEach(track => {
-        track.trackData.TonePlayer.start(0);
+        track.trackData.TonePlayer.stop()
+          .start(Tone.TransportTime("1:0:0").valueOf())
+          .sync();
         this.visualizationStart(track);
       });
     }
     Tone.Transport.start();
-    console.log(Tone.Transport.state);
   }
 
   pause() {
@@ -75,7 +58,6 @@ export class TimelineProvider {
 
   visualizationStart(track: any) {
     if (track.trackData != undefined) {
-      console.log("TEST");
       track.trackData.WaveSurfer.play();
     }
   }
