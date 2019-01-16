@@ -40,6 +40,7 @@ export class WavesListItemComponent implements AfterViewInit {
   cursorColor: string = "white";
   scrollParent: boolean = true;
   hideScrollbar: boolean = true;
+  initialColor;
 
   menuIsOpen: boolean = false;
 
@@ -94,8 +95,7 @@ export class WavesListItemComponent implements AfterViewInit {
     this.menuIsOpen = !this.menuIsOpen;
   }
 
-
-  // die Funktion für die Track ID 
+  // die Funktion für die Track ID
   /*
       this.stateManager.tracks.forEach((track, i) => {
         if (track.id == this.trackID) {
@@ -103,50 +103,99 @@ export class WavesListItemComponent implements AfterViewInit {
         }
       }); 
   */
-  onMute(){   
-
-    
-      this.stateManager.tracks.forEach((track, i) => {
-        if (track.id == this.trackID) {
-          console.log("The state of Track: " + this.stateManager.tracks[i].id + " is " + this.stateManager.tracks[i].state );
-          if (this.stateManager.tracks[i].state == "ACTIVE"){
-            this.stateManager.tracks[i].trackData.TonePlayer.mute = true;
-            this.stateManager.tracks[i].state = "TRACK_MUTE";
-            console.log("Update The state of Track: " + this.stateManager.tracks[i].id + " to " + this.stateManager.tracks[i].state );
-          }else if(this.stateManager.tracks[i].state == "TRACK_MUTE")  {
-            this.stateManager.tracks[i].trackData.TonePlayer.mute = false;
-            this.stateManager.tracks[i].state = "ACTIVE";
-            console.log("Update The state of Track: " + this.stateManager.tracks[i].id + " to " + this.stateManager.tracks[i].state );
-          }
-        }
-      }); 
-    
-    
-  }
-  onSolo() {
+  onMute() {
     this.stateManager.tracks.forEach((track, i) => {
-      if (track.id != this.trackID) {
-        if(this.stateManager.tracks[i].state == "ACTIVE"){
+      if (track.id == this.trackID) {
+        console.log(
+          "The state of muted Track: " +
+            this.stateManager.tracks[i].id +
+            " is " +
+            this.stateManager.tracks[i].state
+        );
+
+        if (this.stateManager.tracks[i].state == "ACTIVE") {
           this.stateManager.tracks[i].trackData.TonePlayer.mute = true;
           this.stateManager.tracks[i].state = "TRACK_MUTE";
-          console.log("Mute because solo Track: " + this.stateManager.tracks[i].id + " to " + this.stateManager.tracks[i].state );
-        }else if (this.stateManager.tracks[i].state == "TRACK_MUTE"){
+          this.stateManager.tracks[i].trackData.WaveSurfer.setWaveColor(
+            "#C0C0C0"
+          );
+          this.stateManager.tracks[i].trackData.WaveSurfer.setProgressColor(
+            "#C0C0C0"
+          );
+
+          console.log(
+            "Update The state of Track: " +
+              this.stateManager.tracks[i].id +
+              " to " +
+              this.stateManager.tracks[i].state
+          );
+          this.onToggleMenu();
+        } else if (this.stateManager.tracks[i].state == "TRACK_MUTE") {
           this.stateManager.tracks[i].trackData.TonePlayer.mute = false;
+          this.stateManager.tracks[i].trackData.WaveSurfer.setWaveColor(
+            this.colors.waveColor
+          );
+          track.trackData.WaveSurfer.setProgressColor(
+            this.colors.progressColor
+          );
           this.stateManager.tracks[i].state = "ACTIVE";
-          console.log("unMute because solo Track: " + this.stateManager.tracks[i].id + " to " + this.stateManager.tracks[i].state );
-        }
-      }else if (track.id == this.trackID){
-        if(this.stateManager.tracks[i].state == "ACTIVE"){
-          this.stateManager.tracks[i].state = "TRACK_SOLO";
-          console.log("enable solo " + this.stateManager.tracks[i].id + " to " + this.stateManager.tracks[i].state );
-        }else if (this.stateManager.tracks[i].state == "TRACK_SOLO"||this.stateManager.tracks[i].state == "TRACK_MUTED"){
-          this.stateManager.tracks[i].state = "ACTIVE";
-          console.log("disable Solo " + this.stateManager.tracks[i].id + " to " + this.stateManager.tracks[i].state );
+          console.log(
+            "Update The state of Track: " +
+              this.stateManager.tracks[i].id +
+              " to " +
+              this.stateManager.tracks[i].state
+          );
+          this.onToggleMenu();
         }
       }
     });
   }
-
+  onSolo() {
+    this.stateManager.tracks.forEach((track, i) => {
+      if (track.id != this.trackID) {
+        if (this.stateManager.tracks[i].state == "ACTIVE") {
+          this.stateManager.tracks[i].trackData.TonePlayer.mute = true;
+          this.stateManager.tracks[i].state = "TRACK_MUTE";
+          console.log(
+            "Mute because solo Track: " +
+              this.stateManager.tracks[i].id +
+              " to " +
+              this.stateManager.tracks[i].state
+          );
+        } else if (this.stateManager.tracks[i].state == "TRACK_MUTE") {
+          this.stateManager.tracks[i].trackData.TonePlayer.mute = false;
+          this.stateManager.tracks[i].state = "ACTIVE";
+          console.log(
+            "unMute because solo Track: " +
+              this.stateManager.tracks[i].id +
+              " to " +
+              this.stateManager.tracks[i].state
+          );
+        }
+      } else if (track.id == this.trackID) {
+        if (this.stateManager.tracks[i].state == "ACTIVE") {
+          this.stateManager.tracks[i].state = "TRACK_SOLO";
+          console.log(
+            "enable solo " +
+              this.stateManager.tracks[i].id +
+              " to " +
+              this.stateManager.tracks[i].state
+          );
+        } else if (
+          this.stateManager.tracks[i].state == "TRACK_SOLO" ||
+          this.stateManager.tracks[i].state == "TRACK_MUTED"
+        ) {
+          this.stateManager.tracks[i].state = "ACTIVE";
+          console.log(
+            "disable Solo " +
+              this.stateManager.tracks[i].id +
+              " to " +
+              this.stateManager.tracks[i].state
+          );
+        }
+      }
+    });
+  }
 
   onDelete() {
     this.stateManager.tracks.forEach((track, i) => {
@@ -157,5 +206,12 @@ export class WavesListItemComponent implements AfterViewInit {
         this.stateManager.tracks.splice(i, 1);
       }
     });
+  }
+
+  disableTrack() {
+    return (
+      this.stateManager.tracks[this.positionOfTrackID(this.trackID)].state ==
+      "TRACK_MUTE"
+    );
   }
 }

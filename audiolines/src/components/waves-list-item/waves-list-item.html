@@ -10,6 +10,9 @@
       <div
         id="waveform-{{ trackID }}"
         class="waveform-container"
+        [ngClass]="{
+          waveformDisabled: true
+        }"
         (swipeleft)="onDelete()"
         (swiperight)="onDelete()"
       ></div>
