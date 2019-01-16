@@ -6,8 +6,8 @@ import { Media } from "@ionic-native/media";
 import { SocialSharing } from "@ionic-native/social-sharing";
 
 import { StateManagerProvider } from "../../providers/state-manager/state-manager";
-import { NgProgress } from "ngx-progressbar";
 
+import { NgProgress } from "ngx-progressbar";
 declare var lamejs: any;
 
 @Component({

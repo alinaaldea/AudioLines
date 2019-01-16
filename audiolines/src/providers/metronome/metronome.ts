@@ -18,7 +18,6 @@ export class MetronomeProvider {
     if (this.stateManager.metronomeIsActive) {
       this.metronomeLoop = Tone.Transport.scheduleRepeat(time => {
         this.triggerSynth(time);
-        // console.log(Tone.Transport.getSecondsAtTime());
       }, "4n");
     }
   }

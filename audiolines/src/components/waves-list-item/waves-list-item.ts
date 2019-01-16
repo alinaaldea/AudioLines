@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Input, state } from "@angular/core";
+import { Component, AfterViewInit, Input } from "@angular/core";
 
 import { File } from "@ionic-native/file";
 import { Media } from "@ionic-native/media";
@@ -41,8 +41,9 @@ export class WavesListItemComponent implements AfterViewInit {
   cursorColor: string = "white";
   scrollParent: boolean = true;
   hideScrollbar: boolean = true;
+  //-----
 
-  menuIsOpen: boolean = false;
+  private menuIsOpen: boolean = false;
 
   constructor(
     public stateManager: StateManagerProvider,
@@ -80,10 +81,7 @@ export class WavesListItemComponent implements AfterViewInit {
     // +++++++++++++++++++++++
 
     this.file
-      .readAsDataURL(
-        this.file.externalApplicationStorageDirectory + "/files",
-        this.fileName
-      )
+      .readAsDataURL(this.file.externalDataDirectory, this.fileName)
       .then((url: string) => {
         this.track.TonePlayer = new Tone.Player(url, () => {
           this.track.TonePlayer.sync().start(0);
@@ -103,6 +101,11 @@ export class WavesListItemComponent implements AfterViewInit {
         this.positionOfTrackID(this.trackID)
       ].trackData = this.track;
     });
+
+    //Used for looping, once it's finished it will loop again
+    this.track.WaveSurfer.on("finish", () => {
+      this.track.WaveSurfer.play();
+    });
   }
 
   positionOfTrackID(trackID): number {
@@ -115,18 +118,150 @@ export class WavesListItemComponent implements AfterViewInit {
     this.menuIsOpen = !this.menuIsOpen;
   }
 
-    // Started testing thoose Functionality on my own App. Going to make them fit into our Application
-  onMute() {}
-  onSolo() {}
+  //TODO: MUTE AND SOLO NEED TO BE REWORKED -> STATEMANAGEMENT SHOULD BE OUTSIDE
 
+  onMute() {
+    this.stateManager.tracks.forEach((track, i) => {
+      if (track.id == this.trackID) {
+        console.log(
+          "The state of Track: " +
+            this.stateManager.tracks[i].id +
+            " is " +
+            this.stateManager.tracks[i].state
+        );
+        if (this.stateManager.tracks[i].state == "ACTIVE") {
+          this.stateManager.tracks[i].trackData.TonePlayer.mute = true;
+          this.stateManager.tracks[i].state = "TRACK_MUTE";
+
+          //TODO: WaveSurfer somehow bugs a bit after changing the color of the tracks
+          track.trackData.WaveSurfer.setWaveColor("#C0C0C0"); //somehow get trkDisabled variable
+          track.trackData.WaveSurfer.setProgressColor("#C0C0C0");
+
+          console.log(
+            "Update The state of Track: " +
+              this.stateManager.tracks[i].id +
+              " to " +
+              this.stateManager.tracks[i].state
+          );
+
+          this.onToggleMenu();
+        } else if (this.stateManager.tracks[i].state == "TRACK_MUTE") {
+          var isSolo = false;
+          this.stateManager.tracks.forEach(track => {
+            if (track.state == "TRACK_SOLO") {
+              isSolo = true;
+            }
+          });
+          if (!isSolo) {
+            this.stateManager.tracks[i].trackData.TonePlayer.mute = false;
+            this.stateManager.tracks[i].state = "ACTIVE";
+
+            track.trackData.WaveSurfer.setWaveColor(this.colors.waveColor);
+            track.trackData.WaveSurfer.setProgressColor(
+              this.colors.progressColor
+            );
+
+            console.log(
+              "Update The state of Track: " +
+                this.stateManager.tracks[i].id +
+                " to " +
+                this.stateManager.tracks[i].state
+            );
+
+            this.onToggleMenu();
+          }
+        }
+      }
+    });
+  }
+
+  onSolo() {
+    this.stateManager.tracks.forEach((track, i) => {
+      if (track.id != this.trackID) {
+        if (this.stateManager.tracks[i].state == "ACTIVE") {
+          this.stateManager.tracks[i].trackData.TonePlayer.mute = true;
+          this.stateManager.tracks[i].state = "TRACK_MUTE";
+
+          console.log(
+            "Mute because solo Track: " +
+              this.stateManager.tracks[i].id +
+              " to " +
+              this.stateManager.tracks[i].state
+          );
+        } else if (this.stateManager.tracks[i].state == "TRACK_MUTE") {
+          var isSolo;
+          this.stateManager.tracks.forEach(track => {
+            if (track.state == "TRACK_SOLO") {
+              isSolo = true;
+            }
+          });
+          if (!isSolo) {
+            this.stateManager.tracks[i].trackData.TonePlayer.mute = false;
+            this.stateManager.tracks[i].state = "ACTIVE";
+
+            console.log(
+              "unMute because solo Track: " +
+                this.stateManager.tracks[i].id +
+                " to " +
+                this.stateManager.tracks[i].state
+            );
+          }
+        }
+      } else if (track.id == this.trackID) {
+        if (
+          this.stateManager.tracks[i].state == "ACTIVE" ||
+          this.stateManager.tracks[i].state == "TRACK_MUTE"
+        ) {
+          this.stateManager.tracks[i].state = "TRACK_SOLO";
+          this.stateManager.tracks[i].trackData.TonePlayer.mute = false;
+
+          console.log(
+            "enable solo " +
+              this.stateManager.tracks[i].id +
+              " to " +
+              this.stateManager.tracks[i].state
+          );
+        } else if (
+          this.stateManager.tracks[i].state == "TRACK_SOLO" ||
+          this.stateManager.tracks[i].state == "TRACK_MUTE"
+        ) {
+          var otherSolo;
+          this.stateManager.tracks.forEach(track => {
+            if (track.state == "TRACK_SOLO" && track.id != this.trackID) {
+              otherSolo = true;
+            }
+          });
+          if (otherSolo) {
+            this.stateManager.tracks[i].state = "TRACK_MUTE";
+            this.stateManager.tracks[i].trackData.TonePlayer.mute = true;
+
+            console.log(
+              "Track " +
+                this.stateManager.tracks[i].id +
+                "becaus another track is on Solo"
+            );
+          } else {
+            this.stateManager.tracks[i].state = "ACTIVE";
+            this.stateManager.tracks[i].trackData.TonePlayer.mute = false;
+
+            console.log(
+              "disable Solo " +
+                this.stateManager.tracks[i].id +
+                " to " +
+                this.stateManager.tracks[i].state
+            );
+          }
+        }
+      }
+    });
+  }
 
   onDelete() {
     this.stateManager.tracks.forEach((track, i) => {
       if (track.id == this.trackID) {
-
         //Remove Track completely
         this.track.TonePlayer.dispose();
-        this.file.removeFile(this.file.externalApplicationStorageDirectory + "/files", track.fileName);
+        this.file.removeFile(this.file.externalDataDirectory, track.fileName);
         //Remove File from tracks
         this.stateManager.tracks.splice(i, 1);
       }
@@ -137,12 +272,19 @@ export class WavesListItemComponent implements AfterViewInit {
     let toast = this.toastCtrl.create({
       message: message,
       duration: 5000,
-      position: 'top'
+      position: "top"
     });
-  
+
     toast.onDidDismiss(() => {
-      console.log('Dismissed toast');
+      console.log("Dismissed toast");
     });
     toast.present();
+  }
+
+  disableTrack() {
+    return (
+      this.stateManager.tracks[this.positionOfTrackID(this.trackID)].state ==
+      "TRACK_MUTE"
+    );
   }
 }

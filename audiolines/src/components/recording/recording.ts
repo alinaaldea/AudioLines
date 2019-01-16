@@ -61,7 +61,7 @@ export class RecordingComponent {
         this.fileName;
       this.audio = this.media.create(this.filePath);
       this.timeLine.start();
-      this.audio.startRecord();
+      this.audio.startRecord(); // TODO: RECORDING STARTS INSTANTLY! HAS TO BE OFFSET
     }
   }
 
