@@ -4,7 +4,7 @@ onboarding {
     font-family: "Raleway";
   }
 
-  $colors: ();
+  // $colors: ();
 
   button.btn-floating {
     height: 7rem;
@@ -17,16 +17,16 @@ onboarding {
     background-color: color($colors, btnDisabled) !important;
   }
 
-  #export-icon{
+  #export-icon {
     color: #00bb88;
   }
 
-  .onboard-image{
+  .onboard-image {
     width: 80vw;
     height: auto;
   }
 
-  .file-export{
+  .file-export {
     height: 8rem;
     width: 8rem;
     margin: auto;
@@ -92,7 +92,6 @@ onboarding {
     margin-top: 50% !important;
     font-weight: bold;
     font-size: 2em;
-
   }
 
   h2 {
