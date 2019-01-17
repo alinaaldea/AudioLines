@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import {Component, Input} from "@angular/core";
 
 import { Media, MediaObject } from "@ionic-native/media";
 import { File } from "@ionic-native/file";
@@ -35,6 +35,7 @@ export class RecordingComponent {
   filePath: string;
   fileName: string;
   audio: MediaObject;
+  @Input() disabled: boolean = false;
 
   constructor(
     public stateManager: StateManagerProvider,
@@ -44,7 +45,7 @@ export class RecordingComponent {
   ) {}
 
   startRecord() {
-    if (this.stateManager.state == "STOPPED") {
+    if (this.stateManager.state == "STOPPED" && !this.disabled) {
       this.stateManager.state = "RECORDING";
 
       this.fileName =
@@ -84,7 +85,7 @@ export class RecordingComponent {
   }
 
   stopRecord() {
-    if (this.stateManager.state == "RECORDING") {
+    if (this.stateManager.state == "RECORDING"  && !this.disabled) {
       this.stateManager.state = "STOPPED";
       this.audio.stopRecord();
       this.audio.release();

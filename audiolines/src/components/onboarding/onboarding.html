@@ -1,0 +1,78 @@
+<ion-content class="ion-content">
+  <ion-slides pager>
+    <!-- Welcome -->
+    <ion-slide (ionSlideDidChange)="slideChanged()">
+      <div class="diag">
+        <h1 class="text-white">Welcome to Audiolines!</h1>
+        <img class="onboard-image" src="../../assets/imgs/icon.jpg">
+      </div>
+    </ion-slide>
+    <!-- BPM -->
+    <ion-slide (ionSlideDidChange)="slideChanged()">
+      <div class="diag">
+        <set-bpm-view></set-bpm-view>
+      </div>
+      <div>
+        <h2 class="text-white">Set the BPM!</h2>
+        <p class="text-white">You can set the BPM by clicking on the BPM at the top of the screen!</p>
+      </div>
+    </ion-slide>
+    <!-- Metronome BPM -->
+    <ion-slide (ionSlideDidChange)="slideChanged()">
+      <div class="diag pt-30">
+        <span class="metronome"></span>
+      </div>
+      <div>
+        <h2 class="text-white"></h2>
+        <p class="text-white">Click the metronome to toggle the BPM on/off!</p>
+      </div>
+    </ion-slide>
+    <!-- Record Button -->
+    <ion-slide (ionSlideDidChange)="slideChanged()">
+      <div class="diag">
+        <div class="pt-30">
+          <button
+            class="btn-floating waves-effect waves-dark pulse">
+            <span class="add-track-icon"></span>
+          </button>
+        </div>
+      </div>
+      <div>
+        <h2 class="text-white">Create your own recordings!</h2>
+        <p class="text-white">Tap the record icon to record a new track!</p>
+      </div>
+    </ion-slide>
+    <!-- Waveform -->
+    <ion-slide (ionSlideDidChange)="slideChanged()">
+      <div class="diag">
+        <img class="onboard-image pt-30" src="../../assets/imgs/wave.jpg">
+      </div>
+      <div>
+        <h2 class="text-white"></h2>
+        <p class="text-white">Your recordings are then visualized. Click on the three dots to enter the menu for that track.</p>
+      </div>
+    </ion-slide>
+    <!-- Wavemenu -->
+    <ion-slide (ionSlideDidChange)="slideChanged()">
+      <div class="diag">
+        <img class="onboard-image pt-30" src="../../assets/imgs/wave_menu.jpg">
+      </div>
+      <div>
+        <h2 class="text-white"></h2>
+        <p class="text-white">In the menu, you can Mute the track(M), have it play Solo (S) or delete it entirely.</p>
+      </div>
+    </ion-slide>
+    <!-- Exporting -->
+    <ion-slide (ionSlideDidChange)="slideChanged()">
+      <div class="diag pt-30">
+        <i class="fas fa-file-export fa-7x" id="export-icon"></i>
+      </div>
+      <div class="pt-2">
+        <h2 class="text-white">Export your track!</h2>
+        <p class="text-white">To save your recording, export the track to your phone(and share it)!</p>
+      </div>
+    </ion-slide>
+  </ion-slides>
+  <button (click)="skip()" class="text-white" id="skip">{{ skipMsg }}</button>
+</ion-content>
+

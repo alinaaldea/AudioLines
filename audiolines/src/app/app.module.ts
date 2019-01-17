@@ -28,6 +28,8 @@ import { FileChooser } from "@ionic-native/file-chooser";
 import { SocialSharing } from "@ionic-native/social-sharing";
 import { NgProgressModule } from "ngx-progressbar";
 import "hammerjs";
+import {OnboardingComponent} from "../components/onboarding/onboarding";
+import {IonicStorageModule} from "@ionic/storage";
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import "hammerjs";
     RecordingComponent,
     PlayComponent,
     BacktozeroComponent,
+    OnboardingComponent,
     WavesListComponent,
     WavesListItemComponent,
     MetronomeToggleComponent,
@@ -44,9 +47,9 @@ import "hammerjs";
     ExportComponent,
     ExportViewComponent
   ],
-  imports: [BrowserModule, IonicModule.forRoot(MyApp), NgProgressModule],
+  imports: [BrowserModule, IonicModule.forRoot(MyApp), NgProgressModule, IonicStorageModule.forRoot()],
   bootstrap: [IonicApp],
-  entryComponents: [MyApp, HomePage],
+  entryComponents: [MyApp, HomePage, OnboardingComponent],
   providers: [
     StatusBar,
     SplashScreen,
